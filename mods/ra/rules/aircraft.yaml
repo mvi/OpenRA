@@ -83,6 +83,7 @@ MIG:
 		Prerequisites: afld, stek
 		BuiltAt: afld
 		Owner: soviet
+		Hotkey: w
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -131,6 +132,7 @@ YAK:
 		Prerequisites: afld
 		BuiltAt: afld
 		Owner: soviet
+		Hotkey: q
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -181,6 +183,7 @@ TRAN:
 		Prerequisites: hpad
 		BuiltAt: hpad
 		Owner: allies
+		Hotkey: t
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -221,6 +224,7 @@ HELI:
 		Prerequisites: hpad, atek
 		BuiltAt: hpad
 		Owner: allies
+		Hotkey: w
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -264,6 +268,7 @@ HIND:
 		Prerequisites: hpad
 		BuiltAt: hpad
 		Owner: allies
+		Hotkey: q
 	Valued:
 		Cost: 1000
 	Tooltip:

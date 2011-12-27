@@ -104,6 +104,23 @@ namespace OpenRA.GameRules
 		public string ConnectTo = "";
 	}
 
+	public class KeySettings
+	{
+		public string AttackMoveKey = "q";
+		public string StopKey = "w";
+		public string ScatterKey = "e";
+		public string StanceCycleKey = "r";
+		public string DeployKey = "t";
+
+		public string DefenseTabKey = "x";
+
+		public Modifiers ModifierToBuild = Modifiers.None;
+		public Modifiers ModifierToCycle = Modifiers.Alt;
+		public Modifiers ModifierToSelectTab = Modifiers.Ctrl;
+
+		public bool UseClassicMouseStyle = false;
+	}
+
 	public class Settings
 	{
 		string SettingsFile;
@@ -113,6 +130,7 @@ namespace OpenRA.GameRules
 		public SoundSettings Sound = new SoundSettings();
 		public GraphicSettings Graphics = new GraphicSettings();
 		public ServerSettings Server = new ServerSettings();
+		public KeySettings Keys = new KeySettings();
 		public DebugSettings Debug = new DebugSettings();
 
 		public Dictionary<string, object> Sections;
@@ -127,6 +145,7 @@ namespace OpenRA.GameRules
 				{"Sound", Sound},
 				{"Graphics", Graphics},
 				{"Server", Server},
+				{"Keys", Keys},
 				{"Debug", Debug},
 			};
 
