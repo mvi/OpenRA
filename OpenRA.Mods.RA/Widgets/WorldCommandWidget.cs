@@ -10,6 +10,7 @@
 
 using System;
 using OpenRA.Mods.RA.Buildings;
+using OpenRA.Mods.RA.Orders;
 using System.Drawing;
 using System.Linq;
 using OpenRA.FileFormats;
@@ -77,7 +78,7 @@ namespace OpenRA.Mods.RA.Widgets
 					}
 				}
 
-				if (KeyName == "space")
+				if (KeyName == KeyConfig.FocusBaseKey)
 					return CycleProductionBuildings("BaseType", true);
 
 				if (e.Modifiers == KeyConfig.ModifierToSelectTab)
@@ -110,7 +111,22 @@ namespace OpenRA.Mods.RA.Widgets
 					}
 				}
 
-				if (!World.Selection.Actors.Any())	// Put all Cycle-functions before this line!
+				if (KeyName == KeyConfig.SellKey)
+					return PerformSwitchToSellMode();
+
+				if (KeyName == KeyConfig.PowerDownKey)
+					return PerformSwitchToPowerDownMode();
+
+				if (KeyName == KeyConfig.RepairKey)
+					return PerformSwitchToRepairMode();
+
+				if (KeyName == KeyConfig.PlaceNormalBuildingKey)
+					return PerformPlaceNormalBuilding();
+
+				if (KeyName == KeyConfig.PlaceDefenceBuildingKey)
+					return PerformPlaceDefenceBuilding();
+
+				if (!World.Selection.Actors.Any())	// Put all functions, that are no unit-functions, before this line!
 					return false;
 
 				if ((KeyName == KeyConfig.AttackMoveKey) && unitsSelected())
@@ -225,11 +241,65 @@ namespace OpenRA.Mods.RA.Widgets
 			return true;
 		}
 
+
+		private bool PerformSwitchToSellMode()
+		{
+			World.ToggleInputMode<SellOrderGenerator>();
+			return true;
+		}
+
+		private bool PerformSwitchToPowerDownMode()
+		{
+			World.ToggleInputMode<PowerDownOrderGenerator>();
+			return true;
+		}
+
+		private bool PerformSwitchToRepairMode()
+		{
+			World.ToggleInputMode<RepairOrderGenerator>();
+			return true;
+		}
+
+		private bool PerformPlaceNormalBuilding()
+		{
+			return SwitchToTab(0);
+		}
+
+		private bool PerformPlaceDefenceBuilding()
+		{
+			return SwitchToTab(1);
+		}
+
 		bool unitsSelected()
 		{
 			if (World.Selection.Actors.Any( a => a.Owner == World.LocalPlayer && !a.HasTrait<Building>() )) return true;
 
 			return false;
+		}
+
+		private bool SwitchToTab(int num)
+		{
+			var types = World.Actors.Where(a => a.IsInWorld && (a.World.LocalPlayer == a.Owner))
+								  .SelectMany(a => a.TraitsImplementing<Production>())
+								  .SelectMany(t => t.Info.Produces)
+								  .ToArray();
+
+			if (types.Length == 0)
+				return false;
+			var tabs = World.LocalPlayer.PlayerActor.TraitsImplementing<ProductionQueue>().Where(t => types.Contains(t.Info.Type)).ToArray();
+			if (tabs.Length <= num)
+				return false;
+
+			var tab = tabs[num];
+			Ui.Root.GetWidget<BuildPaletteWidget>("INGAME_BUILD_PALETTE")
+				.SetCurrentTab(tab);
+
+			if ((tab.Queue.Count() > 0) && (tab.CurrentDone))
+			{
+				if (Rules.Info[tab.CurrentItem().Item].Traits.Contains<BuildingInfo>())
+					World.OrderGenerator = new PlaceBuildingOrderGenerator(tab.self, tab.CurrentItem().Item);
+			}
+			return true;
 		}
 	}
 }
