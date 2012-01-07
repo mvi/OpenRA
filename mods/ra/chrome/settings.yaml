@@ -242,90 +242,32 @@ Background@SETTINGS_MENU:
 			Height:PARENT_BOTTOM - 100
 			Visible: false
 			Children:
-				Label@KEYS_UNITCOMMANDSHEADLINE:
-					Id:KEYS_UNITCOMMANDSHEADLINE
+				Label@KEYS_MOUSESTYLEHEADLINE:
+					Id:KEYS_MOUSESTYLEHEADLINE
 					X:0
 					Y:0
-					Text: Hotkeys for Unit Commands:
-				Label@KEYS_ATTACKMOVEKEY_NAME:
-					Id:KEYS_ATTACKMOVEKEY_NAME
+					Text: Mouse Behavior:
+				Checkbox@USE_CLASSIC_MOUSE_STYLE_CHECKBOX:
+					Id:USE_CLASSIC_MOUSE_STYLE_CHECKBOX
 					X:0
-					Y:30
-					Text: Attack Move:
-				TextField@ATTACKMOVEKEYNAME:
-					Id:ATTACKMOVEKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
 					Y:20
-					MaxLength:16
-				Label@KEYS_STOPKEY_NAME:
-					Id:KEYS_STOPKEY_NAME
-					X:0
-					Y:60
-					Text: Stop:
-				TextField@STOPKEYNAME:
-					Id:STOPKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:50
-					MaxLength:16
-				Label@KEYS_SCATTERKEY_NAME:
-					Id:KEYS_SCATTERKEY_NAME
-					X:0
-					Y:90
-					Text: Scatter:
-				TextField@SCATTERKEYNAME:
-					Id:SCATTERKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:80
-					MaxLength:16
-				Label@KEYS_STANCECYCLEKEY_NAME:
-					Id:KEYS_STANCECYCLE_NAME
-					X:0
-					Y:120
-					Text: Cycle Stance:
-				TextField@STANCECYCLEKEYNAME:
-					Id:STANCECYCLEKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:110
-					MaxLength:16
-				Label@KEYS_DEPLOYKEY_NAME:
-					Id:KEYS_DEPLOYKEY_NAME
-					X:0
-					Y:150
-					Text: Deploy:
-				TextField@DEPLOYKEYNAME:
-					Id:DEPLOYKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:140
-					MaxLength:16
+					Width:200
+					Height:20
+					Text: Use Classic Mouse Style
 				Label@KEYS_MODIFIERHEADLINE:
 					Id:KEYS_MODIFIERHEADLINE
 					X:0
-					Y:190
+					Y:70
 					Text: Hotkey Modifiers for Production Buildings:
 				Label@KEYS_MODIFIERTOBUILD_NAME:
 					Id:KEYS_MODIFIERTOBUILD_NAME
 					X:0
-					Y:220
+					Y:100
 					Text: Build:
 				DropDownButton@MODIFIERTOBUILD_DROPDOWN:
 					Id:MODIFIERTOBUILD_DROPDOWN
 					X:310
-					Y:210
+					Y:90
 					Width:139
 					Height:25
 					Font:Regular
@@ -333,12 +275,12 @@ Background@SETTINGS_MENU:
 				Label@KEYS_MODIFIERTOCYCLE_NAME:
 					Id:KEYS_MODIFIERTOCYCLE_NAME
 					X:0
-					Y:250
+					Y:130
 					Text: Cycle:
 				DropDownButton@MODIFIERTOCYCLE_DROPDOWN:
 					Id:MODIFIERTOCYCLE_DROPDOWN
 					X:310
-					Y:240
+					Y:120
 					Width:139
 					Height:25
 					Font:Regular
@@ -346,20 +288,25 @@ Background@SETTINGS_MENU:
 				Label@KEYS_MODIFIERTOSELECTTAB_NAME:
 					Id:KEYS_MODIFIERTOSELECTTAB_NAME
 					X:0
-					Y:280
+					Y:160
 					Text: Select corresponding Tab on Build Palette only:
 				DropDownButton@MODIFIERTOSELECTTAB_DROPDOWN:
 					Id:MODIFIERTOSELECTTAB_DROPDOWN
 					X:310
-					Y:270
+					Y:150
 					Width:139
 					Height:25
 					Font:Regular
 					Text:
+				Label@KEYS_SPECIALHOTKEYSHEADLINE:
+					Id:KEYS_SPECIALHOTKEYSHEADLINE
+					X:0
+					Y:200
+					Text: Special Hotkeys:
 				Label@KEYS_DEFENSETABKEY_NAME:
 					Id:KEYS_DEFENSETABKEY_NAME
 					X:0
-					Y:310
+					Y:230
 					Text: Select Defense Tab on Build Palette:
 				TextField@DEFENSETABKEYNAME:
 					Id:DEFENSETABKEYNAME
@@ -367,24 +314,82 @@ Background@SETTINGS_MENU:
 					Width:139
 					Height:25
 					X:240
-					Y:300
+					Y:220
 					MaxLength:16
-				Label@KEYS_MOUSESTYLEHEADLINE:
-					Id:KEYS_MOUSESTYLEHEADLINE
+				Label@KEYS_UNITCOMMANDSHEADLINE:
+					Id:KEYS_UNITCOMMANDSHEADLINE
 					X:0
+					Y:270
+					Text: Hotkeys for Unit Commands:
+				Label@KEYS_ATTACKMOVEKEY_NAME:
+					Id:KEYS_ATTACKMOVEKEY_NAME
+					X:0
+					Y:300
+					Text: Attack Move:
+				TextField@ATTACKMOVEKEYNAME:
+					Id:ATTACKMOVEKEYNAME
+					Text:Name
+					Width:139
+					Height:25
+					X:240
+					Y:290
+					MaxLength:16
+				Label@KEYS_STOPKEY_NAME:
+					Id:KEYS_STOPKEY_NAME
+					X:0
+					Y:330
+					Text: Stop:
+				TextField@STOPKEYNAME:
+					Id:STOPKEYNAME
+					Text:Name
+					Width:139
+					Height:25
+					X:240
+					Y:320
+					MaxLength:16
+				Label@KEYS_SCATTERKEY_NAME:
+					Id:KEYS_SCATTERKEY_NAME
+					X:0
+					Y:360
+					Text: Scatter:
+				TextField@SCATTERKEYNAME:
+					Id:SCATTERKEYNAME
+					Text:Name
+					Width:139
+					Height:25
+					X:240
 					Y:350
-					Text: Mouse Behavior:
-				Checkbox@USE_CLASSIC_MOUSE_STYLE_CHECKBOX:
-					Id:USE_CLASSIC_MOUSE_STYLE_CHECKBOX
+					MaxLength:16
+				Label@KEYS_STANCECYCLEKEY_NAME:
+					Id:KEYS_STANCECYCLE_NAME
 					X:0
-					Y:370
-					Width:200
-					Height:20
-					Text: Use Classic Mouse Style
+					Y:390
+					Text: Cycle Stance:
+				TextField@STANCECYCLEKEYNAME:
+					Id:STANCECYCLEKEYNAME
+					Text:Name
+					Width:139
+					Height:25
+					X:240
+					Y:380
+					MaxLength:16
+				Label@KEYS_DEPLOYKEY_NAME:
+					Id:KEYS_DEPLOYKEY_NAME
+					X:0
+					Y:420
+					Text: Deploy:
+				TextField@DEPLOYKEYNAME:
+					Id:DEPLOYKEYNAME
+					Text:Name
+					Width:139
+					Height:25
+					X:240
+					Y:410
+					MaxLength:16
 				Label@HOTKEY_INFO:
 					Id:HOTKEY_INFO
 					X:10
-					Y:420
+					Y:720
 					Text: To change the Hotkey Mapping edit the YAML-Files in /mods/ra/rules/.
 		Container@DEBUG_PANE:
 			Id:DEBUG_PANE
