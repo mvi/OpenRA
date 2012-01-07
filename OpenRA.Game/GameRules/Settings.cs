@@ -106,27 +106,25 @@ namespace OpenRA.GameRules
 
 	public class KeySettings
 	{
-		public string AttackMoveKey = "q";
-		public string StopKey = "w";
-		public string ScatterKey = "e";
-		public string StanceCycleKey = "r";
-		public string DeployKey = "t";
-
-		public string DefenseTabKey = "x";
-		public string FocusBaseKey = "space";
-
-		public string SellKey = "v";
-		public string PowerDownKey = "b";
-		public string RepairKey = "n";
-
-		public string PlaceNormalBuildingKey = "f1";
-		public string PlaceDefenceBuildingKey = "f2";
+		public bool UseClassicMouseStyle = false;
 
 		public Modifiers ModifierToBuild = Modifiers.None;
 		public Modifiers ModifierToCycle = Modifiers.Alt;
 		public Modifiers ModifierToSelectTab = Modifiers.Ctrl;
 
-		public bool UseClassicMouseStyle = false;
+		public string DefenseTabKey = "x";
+		public string FocusBaseKey = "space";
+		public string SellKey = "v";
+		public string PowerDownKey = "b";
+		public string RepairKey = "n";
+		public string PlaceNormalBuildingKey = "f1";
+		public string PlaceDefenceBuildingKey = "f2";
+
+		public string AttackMoveKey = "q";
+		public string StopKey = "w";
+		public string ScatterKey = "e";
+		public string StanceCycleKey = "r";
+		public string DeployKey = "t";
 	}
 
 	public class Settings

@@ -111,16 +111,9 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 
 			var keyConfig = Game.Settings.Keys;
 
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("ATTACKMOVEKEYNAME"),
-			() => keyConfig.AttackMoveKey, k => keyConfig.AttackMoveKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("STOPKEYNAME"),
-			() => keyConfig.StopKey, k => keyConfig.StopKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("SCATTERKEYNAME"),
-			() => keyConfig.ScatterKey, k => keyConfig.ScatterKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("STANCECYCLEKEYNAME"),
-			() => keyConfig.StanceCycleKey, k => keyConfig.StanceCycleKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("DEPLOYKEYNAME"),
-			() => keyConfig.DeployKey, k => keyConfig.DeployKey = k );
+			var useClassicMouseStyleCheckbox = keys.GetWidget<CheckboxWidget>("USE_CLASSIC_MOUSE_STYLE_CHECKBOX");
+			useClassicMouseStyleCheckbox.IsChecked = () => keyConfig.UseClassicMouseStyle;
+			useClassicMouseStyleCheckbox.OnClick = () => keyConfig.UseClassicMouseStyle ^= true;
 
 			var modifierToBuildDropdown = keys.GetWidget<DropDownButtonWidget>("MODIFIERTOBUILD_DROPDOWN");
 			modifierToBuildDropdown.OnMouseDown = _
@@ -149,10 +142,29 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 
 			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("DEFENSETABKEYNAME"),
 			() => keyConfig.DefenseTabKey, k => keyConfig.DefenseTabKey = k );
+			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("FOCUSBASEKEYNAME"),
+			() => keyConfig.FocusBaseKey, k => keyConfig.FocusBaseKey = k );
+			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("SELLKEYNAME"),
+			() => keyConfig.SellKey, k => keyConfig.SellKey = k );
+			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("POWERDOWNKEYNAME"),
+			() => keyConfig.PowerDownKey, k => keyConfig.PowerDownKey = k );
+			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("REPAIRKEYNAME"),
+			() => keyConfig.RepairKey, k => keyConfig.RepairKey = k );
+			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("PLACENORMALBUILDINGKEYNAME"),
+			() => keyConfig.PlaceNormalBuildingKey, k => keyConfig.PlaceNormalBuildingKey = k );
+			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("PLACEDEFENSEBUILDINGKEYNAME"),
+			() => keyConfig.PlaceDefenceBuildingKey, k => keyConfig.PlaceDefenceBuildingKey = k );
 
-			var useClassicMouseStyleCheckbox = keys.GetWidget<CheckboxWidget>("USE_CLASSIC_MOUSE_STYLE_CHECKBOX");
-			useClassicMouseStyleCheckbox.IsChecked = () => keyConfig.UseClassicMouseStyle;
-			useClassicMouseStyleCheckbox.OnClick = () => keyConfig.UseClassicMouseStyle ^= true;
+			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("ATTACKMOVEKEYNAME"),
+			() => keyConfig.AttackMoveKey, k => keyConfig.AttackMoveKey = k );
+			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("STOPKEYNAME"),
+			() => keyConfig.StopKey, k => keyConfig.StopKey = k );
+			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("SCATTERKEYNAME"),
+			() => keyConfig.ScatterKey, k => keyConfig.ScatterKey = k );
+			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("STANCECYCLEKEYNAME"),
+			() => keyConfig.StanceCycleKey, k => keyConfig.StanceCycleKey = k );
+			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("DEPLOYKEYNAME"),
+			() => keyConfig.DeployKey, k => keyConfig.DeployKey = k );
 
 			// Debug
 			var debug = bg.GetWidget("DEBUG_PANE");

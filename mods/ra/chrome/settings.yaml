@@ -316,15 +316,93 @@ Background@SETTINGS_MENU:
 					X:240
 					Y:220
 					MaxLength:16
+				Label@KEYS_FOCUSBASEKEY_NAME:
+					Id:KEYS_FOCUSBASEKEY_NAME
+					X:0
+					Y:260
+					Text: Move Viewport to Base:
+				TextField@FOCUSBASEKEYNAME:
+					Id:FOCUSBASEKEYNAME
+					Text:Name
+					Width:139
+					Height:25
+					X:240
+					Y:250
+					MaxLength:16
+				Label@KEYS_SELLKEY_NAME:
+					Id:KEYS_SELLKEY_NAME
+					X:0
+					Y:290
+					Text: Switch to Sell-Cursor:
+				TextField@SELLKEYNAME:
+					Id:SELLKEYNAME
+					Text:Name
+					Width:139
+					Height:25
+					X:240
+					Y:280
+					MaxLength:16
+				Label@KEYS_POWERDOWNKEY_NAME:
+					Id:KEYS_POWERDOWNKEY_NAME
+					X:0
+					Y:320
+					Text: Switch to Power-Down-Cursor:
+				TextField@POWERDOWNKEYNAME:
+					Id:POWERDOWNKEYNAME
+					Text:Name
+					Width:139
+					Height:25
+					X:240
+					Y:310
+					MaxLength:16
+				Label@KEYS_REPAIRKEY_NAME:
+					Id:KEYS_REPAIRKEY_NAME
+					X:0
+					Y:350
+					Text: Switch to Repair-Cursor:
+				TextField@REPAIRKEYNAME:
+					Id:REPAIRKEYNAME
+					Text:Name
+					Width:139
+					Height:25
+					X:240
+					Y:340
+					MaxLength:16
+				Label@KEYS_PLACENORMALBUILDINGKEY_NAME:
+					Id:KEYS_PLACENORMALBUILDINGKEY_NAME
+					X:0
+					Y:380
+					Text: Place Normal-Building:
+				TextField@PLACENORMALBUILDINGKEYNAME:
+					Id:PLACENORMALBUILDINGKEYNAME
+					Text:Name
+					Width:139
+					Height:25
+					X:240
+					Y:370
+					MaxLength:16
+				Label@KEYS_PLACEDEFENSEBUILDINGKEY_NAME:
+					Id:KEYS_PLACEDEFENSEBUILDINGKEY_NAME
+					X:0
+					Y:410
+					Text: Place Defence-Building:
+				TextField@PLACEDEFENSEBUILDINGKEYNAME:
+					Id:PLACEDEFENSEBUILDINGKEYNAME
+					Text:Name
+					Width:139
+					Height:25
+					X:240
+					Y:400
+					MaxLength:16
 				Label@KEYS_UNITCOMMANDSHEADLINE:
 					Id:KEYS_UNITCOMMANDSHEADLINE
 					X:0
-					Y:270
+					Y:450
 					Text: Hotkeys for Unit Commands:
 				Label@KEYS_ATTACKMOVEKEY_NAME:
 					Id:KEYS_ATTACKMOVEKEY_NAME
 					X:0
-					Y:300
+					Y:490
 					Text: Attack Move:
 				TextField@ATTACKMOVEKEYNAME:
 					Id:ATTACKMOVEKEYNAME
@@ -332,12 +410,12 @@ Background@SETTINGS_MENU:
 					Width:139
 					Height:25
 					X:240
-					Y:290
+					Y:480
 					MaxLength:16
 				Label@KEYS_STOPKEY_NAME:
 					Id:KEYS_STOPKEY_NAME
 					X:0
-					Y:330
+					Y:520
 					Text: Stop:
 				TextField@STOPKEYNAME:
 					Id:STOPKEYNAME
@@ -345,12 +423,12 @@ Background@SETTINGS_MENU:
 					Width:139
 					Height:25
 					X:240
-					Y:320
+					Y:510
 					MaxLength:16
 				Label@KEYS_SCATTERKEY_NAME:
 					Id:KEYS_SCATTERKEY_NAME
 					X:0
-					Y:360
+					Y:550
 					Text: Scatter:
 				TextField@SCATTERKEYNAME:
 					Id:SCATTERKEYNAME
@@ -358,12 +436,12 @@ Background@SETTINGS_MENU:
 					Width:139
 					Height:25
 					X:240
-					Y:350
+					Y:540
 					MaxLength:16
 				Label@KEYS_STANCECYCLEKEY_NAME:
 					Id:KEYS_STANCECYCLE_NAME
 					X:0
-					Y:390
+					Y:580
 					Text: Cycle Stance:
 				TextField@STANCECYCLEKEYNAME:
 					Id:STANCECYCLEKEYNAME
@@ -371,12 +449,12 @@ Background@SETTINGS_MENU:
 					Width:139
 					Height:25
 					X:240
-					Y:380
+					Y:570
 					MaxLength:16
 				Label@KEYS_DEPLOYKEY_NAME:
 					Id:KEYS_DEPLOYKEY_NAME
 					X:0
-					Y:420
+					Y:610
 					Text: Deploy:
 				TextField@DEPLOYKEYNAME:
 					Id:DEPLOYKEYNAME
@@ -384,12 +462,12 @@ Background@SETTINGS_MENU:
 					Width:139
 					Height:25
 					X:240
-					Y:410
+					Y:600
 					MaxLength:16
 				Label@HOTKEY_INFO:
 					Id:HOTKEY_INFO
 					X:10
-					Y:720
+					Y:650
 					Text: To change the Hotkey Mapping edit the YAML-Files in /mods/ra/rules/.
 		Container@DEBUG_PANE:
 			Id:DEBUG_PANE
