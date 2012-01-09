@@ -140,31 +140,85 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 					: keyConfig.ModifierToSelectTab == Modifiers.Alt ? "Alt + <Hotkey>"
 					: "Ctrl + <Hotkey>";
 
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("DEFENSETABKEYNAME"),
-			() => keyConfig.DefenseTabKey, k => keyConfig.DefenseTabKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("FOCUSBASEKEYNAME"),
-			() => keyConfig.FocusBaseKey, k => keyConfig.FocusBaseKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("SELLKEYNAME"),
-			() => keyConfig.SellKey, k => keyConfig.SellKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("POWERDOWNKEYNAME"),
-			() => keyConfig.PowerDownKey, k => keyConfig.PowerDownKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("REPAIRKEYNAME"),
-			() => keyConfig.RepairKey, k => keyConfig.RepairKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("PLACENORMALBUILDINGKEYNAME"),
-			() => keyConfig.PlaceNormalBuildingKey, k => keyConfig.PlaceNormalBuildingKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("PLACEDEFENSEBUILDINGKEYNAME"),
-			() => keyConfig.PlaceDefenceBuildingKey, k => keyConfig.PlaceDefenceBuildingKey = k );
+			var specialHotkeyList = keys.GetWidget<ScrollPanelWidget>("SPECIALHOTKEY_LIST");
 
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("ATTACKMOVEKEYNAME"),
+			var specialHotkeyTemplate = specialHotkeyList.GetWidget<ScrollItemWidget>("SPECIALHOTKEY_TEMPLATE");
+
+			var item11 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
+			item11.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Select Defense Tab on Build Palette:";
+			SetupKeyBinding( item11.GetWidget<TextFieldWidget>("HOTKEY"),
+			() => keyConfig.DefenseTabKey, k => keyConfig.DefenseTabKey = k );
+			specialHotkeyList.AddChild(item11);
+
+			var item12 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
+			item12.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Move Viewport to Base:";
+			SetupKeyBinding( item12.GetWidget<TextFieldWidget>("HOTKEY"),
+			() => keyConfig.FocusBaseKey, k => keyConfig.FocusBaseKey = k );
+			specialHotkeyList.AddChild(item12);
+
+			var item13 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
+			item13.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Switch to Sell-Cursor:";
+			SetupKeyBinding( item13.GetWidget<TextFieldWidget>("HOTKEY"),
+			() => keyConfig.SellKey, k => keyConfig.SellKey = k );
+			specialHotkeyList.AddChild(item13);
+
+			var item14 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
+			item14.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Switch to Power-Down-Cursor:";
+			SetupKeyBinding( item14.GetWidget<TextFieldWidget>("HOTKEY"),
+			() => keyConfig.PowerDownKey, k => keyConfig.PowerDownKey = k );
+			specialHotkeyList.AddChild(item14);
+
+			var item15 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
+			item15.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Switch to Repair-Cursor:";
+			SetupKeyBinding( item15.GetWidget<TextFieldWidget>("HOTKEY"),
+			() => keyConfig.RepairKey, k => keyConfig.RepairKey = k );
+			specialHotkeyList.AddChild(item15);
+
+			var item16 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
+			item16.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Place Normal-Building:";
+			SetupKeyBinding( item16.GetWidget<TextFieldWidget>("HOTKEY"),
+			() => keyConfig.PlaceNormalBuildingKey, k => keyConfig.PlaceNormalBuildingKey = k );
+			specialHotkeyList.AddChild(item16);
+
+			var item17 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
+			item17.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Place Defence-Building:";
+			SetupKeyBinding( item17.GetWidget<TextFieldWidget>("HOTKEY"),
+			() => keyConfig.PlaceDefenceBuildingKey, k => keyConfig.PlaceDefenceBuildingKey = k );
+			specialHotkeyList.AddChild(item17);
+
+			var unitCommandHotkeyList = keys.GetWidget<ScrollPanelWidget>("UNITCOMMANDHOTKEY_LIST");
+
+			var unitCommandHotkeyTemplate = unitCommandHotkeyList.GetWidget<ScrollItemWidget>("UNITCOMMANDHOTKEY_TEMPLATE");
+
+			var item21 = ScrollItemWidget.Setup(unitCommandHotkeyTemplate, () => false, () => {});
+			item21.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Attack Move:";
+			SetupKeyBinding( item21.GetWidget<TextFieldWidget>("HOTKEY"),
 			() => keyConfig.AttackMoveKey, k => keyConfig.AttackMoveKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("STOPKEYNAME"),
+			unitCommandHotkeyList.AddChild(item21);
+
+			var item22 = ScrollItemWidget.Setup(unitCommandHotkeyTemplate, () => false, () => {});
+			item22.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Stop:";
+			SetupKeyBinding( item22.GetWidget<TextFieldWidget>("HOTKEY"),
 			() => keyConfig.StopKey, k => keyConfig.StopKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("SCATTERKEYNAME"),
+			unitCommandHotkeyList.AddChild(item22);
+
+			var item23 = ScrollItemWidget.Setup(unitCommandHotkeyTemplate, () => false, () => {});
+			item23.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Scatter:";
+			SetupKeyBinding( item23.GetWidget<TextFieldWidget>("HOTKEY"),
 			() => keyConfig.ScatterKey, k => keyConfig.ScatterKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("STANCECYCLEKEYNAME"),
+			unitCommandHotkeyList.AddChild(item23);
+
+			var item24 = ScrollItemWidget.Setup(unitCommandHotkeyTemplate, () => false, () => {});
+			item24.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Cycle Stance:";
+			SetupKeyBinding( item24.GetWidget<TextFieldWidget>("HOTKEY"),
 			() => keyConfig.StanceCycleKey, k => keyConfig.StanceCycleKey = k );
-			SetupKeyBinding( keys.GetWidget<TextFieldWidget>("DEPLOYKEYNAME"),
+			unitCommandHotkeyList.AddChild(item24);
+
+			var item25 = ScrollItemWidget.Setup(unitCommandHotkeyTemplate, () => false, () => {});
+			item25.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Deploy:";
+			SetupKeyBinding( item25.GetWidget<TextFieldWidget>("HOTKEY"),
 			() => keyConfig.DeployKey, k => keyConfig.DeployKey = k );
+			unitCommandHotkeyList.AddChild(item25);
 
 			// Debug
 			var debug = bg.GetWidget("DEBUG_PANE");

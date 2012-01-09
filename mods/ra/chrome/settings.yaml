@@ -303,171 +303,69 @@ Background@SETTINGS_MENU:
 					X:0
 					Y:200
 					Text: Special Hotkeys:
-				Label@KEYS_DEFENSETABKEY_NAME:
-					Id:KEYS_DEFENSETABKEY_NAME
+				ScrollPanel@SPECIALHOTKEY_LIST:
+					Id:SPECIALHOTKEY_LIST
 					X:0
-					Y:230
-					Text: Select Defense Tab on Build Palette:
-				TextField@DEFENSETABKEYNAME:
-					Id:DEFENSETABKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
 					Y:220
-					MaxLength:16
-				Label@KEYS_FOCUSBASEKEY_NAME:
-					Id:KEYS_FOCUSBASEKEY_NAME
-					X:0
-					Y:260
-					Text: Move Viewport to Base:
-				TextField@FOCUSBASEKEYNAME:
-					Id:FOCUSBASEKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:250
-					MaxLength:16
-				Label@KEYS_SELLKEY_NAME:
-					Id:KEYS_SELLKEY_NAME
-					X:0
-					Y:290
-					Text: Switch to Sell-Cursor:
-				TextField@SELLKEYNAME:
-					Id:SELLKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:280
-					MaxLength:16
-				Label@KEYS_POWERDOWNKEY_NAME:
-					Id:KEYS_POWERDOWNKEY_NAME
-					X:0
-					Y:320
-					Text: Switch to Power-Down-Cursor:
-				TextField@POWERDOWNKEYNAME:
-					Id:POWERDOWNKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:310
-					MaxLength:16
-				Label@KEYS_REPAIRKEY_NAME:
-					Id:KEYS_REPAIRKEY_NAME
-					X:0
-					Y:350
-					Text: Switch to Repair-Cursor:
-				TextField@REPAIRKEYNAME:
-					Id:REPAIRKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:340
-					MaxLength:16
-				Label@KEYS_PLACENORMALBUILDINGKEY_NAME:
-					Id:KEYS_PLACENORMALBUILDINGKEY_NAME
-					X:0
-					Y:380
-					Text: Place Normal-Building:
-				TextField@PLACENORMALBUILDINGKEYNAME:
-					Id:PLACENORMALBUILDINGKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:370
-					MaxLength:16
-				Label@KEYS_PLACEDEFENSEBUILDINGKEY_NAME:
-					Id:KEYS_PLACEDEFENSEBUILDINGKEY_NAME
-					X:0
-					Y:410
-					Text: Place Defence-Building:
-				TextField@PLACEDEFENSEBUILDINGKEYNAME:
-					Id:PLACEDEFENSEBUILDINGKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:400
-					MaxLength:16
+					Width:449
+					Height:75
+					Children:
+						ScrollItem@SPECIALHOTKEY_TEMPLATE:
+							Id:SPECIALHOTKEY_TEMPLATE
+							Width:PARENT_RIGHT-27
+							Height:25
+							X:2
+							Y:0
+							Visible:false
+							Children:
+								Label@FUNCTION:
+									X:10
+									Id:FUNCTION
+									Width:200
+									Height:25
+								TextField@HOTKEY:
+									Id:HOTKEY
+									X:250
+									Width:139
+									Height:25
+									MaxLength:16
 				Label@KEYS_UNITCOMMANDSHEADLINE:
 					Id:KEYS_UNITCOMMANDSHEADLINE
 					X:0
-					Y:450
+					Y:320
 					Text: Hotkeys for Unit Commands:
-				Label@KEYS_ATTACKMOVEKEY_NAME:
-					Id:KEYS_ATTACKMOVEKEY_NAME
+				ScrollPanel@UNITCOMMANDHOTKEY_LIST:
+					Id:UNITCOMMANDHOTKEY_LIST
 					X:0
-					Y:490
-					Text: Attack Move:
-				TextField@ATTACKMOVEKEYNAME:
-					Id:ATTACKMOVEKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:480
-					MaxLength:16
-				Label@KEYS_STOPKEY_NAME:
-					Id:KEYS_STOPKEY_NAME
-					X:0
-					Y:520
-					Text: Stop:
-				TextField@STOPKEYNAME:
-					Id:STOPKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:510
-					MaxLength:16
-				Label@KEYS_SCATTERKEY_NAME:
-					Id:KEYS_SCATTERKEY_NAME
-					X:0
-					Y:550
-					Text: Scatter:
-				TextField@SCATTERKEYNAME:
-					Id:SCATTERKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:540
-					MaxLength:16
-				Label@KEYS_STANCECYCLEKEY_NAME:
-					Id:KEYS_STANCECYCLE_NAME
-					X:0
-					Y:580
-					Text: Cycle Stance:
-				TextField@STANCECYCLEKEYNAME:
-					Id:STANCECYCLEKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:570
-					MaxLength:16
-				Label@KEYS_DEPLOYKEY_NAME:
-					Id:KEYS_DEPLOYKEY_NAME
-					X:0
-					Y:610
-					Text: Deploy:
-				TextField@DEPLOYKEYNAME:
-					Id:DEPLOYKEYNAME
-					Text:Name
-					Width:139
-					Height:25
-					X:240
-					Y:600
-					MaxLength:16
+					Y:340
+					Width:449
+					Height:75
+					Children:
+						ScrollItem@UNITCOMMANDHOTKEY_TEMPLATE:
+							Id:UNITCOMMANDHOTKEY_TEMPLATE
+							Width:PARENT_RIGHT-27
+							Height:25
+							X:2
+							Y:0
+							Visible:false
+							Children:
+								Label@FUNCTION:
+									X:10
+									Id:FUNCTION
+									Width:200
+									Height:25
+								TextField@HOTKEY:
+									Id:HOTKEY
+									X:250
+									Width:139
+									Height:25
+									MaxLength:16
 				Label@HOTKEY_INFO:
 					Id:HOTKEY_INFO
-					X:10
-					Y:650
+					Y:422
+					X:0
+					Height:25
+					Font:Tiny
 					Text: To change the Hotkey Mapping edit the YAML-Files in /mods/ra/rules/.
 		Container@DEBUG_PANE:
 			Id:DEBUG_PANE
