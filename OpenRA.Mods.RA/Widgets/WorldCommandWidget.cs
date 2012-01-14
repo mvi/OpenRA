@@ -123,8 +123,8 @@ namespace OpenRA.Mods.RA.Widgets
 				if (KeyName == KeyConfig.PlaceNormalBuildingKey)
 					return PerformPlaceNormalBuilding();
 
-				if (KeyName == KeyConfig.PlaceDefenceBuildingKey)
-					return PerformPlaceDefenceBuilding();
+				if (KeyName == KeyConfig.PlaceDefenseBuildingKey)
+					return PerformPlaceDefenseBuilding();
 
 				if (!World.Selection.Actors.Any())	// Put all functions, that are no unit-functions, before this line!
 					return false;
@@ -265,7 +265,7 @@ namespace OpenRA.Mods.RA.Widgets
 			return SwitchToTab(0);
 		}
 
-		private bool PerformPlaceDefenceBuilding()
+		private bool PerformPlaceDefenseBuilding()
 		{
 			return SwitchToTab(1);
 		}

@@ -181,9 +181,9 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 			specialHotkeyList.AddChild(item16);
 
 			var item17 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
-			item17.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Place Defence-Building:";
+			item17.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Place Defense-Building:";
 			SetupKeyBinding( item17.GetWidget<TextFieldWidget>("HOTKEY"),
-			() => keyConfig.PlaceDefenceBuildingKey, k => keyConfig.PlaceDefenceBuildingKey = k );
+			() => keyConfig.PlaceDefenseBuildingKey, k => keyConfig.PlaceDefenseBuildingKey = k );
 			specialHotkeyList.AddChild(item17);
 
 			var unitCommandHotkeyList = keys.GetWidget<ScrollPanelWidget>("UNITCOMMANDHOTKEY_LIST");

@@ -118,7 +118,7 @@ namespace OpenRA.GameRules
 		public string PowerDownKey = "b";
 		public string RepairKey = "n";
 		public string PlaceNormalBuildingKey = "f1";
-		public string PlaceDefenceBuildingKey = "f2";
+		public string PlaceDefenseBuildingKey = "f2";
 
 		public string AttackMoveKey = "q";
 		public string StopKey = "w";
