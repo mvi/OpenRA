@@ -113,7 +113,8 @@ namespace OpenRA.GameRules
 		public Modifiers ModifierToSelectTab = Modifiers.Ctrl;
 
 		public string DefenseTabKey = "x";
-		public string FocusBaseKey = "space";
+		public string FocusBaseKey = "g";
+		public string FocusLastEventKey = "space";
 		public string SellKey = "v";
 		public string PowerDownKey = "b";
 		public string RepairKey = "n";

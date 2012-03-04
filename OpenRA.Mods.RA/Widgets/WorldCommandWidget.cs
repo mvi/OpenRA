@@ -78,9 +78,6 @@ namespace OpenRA.Mods.RA.Widgets
 					}
 				}
 
-				if (KeyName == KeyConfig.FocusBaseKey)
-					return CycleProductionBuildings("BaseType", true);
-
 				if (e.Modifiers == KeyConfig.ModifierToSelectTab)
 				{
 					if (KeyName == Rules.Info["mcv"].Traits.Get<BuildableInfo>().Hotkey)
@@ -110,6 +107,12 @@ namespace OpenRA.Mods.RA.Widgets
 						return true;
 					}
 				}
+
+				if (KeyName == KeyConfig.FocusBaseKey)
+					return CycleProductionBuildings("BaseType", true);
+
+				if (KeyName == KeyConfig.FocusLastEventKey)
+					return GotoLastEvent();
 
 				if (KeyName == KeyConfig.SellKey)
 					return PerformSwitchToSellMode();
@@ -201,7 +204,7 @@ namespace OpenRA.Mods.RA.Widgets
 			if (actor.First == null)
 				return true;
 
-			var stances = (UnitStance[])Enum.GetValues(typeof(UnitStance));
+			var stances = Enum<UnitStance>.GetValues();
 
 			var nextStance = stances.Concat(stances).SkipWhile(s => s != actor.Second.predictedStance).Skip(1).First();
 
@@ -241,6 +244,21 @@ namespace OpenRA.Mods.RA.Widgets
 			return true;
 		}
 
+		bool GotoLastEvent()
+		{
+			if (World.LocalPlayer == null)
+				return true;
+
+			var eventNotifier = World.LocalPlayer.PlayerActor.TraitOrDefault<BaseAttackNotifier>();
+			if (eventNotifier == null)
+				return true;
+
+			if (eventNotifier.lastAttackTime < 0)
+				return true;
+
+			Game.viewport.Center(eventNotifier.lastAttackLocation);
+			return true;
+		}
 
 		private bool PerformSwitchToSellMode()
 		{

@@ -116,7 +116,7 @@ E4:
 	Buildable:
 		Queue: Infantry
 		BuildPaletteOrder: 60
-		Prerequisites: stek
+		Prerequisites: ftur
 		Owner: soviet
 		Hotkey: y
 	Valued:
@@ -309,7 +309,6 @@ C2:
 		Range: 2
 	AttackFrontal:
 		PrimaryWeapon: Pistol
-	-ProximityCaptor:
 	ProximityCaptor:
 		Types:CivilianInfantry
 
