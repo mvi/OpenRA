@@ -157,34 +157,40 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 			specialHotkeyList.AddChild(item12);
 
 			var item13 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
-			item13.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Switch to Sell-Cursor:";
+			item13.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Move Viewport to Last Event:";
 			SetupKeyBinding( item13.GetWidget<TextFieldWidget>("HOTKEY"),
-			() => keyConfig.SellKey, k => keyConfig.SellKey = k );
+			() => keyConfig.FocusLastEventKey, k => keyConfig.FocusLastEventKey = k );
 			specialHotkeyList.AddChild(item13);
 
 			var item14 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
-			item14.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Switch to Power-Down-Cursor:";
+			item14.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Switch to Sell-Cursor:";
 			SetupKeyBinding( item14.GetWidget<TextFieldWidget>("HOTKEY"),
-			() => keyConfig.PowerDownKey, k => keyConfig.PowerDownKey = k );
+			() => keyConfig.SellKey, k => keyConfig.SellKey = k );
 			specialHotkeyList.AddChild(item14);
 
 			var item15 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
-			item15.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Switch to Repair-Cursor:";
+			item15.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Switch to Power-Down-Cursor:";
 			SetupKeyBinding( item15.GetWidget<TextFieldWidget>("HOTKEY"),
-			() => keyConfig.RepairKey, k => keyConfig.RepairKey = k );
+			() => keyConfig.PowerDownKey, k => keyConfig.PowerDownKey = k );
 			specialHotkeyList.AddChild(item15);
 
 			var item16 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
-			item16.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Place Normal-Building:";
+			item16.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Switch to Repair-Cursor:";
 			SetupKeyBinding( item16.GetWidget<TextFieldWidget>("HOTKEY"),
-			() => keyConfig.PlaceNormalBuildingKey, k => keyConfig.PlaceNormalBuildingKey = k );
+			() => keyConfig.RepairKey, k => keyConfig.RepairKey = k );
 			specialHotkeyList.AddChild(item16);
 
 			var item17 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
-			item17.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Place Defense-Building:";
+			item17.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Place Normal-Building:";
 			SetupKeyBinding( item17.GetWidget<TextFieldWidget>("HOTKEY"),
-			() => keyConfig.PlaceDefenseBuildingKey, k => keyConfig.PlaceDefenseBuildingKey = k );
+			() => keyConfig.PlaceNormalBuildingKey, k => keyConfig.PlaceNormalBuildingKey = k );
 			specialHotkeyList.AddChild(item17);
+
+			var item18 = ScrollItemWidget.Setup(specialHotkeyTemplate, () => false, () => {});
+			item18.GetWidget<LabelWidget>("FUNCTION").GetText = () => "Place Defense-Building:";
+			SetupKeyBinding( item18.GetWidget<TextFieldWidget>("HOTKEY"),
+			() => keyConfig.PlaceDefenseBuildingKey, k => keyConfig.PlaceDefenseBuildingKey = k );
+			specialHotkeyList.AddChild(item18);
 
 			var unitCommandHotkeyList = keys.GetWidget<ScrollPanelWidget>("UNITCOMMANDHOTKEY_LIST");
 
