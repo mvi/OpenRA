@@ -202,6 +202,8 @@ SPY:
 	-RenderInfantry:
 	RenderSpy:
 		IdleAnimations: idle1,idle2
+	AttackFrontal:
+		PrimaryWeapon: SilencedPPK
 
 E7:
 	Inherits: ^Infantry
@@ -209,7 +211,7 @@ E7:
 		Queue: Infantry
 		BuildPaletteOrder: 110
 		Prerequisites: techcenter
-		Owner: allies,soviet
+		Owner: allies
 		Hotkey: t
 	Valued:
 		Cost: 1200
