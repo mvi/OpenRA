@@ -71,7 +71,7 @@ namespace OpenRA.Mods.RA.Widgets
 					if (KeyName == KeyConfig.DefenseTabKey)
 					{
 						CycleProductionBuildings("BaseType", true);
-						Ui.Root.GetWidget<BuildPaletteWidget>("INGAME_BUILD_PALETTE")
+						Ui.Root.Get<BuildPaletteWidget>("INGAME_BUILD_PALETTE")
 							.SetCurrentTab(World.LocalPlayer.PlayerActor.TraitsImplementing<ProductionQueue>()
 								.FirstOrDefault( q => q.Info.Type == "Defense" ));
 						return true;
@@ -101,7 +101,7 @@ namespace OpenRA.Mods.RA.Widgets
 					if (KeyName == KeyConfig.DefenseTabKey)
 					{
 						CycleProductionBuildings("BaseType", false);
-						Ui.Root.GetWidget<BuildPaletteWidget>("INGAME_BUILD_PALETTE")
+						Ui.Root.Get<BuildPaletteWidget>("INGAME_BUILD_PALETTE")
 							.SetCurrentTab(World.LocalPlayer.PlayerActor.TraitsImplementing<ProductionQueue>()
 								.FirstOrDefault( q => q.Info.Type == "Defense" ));
 						return true;
@@ -309,7 +309,7 @@ namespace OpenRA.Mods.RA.Widgets
 				return false;
 
 			var tab = tabs[num];
-			Ui.Root.GetWidget<BuildPaletteWidget>("INGAME_BUILD_PALETTE")
+			Ui.Root.Get<BuildPaletteWidget>("INGAME_BUILD_PALETTE")
 				.SetCurrentTab(tab);
 
 			if ((tab.Queue.Count() > 0) && (tab.CurrentDone))
