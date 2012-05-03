@@ -1,7 +1,7 @@
 Metadata:
 	Title: Red Alert
 	Description: OpenRA Reimagining of the classic game
-	Version: release-20120315
+	Version: release-20120504
 	Author: The OpenRA Developers
 
 Folders:
@@ -63,6 +63,8 @@ ChromeLayout:
 	mods/ra/chrome/replaybrowser.yaml
 	mods/ra/chrome/dropdowns.yaml
 	mods/ra/chrome/modchooser.yaml
+	mods/ra/chrome/cheats.yaml
+
 Weapons:
 	mods/ra/weapons.yaml
 	
