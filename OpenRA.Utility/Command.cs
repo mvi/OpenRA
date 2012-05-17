@@ -107,10 +107,11 @@ namespace OpenRA.Utility
 		public static void ConvertR8ToPng(string[] args)
 		{
 			var srcImage = new R8Reader(File.OpenRead(args[1]));
-			var shouldRemap = args.Contains( "--transparent" );
+			var shouldRemap = args.Contains("--transparent");
 			var palette = Palette.Load(args[2], shouldRemap);
 			var startFrame = int.Parse(args[3]);
 			var endFrame = int.Parse(args[4]);
+			endFrame++;
 			var filename = args[5];
 			var FrameCount = endFrame - startFrame;
 
@@ -118,13 +119,36 @@ namespace OpenRA.Utility
 			var bitmap = new Bitmap(frame.FrameWidth * FrameCount, frame.FrameHeight, PixelFormat.Format8bppIndexed);
 			bitmap.Palette = palette.AsSystemPalette();
 
-			var x = 0;
+			int OffsetX = 0;
+			int OffsetY = 0;
+
+			int x = 0;
 
 			for (int f = startFrame; f < endFrame; f++)
 			{
 				frame = srcImage[f];
+				
+				if (args.Contains("--infrantry"))
+				{
+					OffsetX = frame.FrameWidth/2 - frame.Width/2;
+					OffsetY = frame.FrameHeight/2 - frame.Height/2;
+				}
+				else if (args.Contains("--vehicle") || args.Contains("--projectile"))
+				{
+					OffsetX = frame.FrameWidth/2 - frame.OffsetX;
+					OffsetY = frame.FrameHeight/2 - frame.OffsetY;
+				}
+				else if (args.Contains("--building"))
+				{
+					if (frame.OffsetX < 0) { frame.OffsetX = 0 - frame.OffsetX; }
+					if (frame.OffsetY < 0) { frame.OffsetY = 0 - frame.OffsetY; }
+					OffsetX = 0 + frame.OffsetX;
+					OffsetY = frame.FrameHeight - frame.OffsetY;
+				}
+				Console.WriteLine("calculated OffsetX: {0}", OffsetX);
+				Console.WriteLine("calculated OffsetY: {0}", OffsetY);
 
-				var data = bitmap.LockBits(new Rectangle(x, 0, frame.Width, frame.Height), ImageLockMode.WriteOnly,
+				var data = bitmap.LockBits(new Rectangle(x+OffsetX, 0+OffsetY, frame.Width, frame.Height), ImageLockMode.WriteOnly,
 					PixelFormat.Format8bppIndexed);
 
 				for (var i = 0; i < frame.Height; i++)
