@@ -4,59 +4,59 @@ PAL="mods/palettetest/d2k.pal"
 
 mono OpenRA.Utility.exe --r8 $R8 $PAL 194 205 "spice"
 mono OpenRA.Utility.exe --shp spice.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 206 457 "e1"
-#infantry
+mono OpenRA.Utility.exe --r8 $R8 $PAL 206 457 "e1" --infantry
+mono OpenRA.Utility.exe --shp e1.png 48
 
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1603 1634 "missile"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1603 1634 "missile" --vehicle
 mono OpenRA.Utility.exe --shp missile.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1635 1666 "trike"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1635 1666 "trike" --vehicle
 mono OpenRA.Utility.exe --shp trike.png 32
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1667 1698 "quad"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1667 1698 "quad" --vehicle
 mono OpenRA.Utility.exe --shp quad.png 32
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1699 1730 "harvester"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1699 1730 "harvester" --vehicle
 mono OpenRA.Utility.exe --shp harvester.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1731 1762 "combath"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1731 1762 "combath" --vehicle
 mono OpenRA.Utility.exe --shp combath.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1763 1794 "siege"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1763 1794 "siege" --vehicle
 mono OpenRA.Utility.exe --shp siege.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1795 1826 "mcv"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1795 1826 "mcv" --vehicle
 mono OpenRA.Utility.exe --shp mcv.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1827 1858 "sonic"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1827 1858 "sonic" --vehicle
 mono OpenRA.Utility.exe --shp sonic.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1859 1890 "combathturret"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1859 1890 "combathturret" --vehicle
 mono OpenRA.Utility.exe --shp combathturret.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1891 1922 "siegeturret"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1891 1922 "siegeturret" --vehicle
 mono OpenRA.Utility.exe --shp siegeturret.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1923 1954 "carryall"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1923 1954 "carryall" --vehicle
 mono OpenRA.Utility.exe --shp siegeturret.png 64
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1955 2050 "orni"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1955 2050 "orni" --vehicle
 mono OpenRA.Utility.exe --shp orni.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2051 2082 "combata"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2051 2082 "combata" --vehicle
 mono OpenRA.Utility.exe --shp combath.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2083 2114 "devast"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2083 2114 "devast" --vehicle
 mono OpenRA.Utility.exe --shp devast.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2115 2146 "combataturret"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2115 2146 "combataturret" --vehicle
 mono OpenRA.Utility.exe --shp combataturret.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2147 2148 "deathhandmissile"
 mono OpenRA.Utility.exe --shp deathhandmissile.png 24
 #infantry
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2389 2420 "deviator"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2389 2420 "deviator" --vehicle
 mono OpenRA.Utility.exe --shp deviator.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2421 2452 "raider"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2421 2452 "raider" --vehicle
 mono OpenRA.Utility.exe --shp raider.png 32
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2453 2484 "combato"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2453 2484 "combato" --vehicle
 mono OpenRA.Utility.exe --shp combato.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2485 2516 "combatoturret"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2485 2516 "combatoturret" --vehicle
 mono OpenRA.Utility.exe --shp combatoturret.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2517 2517 "frigate"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2517 2517 "frigate" --vehicle
 mono OpenRA.Utility.exe --shp frigate.png 96
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2518 2520 "heavya" #2518 is only the gate
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2518 2520 "heavya" --building #2518 is only the gate
 mono OpenRA.Utility.exe --shp heavya.png 96
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2521 2522 "radara"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2521 2522 "radara" --building
 mono OpenRA.Utility.exe --shp radara.png 96
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2523 2524 "pwra"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2523 2524 "pwra" --building
 mono OpenRA.Utility.exe --shp pwra.png 64
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2525 2526 "barra"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2525 2526 "barra" --building
 mono OpenRA.Utility.exe --shp barra.png 96
 
 mono OpenRA.Utility.exe --r8 $R8 $PAL 3549 3564 "sandwormmouth"
@@ -129,10 +129,10 @@ mono OpenRA.Utility.exe --r8 $R8 $PAL 4047 4047 "facticonh"
 mono OpenRA.Utility.exe --shp facticonh.png 60
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4048 4048 "facticono"
 mono OpenRA.Utility.exe --shp facticono.png 60
-mono OpenRA.Utility.exe --r8 $R8 $PAL 4050 4050 "4plate" # = 4051..4052
-mono OpenRA.Utility.exe --shp 4plate.png 60
-mono OpenRA.Utility.exe --r8 $R8 $PAL 4053 4053 "6plate" # = 4054..4055
-mono OpenRA.Utility.exe --shp 6plate.png 60
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4050 4050 "4plateicon" # = 4051..4052
+mono OpenRA.Utility.exe --shp 4plateicon.png 60
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4053 4053 "6plateicon" # = 4054..4055
+mono OpenRA.Utility.exe --shp 6plateicon.png 60
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4056 4056 "pwraicon"
 mono OpenRA.Utility.exe --shp pwraicon.png 60
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4057 4057 "pwrhicon"
@@ -209,8 +209,8 @@ mono OpenRA.Utility.exe --shp palaceoicon.png 60
 # 4105 = orniicon
 # 4106..4107 = radaraicon
 # 4108 = factaicon
-mono OpenRA.Utility.exe --r8 $R8 $PAL 4109 4150 "conyardmake"
-mono OpenRA.Utility.exe --shp conyardmake.png 96
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4109 4150 "factmake"
+mono OpenRA.Utility.exe --shp factmake.png 96
 
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4436 4449 "cranea"
 mono OpenRA.Utility.exe --shp cranea.png 96
@@ -223,5 +223,3 @@ mono OpenRA.Utility.exe --r8 $R8 $PAL 4760 4819 "windtrap_anim"
 mono OpenRA.Utility.exe --shp windtrap_anim.png 96
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4820 4840 "missile_launch"
 mono OpenRA.Utility.exe --shp missile_launch.png 96
-
-mv *.shp mods/d2k/bits
