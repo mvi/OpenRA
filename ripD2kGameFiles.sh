@@ -4,8 +4,8 @@ PAL="mods/palettetest/d2k.pal"
 
 mono OpenRA.Utility.exe --r8 $R8 $PAL 194 205 "spice"
 mono OpenRA.Utility.exe --shp spice.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 206 457 "e1" --infantry
-mono OpenRA.Utility.exe --shp e1.png 48
+mono OpenRA.Utility.exe --r8 $R8 $PAL 206 457 "rifleinfantry" --infantry
+mono OpenRA.Utility.exe --shp rifleinfantry.png 48
 
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1603 1634 "missile" --vehicle
 mono OpenRA.Utility.exe --shp missile.png 48

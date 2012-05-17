@@ -1,41 +1,67 @@
 Metadata:
 	Title: Dune 2000
-	Description: Work in progress d2k port
-	Version: a0001
-	Author: The OpenRA Developers
+	Description: Converting the OpenRA Red Alert Mod one by one to Dune 2000
+	Version: {DEV_VERSION}
+	Author: The OpenD2k Developers
+	Requires: ra
 
 Folders:
 	.
-	mods/d2k
-	mods/d2k/bits
-	mods/ra/uibits
+	./mods/d2k
+	./mods/d2k/bits
+	./mods/d2k/uibits
+	~^/Content/d2k
+
 Packages:
-	mods/d2k/bits/arrakis.mix
+
 Rules:
-	mods/d2k/rules/defaults.yaml
-	mods/d2k/rules/vehicles.yaml
 	mods/d2k/rules/system.yaml
+	mods/d2k/rules/vehicles.yaml
 Sequences:
-	mods/d2k/sequences.yaml
+
 Cursors:
-	mods/d2k/cursors.xml
+
 Chrome:
-	mods/ra/chrome.xml
+
 Assemblies:
-	mods/ra/OpenRA.Mods.RA.dll
+	mods/d2k/OpenRA.Mods.D2k.dll
+
 ChromeLayout:
-	mods/d2k/chrome/ingame.yaml
-	mods/d2k/chrome/mainmenu.yaml
-	mods/d2k/chrome/videoplayer.yaml
-	mods/d2k/chrome/settings.yaml
-	mods/d2k/chrome/gamelobby.yaml
-	mods/d2k/chrome/serverbrowser.yaml
+#	mods/d2k/chrome/mainmenu.yaml
+
 Weapons:
+
 Voices:
+
 TileSets:
 	mods/d2k/tilesets/arrakis.yaml
+
 Music:
+
 Movies:
-LoadScreen: NullLoadScreen
-ShellmapUid:1e36d6874ef7960ac0e21edf36bbe1490a4650eb
-TileSize:32
+
+LoadScreen: D2kLoadScreen
+
+ServerTraits:
+
+ChromeMetrics:
+
+Fonts:
+	Regular:
+		Font:FreeSans.ttf
+		Size:14
+	Bold:
+		Font:FreeSansBold.ttf
+		Size:14
+	Title:
+		Font:titles.ttf
+		Size:48
+	BigBold:
+		Font:FreeSansBold.ttf
+		Size:24
+	Tiny:
+		Font:FreeSans.ttf
+		Size:10
+	TinyBold:
+		Font:FreeSansBold.ttf
+		Size:10

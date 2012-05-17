@@ -97,6 +97,16 @@ mod_cnc_EXTRA_CMDS	= mono --debug RALint.exe cnc
 PROGRAMS 		+= mod_cnc
 mod_cnc: $(mod_cnc_TARGET)
 
+# Dune 2000
+mod_cnc_SRCS		:= $(shell find OpenRA.Mods.D2k/ -iname '*.cs')
+mod_cnc_TARGET		= mods/cnc/OpenRA.Mods.D2k.dll
+mod_cnc_KIND		= library
+mod_cnc_DEPS		= $(STD_MOD_DEPS) $(mod_ra_TARGET)
+mod_cnc_LIBS		= $(COMMON_LIBS) $(STD_MOD_LIBS) $(mod_ra_TARGET)
+mod_cnc_EXTRA_CMDS	= mono --debug RALint.exe d2k
+PROGRAMS 		+= mod_d2k
+mod_cnc: $(mod_cnc_TARGET)
+
 #
 # Tools
 #
