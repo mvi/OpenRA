@@ -1,12 +1,23 @@
 #!/bin/bash
 R8="/home/matthias/.openra/Content/d2k/DATA.R8"
-PAL="mods/palettetest/d2k.pal"
+PAL="mods/d2k/bits/d2k.pal"
 
 mono OpenRA.Utility.exe --r8 $R8 $PAL 194 205 "spice"
 mono OpenRA.Utility.exe --shp spice.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 206 457 "rifleinfantry" --infantry
 mono OpenRA.Utility.exe --shp rifleinfantry.png 48
-
+mono OpenRA.Utility.exe --r8 $R8 $PAL 458 693 "rocketinfantry" --infantry
+mono OpenRA.Utility.exe --shp rocketinfantry.png 48
+mono OpenRA.Utility.exe --r8 $R8 $PAL 694 929 "fremen" --infantry
+mono OpenRA.Utility.exe --shp fremen.png 48
+mono OpenRA.Utility.exe --r8 $R8 $PAL 930 1165 "sardaukar" --infantry
+mono OpenRA.Utility.exe --shp sardaukar.png 48
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1166 1221 "engineer" --infantry # death animation 1342..1401
+mono OpenRA.Utility.exe --shp engineer.png 48
+#rifleinfantry repetitions?
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1402 1502 "thumper" --infantry #death animations 1543..1602
+mono OpenRA.Utility.exe --shp thumper.png 48
+#rifleinfantry repetitions?
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1603 1634 "missile" --vehicle
 mono OpenRA.Utility.exe --shp missile.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1635 1666 "trike" --vehicle
@@ -28,7 +39,7 @@ mono OpenRA.Utility.exe --shp combathturret.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1891 1922 "siegeturret" --vehicle
 mono OpenRA.Utility.exe --shp siegeturret.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1923 1954 "carryall" --vehicle
-mono OpenRA.Utility.exe --shp siegeturret.png 64
+mono OpenRA.Utility.exe --shp carryall.png 64
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1955 2050 "orni" --vehicle
 mono OpenRA.Utility.exe --shp orni.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2051 2082 "combata" --vehicle
@@ -39,7 +50,9 @@ mono OpenRA.Utility.exe --r8 $R8 $PAL 2115 2146 "combataturret" --vehicle
 mono OpenRA.Utility.exe --shp combataturret.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2147 2148 "deathhandmissile"
 mono OpenRA.Utility.exe --shp deathhandmissile.png 24
-#infantry
+#rifleinfantry repetitions?
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2245 2284 "saboteur" --infantry #death animations 2325..2388
+mono OpenRA.Utility.exe --shp saboteur.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2389 2420 "deviator" --vehicle
 mono OpenRA.Utility.exe --shp deviator.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2421 2452 "raider" --vehicle
@@ -58,6 +71,16 @@ mono OpenRA.Utility.exe --r8 $R8 $PAL 2523 2524 "pwra" --building
 mono OpenRA.Utility.exe --shp pwra.png 64
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2525 2526 "barra" --building
 mono OpenRA.Utility.exe --shp barra.png 96
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2527 2558 "wall" --building
+mono OpenRA.Utility.exe --shp wall.png 32
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2559 2560 "conyarda" --building
+mono OpenRA.Utility.exe --shp conyarda.png 96
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2561 2563 "refa" --building # 2561 is fassade, 2562 is silo top, 2563 is silo top broken
+mono OpenRA.Utility.exe --shp refa.png 96
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2564 2565 "hightecha" --building
+mono OpenRA.Utility.exe --shp hightecha.png 96
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2566 2570 "siloa" --building
+mono OpenRA.Utility.exe --shp siloa.png 32
 
 mono OpenRA.Utility.exe --r8 $R8 $PAL 3549 3564 "sandwormmouth"
 mono OpenRA.Utility.exe --shp sandwormmouth.png 68
@@ -223,3 +246,5 @@ mono OpenRA.Utility.exe --r8 $R8 $PAL 4760 4819 "windtrap_anim"
 mono OpenRA.Utility.exe --shp windtrap_anim.png 96
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4820 4840 "missile_launch"
 mono OpenRA.Utility.exe --shp missile_launch.png 96
+
+mv *.shp mods/d2k/bits

@@ -13,6 +13,7 @@ Folders:
 	~^/Content/d2k
 
 Packages:
+	mods/d2k/bits/arrakis.mix
 
 Rules:
 	mods/d2k/rules/system.yaml
