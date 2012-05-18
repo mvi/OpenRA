@@ -75,6 +75,11 @@
       <Name>OpenRA.Mods.RA</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\OpenRA.Mods.Cnc\OpenRA.Mods.Cnc.csproj">
+      <Project>{2881135D-4D62-493E-8F83-5EEE92CCC6BE}</Project>
+      <Name>OpenRA.Mods.Cnc</Name>
+      <Private>False</Private>
+    </ProjectReference> 
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
