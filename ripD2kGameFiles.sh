@@ -70,7 +70,7 @@ mono OpenRA.Utility.exe --shp radara.png 96
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2523 2524 "pwra" --building
 mono OpenRA.Utility.exe --shp pwra.png 64
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2525 2526 "barra" --building
-mono OpenRA.Utility.exe --shp barra.png 96
+mono OpenRA.Utility.exe --shp barra.png 80
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2527 2558 "wall" --building
 mono OpenRA.Utility.exe --shp wall.png 32
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2559 2560 "conyarda" --building
@@ -232,8 +232,15 @@ mono OpenRA.Utility.exe --shp palaceoicon.png 60
 # 4105 = orniicon
 # 4106..4107 = radaraicon
 # 4108 = conyardaicon
-mono OpenRA.Utility.exe --r8 $R8 $PAL 4109 4150 "conyardmake" --building
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4109 4150 "conmake" --building
 mono OpenRA.Utility.exe --shp conyardmake.png 96
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4151 4174 "wtrpmake" --building
+mono OpenRA.Utility.exe --shp wtrpmake.png 64
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4175 4194 "barramake" --building
+mono OpenRA.Utility.exe --shp barramake.png 80
+
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4274 4294 "somethingmake" --building
+mono OpenRA.Utility.exe --shp somethingmake.png 96
 
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4436 4449 "cranea"
 mono OpenRA.Utility.exe --shp cranea.png 96
@@ -242,7 +249,7 @@ mono OpenRA.Utility.exe --shp craneh.png 96
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4463 4477 "craneo"
 mono OpenRA.Utility.exe --shp craneo.png 96
 
-mono OpenRA.Utility.exe --r8 $R8 $PAL 4760 4819 "windtrap_anim"
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4760 4819 "windtrap_anim" --building #?
 mono OpenRA.Utility.exe --shp windtrap_anim.png 96
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4820 4840 "missile_launch"
 mono OpenRA.Utility.exe --shp missile_launch.png 96

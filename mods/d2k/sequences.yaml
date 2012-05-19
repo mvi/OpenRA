@@ -1,0 +1,31 @@
+mcv:
+	idle:
+		Start: 0
+		Facings: 32
+
+conyarda:
+	idle:
+		Start: 0
+	make: conmake
+		Start: 0
+		Length: *
+	damaged-idle:
+		Start: 1
+
+pwra:
+	idle:
+		Start: 0
+	make: wtrpmake
+		Start: 0
+		Length: *
+	damaged-idle:
+		Start: 1
+
+barra:
+	idle:
+		Start: 0
+	make: barramake
+		Start: 0
+		Length: *
+	damaged-idle:
+		Start: 1
