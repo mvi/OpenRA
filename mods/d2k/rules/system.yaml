@@ -1,18 +1,12 @@
 Player:
-	PlayerColorPalette@d2k:
+	PlayerColorPalette@d2kplayer:
 		BasePalette: d2k
 		BaseName: d2kplayer
 		PaletteFormat: d2k
 World:	
-#	Country@0:
-#		Name: Allies
-#		Race: allies
-#	Country@1:
-#		Name: Soviet
-#		Race: soviet
-#	Country@2:
-#		Name: Atreides
-#		Race: atreides
+	Country@2:
+		Name: Atreides
+		Race: atreides
 #	Country@3:
 #		Name: Harkonnen
 #		Race: harkonnen

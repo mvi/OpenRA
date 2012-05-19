@@ -146,12 +146,12 @@ mono OpenRA.Utility.exe --shp saboteuricon.png 60
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4035 4035 "deathhandicon"
 mono OpenRA.Utility.exe --shp deathhandicon.png 60
 # 4036..4045 = repetitions
-mono OpenRA.Utility.exe --r8 $R8 $PAL 4046 4046 "facticona" # = 4049
-mono OpenRA.Utility.exe --shp facticona.png 60
-mono OpenRA.Utility.exe --r8 $R8 $PAL 4047 4047 "facticonh"
-mono OpenRA.Utility.exe --shp facticonh.png 60
-mono OpenRA.Utility.exe --r8 $R8 $PAL 4048 4048 "facticono"
-mono OpenRA.Utility.exe --shp facticono.png 60
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4046 4046 "conyardicona" # = 4049
+mono OpenRA.Utility.exe --shp conyardicona.png 60
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4047 4047 "conyardiconh"
+mono OpenRA.Utility.exe --shp conyardiconh.png 60
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4048 4048 "conyardicono"
+mono OpenRA.Utility.exe --shp conyardicono.png 60
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4050 4050 "4plateicon" # = 4051..4052
 mono OpenRA.Utility.exe --shp 4plateicon.png 60
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4053 4053 "6plateicon" # = 4054..4055
@@ -231,9 +231,9 @@ mono OpenRA.Utility.exe --r8 $R8 $PAL 4104 4104 "palaceoicon"
 mono OpenRA.Utility.exe --shp palaceoicon.png 60
 # 4105 = orniicon
 # 4106..4107 = radaraicon
-# 4108 = factaicon
-mono OpenRA.Utility.exe --r8 $R8 $PAL 4109 4150 "factmake"
-mono OpenRA.Utility.exe --shp factmake.png 96
+# 4108 = conyardaicon
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4109 4150 "conyardmake" --building
+mono OpenRA.Utility.exe --shp conyardmake.png 96
 
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4436 4449 "cranea"
 mono OpenRA.Utility.exe --shp cranea.png 96
