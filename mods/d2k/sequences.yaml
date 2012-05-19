@@ -29,3 +29,29 @@ barra:
 		Length: *
 	damaged-idle:
 		Start: 1
+
+refa:
+	idle:
+		Start: 1
+	make: refmake
+		Start: 0
+		Length: *
+	damaged-idle:
+		Start: 2
+
+hightecha:
+	idle:
+		Start: 0
+	make: highmake
+		Start: 0
+		Length: *
+	damaged-idle:
+		Start: 1
+
+carryall:
+	idle:
+		Start: 0
+		Facings: 32
+	unload:
+		Start: 0
+		Facings: 32

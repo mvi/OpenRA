@@ -95,3 +95,74 @@ BARRA:
 	PrimaryBuilding:
 	ProductionBar:
 
+HIGHTECHA:
+	Inherits: ^Building
+	Buildable:
+		Queue: Building
+		BuildPaletteOrder: 50
+		Owner: atreides
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: High Tech Factory
+		Description: Produces carryalls
+	ProvidesCustomPrerequisite:
+		Prerequisite: anyhightech
+	Building:
+		Power: -30
+		Footprint: _x_ xxx xxx
+		Dimensions: 3,3
+	Health:
+		HP: 1500
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 4
+	Bib:
+	RenderBuilding:
+		PlayerPalette: d2kplayer
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 5,0
+		ExitCell: 1,1
+	Production:
+		Produces: Plane
+	PrimaryBuilding:
+	ProductionBar:
+
+REFA:
+	Inherits: ^Building
+	Buildable:
+		Queue: Building
+		BuildPaletteOrder: 10
+		Prerequisites: anypower
+		Owner: atreides
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: Spice Refinery
+		Description: Harvesters unload spice here.
+	Building:
+		Power: -30
+		Footprint: _x_ xxx x==
+		Dimensions: 3,3
+	Health:
+		HP: 900
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 6
+	Bib:
+	RenderBuilding:
+		PlayerPalette: d2kplayer
+	OreRefinery:
+	StoresOre:
+		PipCount: 17
+		Capacity: 2000
+	CustomSellValue:
+		Value: 600
+	FreeActor:
+		Actor: HARV
+		InitialActivity: FindResources
+		SpawnOffset: 1,2
+		Facing: 64

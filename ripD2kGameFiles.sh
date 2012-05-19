@@ -38,7 +38,7 @@ mono OpenRA.Utility.exe --r8 $R8 $PAL 1859 1890 "combathturret" --vehicle
 mono OpenRA.Utility.exe --shp combathturret.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1891 1922 "siegeturret" --vehicle
 mono OpenRA.Utility.exe --shp siegeturret.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1923 1954 "carryall" --vehicle
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1923 1954 "carryall" --vehicle # requires some reordering (again)
 mono OpenRA.Utility.exe --shp carryall.png 64
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1955 2050 "orni" --vehicle
 mono OpenRA.Utility.exe --shp orni.png 48
@@ -76,7 +76,7 @@ mono OpenRA.Utility.exe --shp wall.png 32
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2559 2560 "conyarda" --building
 mono OpenRA.Utility.exe --shp conyarda.png 96
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2561 2563 "refa" --building # 2561 is fassade, 2562 is silo top, 2563 is silo top broken
-mono OpenRA.Utility.exe --shp refa.png 96
+mono OpenRA.Utility.exe --shp refa.png 120
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2564 2565 "hightecha" --building
 mono OpenRA.Utility.exe --shp hightecha.png 96
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2566 2570 "siloa" --building
@@ -233,14 +233,17 @@ mono OpenRA.Utility.exe --shp palaceoicon.png 60
 # 4106..4107 = radaraicon
 # 4108 = conyardaicon
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4109 4150 "conmake" --building
-mono OpenRA.Utility.exe --shp conyardmake.png 96
+mono OpenRA.Utility.exe --shp conmake.png 96
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4151 4174 "wtrpmake" --building
 mono OpenRA.Utility.exe --shp wtrpmake.png 64
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4175 4194 "barramake" --building
 mono OpenRA.Utility.exe --shp barramake.png 80
 
-mono OpenRA.Utility.exe --r8 $R8 $PAL 4274 4294 "somethingmake" --building
-mono OpenRA.Utility.exe --shp somethingmake.png 96
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4231 4253 "refmake" --building
+mono OpenRA.Utility.exe --shp refmake.png 120
+
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4274 4294 "highmake" --building
+mono OpenRA.Utility.exe --shp highmake.png 96
 
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4436 4449 "cranea"
 mono OpenRA.Utility.exe --shp cranea.png 96
