@@ -32,8 +32,8 @@ TRAN:
 	WithShadow:
 	Cargo:
 		Types: Infantry
-		MaxWeight: 5
-		PipCount: 5
+		MaxWeight: 10
+		PipCount: 10
 	FallsToEarth:
 
 HELI:
@@ -153,11 +153,13 @@ A10:
 		Icon: a10icnh
 	Plane:
 		ROT: 4
-		Speed: 25
+		Speed: 40
 	Health:
 		HP: 60
 	Armor:
 		Type: Heavy
+	RevealsShroud:
+		Range: 8
 	RenderUnit:
 	WithShadow:
 	LimitedAmmo:
