@@ -26,23 +26,23 @@ mono OpenRA.Utility.exe --r8 $R8 $PAL 1667 1698 "quad" --vehicle
 mono OpenRA.Utility.exe --shp quad.png 32
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1699 1730 "harvester" --vehicle
 mono OpenRA.Utility.exe --shp harvester.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1731 1762 "combath" --vehicle
-mono OpenRA.Utility.exe --shp combath.png 48
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1731 1762 "combata" --vehicle
+mono OpenRA.Utility.exe --shp combata.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1763 1794 "siege" --vehicle
 mono OpenRA.Utility.exe --shp siege.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1795 1826 "mcv" --vehicle
 mono OpenRA.Utility.exe --shp mcv.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1827 1858 "sonic" --vehicle
 mono OpenRA.Utility.exe --shp sonic.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 1859 1890 "combathturret" --vehicle
-mono OpenRA.Utility.exe --shp combathturret.png 48
+mono OpenRA.Utility.exe --r8 $R8 $PAL 1859 1890 "combataturret" --vehicle
+mono OpenRA.Utility.exe --shp combataturret.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1891 1922 "siegeturret" --vehicle
 mono OpenRA.Utility.exe --shp siegeturret.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1923 1954 "carryall" --vehicle # requires some reordering (again)
 mono OpenRA.Utility.exe --shp carryall.png 64
 mono OpenRA.Utility.exe --r8 $R8 $PAL 1955 2050 "orni" --vehicle
 mono OpenRA.Utility.exe --shp orni.png 48
-mono OpenRA.Utility.exe --r8 $R8 $PAL 2051 2082 "combata" --vehicle
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2051 2082 "combath" --vehicle
 mono OpenRA.Utility.exe --shp combath.png 48
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2083 2114 "devast" --vehicle
 mono OpenRA.Utility.exe --shp devast.png 48
@@ -82,6 +82,9 @@ mono OpenRA.Utility.exe --shp hightecha.png 96
 mono OpenRA.Utility.exe --r8 $R8 $PAL 2566 2570 "siloa" --building
 mono OpenRA.Utility.exe --shp siloa.png 32
 
+mono OpenRA.Utility.exe --r8 $R8 $PAL 2673 2675 "lighta" --building
+mono OpenRA.Utility.exe --shp lighta.png 96
+
 mono OpenRA.Utility.exe --r8 $R8 $PAL 3549 3564 "sandwormmouth"
 mono OpenRA.Utility.exe --shp sandwormmouth.png 68
 mono OpenRA.Utility.exe --r8 $R8 $PAL 3565 3585 "sandwormdust"
@@ -109,8 +112,8 @@ mono OpenRA.Utility.exe --r8 $R8 $PAL 4014 4014 "thumpericon"
 mono OpenRA.Utility.exe --shp thumpericon.png 60
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4015 4015 "sadaukaricon"
 mono OpenRA.Utility.exe --shp sadaukaricon.png 60
-mono OpenRA.Utility.exe --r8 $R8 $PAL 4016 4016 "trikicon"
-mono OpenRA.Utility.exe --shp trikicon.png 60
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4016 4016 "trikeicon"
+mono OpenRA.Utility.exe --shp trikeicon.png 60
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4017 4017 "raidericon"
 mono OpenRA.Utility.exe --shp raidericon.png 60
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4018 4018 "quadicon"
@@ -244,6 +247,10 @@ mono OpenRA.Utility.exe --shp refmake.png 120
 
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4274 4294 "highmake" --building
 mono OpenRA.Utility.exe --shp highmake.png 96
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4275 4312 "lightmake" --building
+mono OpenRA.Utility.exe --shp lightmake.png 96
+mono OpenRA.Utility.exe --r8 $R8 $PAL 4313 4327 "silomake" --building
+mono OpenRA.Utility.exe --shp silomake.png 32
 
 mono OpenRA.Utility.exe --r8 $R8 $PAL 4436 4449 "cranea"
 mono OpenRA.Utility.exe --shp cranea.png 96

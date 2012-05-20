@@ -100,6 +100,7 @@ HIGHTECHA:
 	Buildable:
 		Queue: Building
 		BuildPaletteOrder: 50
+		Prerequisites: refa
 		Owner: atreides
 	Valued:
 		Cost: 2000
@@ -166,3 +167,66 @@ REFA:
 		InitialActivity: FindResources
 		SpawnOffset: 1,2
 		Facing: 64
+
+SILOA:
+	Inherits: ^Building
+	Buildable:
+		Queue: Building
+		BuildPaletteOrder: 40
+		Prerequisites: refa
+		Owner: atreides
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Silo
+		Description: Stores excess harvested Spice
+	Building:
+		Power: -10
+	-GivesBuildableArea:
+	Health:
+		HP: 300
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4
+#	RenderBuildingSilo:
+	StoresOre:
+		PipCount: 5
+		Capacity: 1500
+	RenderBuilding:
+		PlayerPalette: d2kplayer
+	-EmitInfantryOnSell:
+
+LIGHTA:
+	Inherits: ^Building
+	Buildable:
+		Queue: Building
+		BuildPaletteOrder: 50
+		Prerequisites: refa
+		Owner: atreides
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Light Factory
+		Description: light vehicles.
+	Building:
+		Power: -30
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Health:
+		HP: 1500
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 4
+	Bib:
+	RenderBuilding:
+		PlayerPalette: d2kplayer
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 5,0
+		ExitCell: 1,1
+	Production:
+		Produces: Vehicle
+	PrimaryBuilding:
+	ProductionBar:

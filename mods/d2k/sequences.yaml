@@ -39,6 +39,18 @@ refa:
 	damaged-idle:
 		Start: 2
 
+siloa:
+	idle:
+		Start: 0
+#		Length: 3
+		Length: 1
+	damaged-idle:
+		Start: 4
+		Length: 1
+	make: silomake
+		Start: 0
+		Length: *
+
 hightecha:
 	idle:
 		Start: 0
@@ -48,10 +60,29 @@ hightecha:
 	damaged-idle:
 		Start: 1
 
+lighta:
+	idle:
+		Start: 1
+	make: lightmake
+		Start: 0
+		Length: *
+	damaged-idle:
+		Start: 2
+
 carryall:
 	idle:
 		Start: 0
 		Facings: 32
 	unload:
+		Start: 0
+		Facings: 32
+
+trike:
+	idle:
+		Start: 0
+		Facings: 32
+
+quad:
+	idle:
 		Start: 0
 		Facings: 32
