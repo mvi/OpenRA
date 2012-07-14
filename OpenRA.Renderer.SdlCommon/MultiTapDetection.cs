@@ -36,6 +36,12 @@ public static class MultiTapDetection
 		var keyHistory = KeyHistoryCache[KeyName];
 		return keyHistory.GetTapCount(int2.Zero);
 	}
+
+	public static int InfoFromKeyboard(string KeyName)
+	{
+		var keyHistory = KeyHistoryCache[KeyName];
+		return keyHistory.LastTapCount();
+	}
 }
 
 class TapHistory

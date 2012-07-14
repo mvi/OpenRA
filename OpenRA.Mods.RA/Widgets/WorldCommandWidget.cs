@@ -48,7 +48,7 @@ namespace OpenRA.Mods.RA.Widgets
 
 			if (e.Event == KeyInputEvent.Down)
 			{
-				if (e.Modifiers == KeyConfig.ModifierToCycle)
+				if ((e.Modifiers == KeyConfig.ModifierToCycle) || (e.MultiTapCount >= 2))
 				{
 					if (KeyName == Rules.Info["mcv"].Traits.Get<BuildableInfo>().Hotkey)
 						return CycleProductionBuildings("BaseType", true);
@@ -78,7 +78,7 @@ namespace OpenRA.Mods.RA.Widgets
 					}
 				}
 
-				if (e.Modifiers == KeyConfig.ModifierToSelectTab)
+				if ((e.Modifiers == KeyConfig.ModifierToSelectTab) && (e.MultiTapCount == 1))
 				{
 					if (KeyName == Rules.Info["mcv"].Traits.Get<BuildableInfo>().Hotkey)
 						return CycleProductionBuildings("BaseType", false);
