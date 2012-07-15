@@ -50,6 +50,9 @@ namespace OpenRA.Mods.RA.Widgets
 			{
 				if ((e.Modifiers == KeyConfig.ModifierToCycle) || (e.MultiTapCount >= 2))
 				{
+					if (e.MultiTapCount == 2)
+						World.Selection.Clear();
+
 					if (KeyName == Rules.Info["mcv"].Traits.Get<BuildableInfo>().Hotkey)
 						return CycleProductionBuildings("BaseType", true);
 
@@ -223,9 +226,10 @@ namespace OpenRA.Mods.RA.Widgets
 		bool CycleProductionBuildings(string DesiredBuildingType, bool ChangeViewport)
 		{
 			var buildings = World.ActorsWithTrait<ProductionBuilding>()
-					.Where( a => (a.Actor.Owner == World.LocalPlayer)
-							&& (a.Actor.Info.Traits.Get<ProductionBuildingInfo>().BuildingType == DesiredBuildingType)
-												).ToArray();
+					.Where(a => a.Actor.Owner ==
+				       World.LocalPlayer && a.Actor.Info.Traits.Get<ProductionBuildingInfo>().BuildingType == DesiredBuildingType)
+					.OrderByDescending(a => a.Actor.IsPrimaryBuilding()).ToArray();
+
 			if (!buildings.Any()) return true;
 
 			var next = buildings
