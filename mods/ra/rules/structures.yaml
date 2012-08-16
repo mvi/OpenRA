@@ -52,6 +52,7 @@ GAP:
 		BuildPaletteOrder: 100
 		Prerequisites: atek
 		Owner: allies
+		Hotkey: o
 	Building:
 		Power: -60
 		Footprint: _ x
