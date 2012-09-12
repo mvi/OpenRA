@@ -14,8 +14,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using OpenRA.FileFormats.Graphics;
 using OpenTK;
-using OpenTK.Compatibility;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 using Tao.Sdl;
 
 namespace OpenRA.Renderer.SdlCommon
@@ -65,6 +64,11 @@ namespace OpenRA.Renderer.SdlCommon
 			if (surf == IntPtr.Zero)
 				Console.WriteLine("Failed to set video mode.");
 
+			OpenTK.Graphics.GraphicsContext dummyContext = OpenTK.Graphics.GraphicsContext.CreateDummyContext(new OpenTK.ContextHandle(surf));
+			OpenTK.Platform.IWindowInfo windowInfo = OpenTK.Platform.Utilities.CreateDummyWindowInfo();
+			dummyContext.MakeCurrent(windowInfo);
+			OpenTK.Graphics.OpenGL.GL.LoadAll();
+
 			Sdl.SDL_WM_SetCaption( "OpenRA", "OpenRA" );
 			Sdl.SDL_ShowCursor( 0 );
 			Sdl.SDL_EnableUNICODE( 1 );
@@ -72,7 +76,7 @@ namespace OpenRA.Renderer.SdlCommon
 
 			ErrorHandler.CheckGlError();
 
-			var extensions = Gl.glGetString(Gl.GL_EXTENSIONS);
+			var extensions = GL.GetString(StringName.Extensions);
 			if (extensions == null)
 				Console.WriteLine("Failed to fetch GL_EXTENSIONS, this is bad.");
 
@@ -88,29 +92,29 @@ namespace OpenRA.Renderer.SdlCommon
 			return surf;
 		}
 
-		static int ModeFromPrimitiveType(PrimitiveType pt)
+		static BeginMode ModeFromPrimitiveType(PrimitiveType pt)
 		{
 			switch(pt)
 			{
-			case PrimitiveType.PointList: return Gl.GL_POINTS;
-			case PrimitiveType.LineList: return Gl.GL_LINES;
-			case PrimitiveType.TriangleList: return Gl.GL_TRIANGLES;
-			case PrimitiveType.QuadList: return Gl.GL_QUADS;
+			case PrimitiveType.PointList: return BeginMode.Points;
+			case PrimitiveType.LineList: return BeginMode.Lines;
+			case PrimitiveType.TriangleList: return BeginMode.Triangles;
+			case PrimitiveType.QuadList: return BeginMode.Quads;
 			}
 			throw new NotImplementedException();
 		}
 
 		public static void DrawPrimitives(PrimitiveType pt, int firstVertex, int numVertices)
 		{
-			Gl.glDrawArrays(ModeFromPrimitiveType(pt), firstVertex, numVertices);
+			GL.DrawArrays(ModeFromPrimitiveType(pt), firstVertex, numVertices);
 			ErrorHandler.CheckGlError();
 		}
 
 		public static void Clear()
 		{
-			Gl.glClearColor(0, 0, 0, 0);
+			GL.ClearColor(0, 0, 0, 0);
 			ErrorHandler.CheckGlError();
-			Gl.glClear(Gl.GL_COLOR_BUFFER_BIT);
+			GL.Clear(ClearBufferMask.ColorBufferBit);
 			ErrorHandler.CheckGlError();
 		}
 	}

@@ -13,7 +13,6 @@ using System.Drawing;
 using OpenRA.FileFormats.Graphics;
 using OpenRA.Renderer.SdlCommon;
 using OpenTK;
-using OpenTK.Compatibility;
 using OpenTK.Graphics.OpenGL;
 using Tao.Cg;
 using Tao.Sdl;
@@ -62,10 +61,6 @@ namespace OpenRA.Renderer.Cg
 			};
 
 			surf = SdlGraphics.InitializeSdlGl(ref windowSize, window, extensions);
-			OpenTK.Graphics.GraphicsContext dummyContext = OpenTK.Graphics.GraphicsContext.CreateDummyContext(new OpenTK.ContextHandle(surf));
-			OpenTK.Platform.IWindowInfo windowInfo = OpenTK.Platform.Utilities.CreateDummyWindowInfo();
-			dummyContext.MakeCurrent(windowInfo);
-			OpenTK.Graphics.OpenGL.GL.LoadAll();
 
 			cgContext = Tao.Cg.Cg.cgCreateContext();
 
