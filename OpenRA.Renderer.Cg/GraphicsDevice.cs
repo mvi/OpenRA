@@ -14,8 +14,8 @@ using OpenRA.FileFormats.Graphics;
 using OpenRA.Renderer.SdlCommon;
 using OpenTK;
 using OpenTK.Compatibility;
+using OpenTK.Graphics.OpenGL;
 using Tao.Cg;
-using Tao.OpenGl;
 using Tao.Sdl;
 
 [assembly: Renderer(typeof(OpenRA.Renderer.Cg.DeviceFactory))]
@@ -62,6 +62,10 @@ namespace OpenRA.Renderer.Cg
 			};
 
 			surf = SdlGraphics.InitializeSdlGl(ref windowSize, window, extensions);
+			OpenTK.Graphics.GraphicsContext dummyContext = OpenTK.Graphics.GraphicsContext.CreateDummyContext(new OpenTK.ContextHandle(surf));
+			OpenTK.Platform.IWindowInfo windowInfo = OpenTK.Platform.Utilities.CreateDummyWindowInfo();
+			dummyContext.MakeCurrent(windowInfo);
+			OpenTK.Graphics.OpenGL.GL.LoadAll();
 
 			cgContext = Tao.Cg.Cg.cgCreateContext();
 
@@ -72,9 +76,9 @@ namespace OpenRA.Renderer.Cg
 			vertexProfile = CgGl.cgGLGetLatestProfile(CgGl.CG_GL_VERTEX);
 			fragmentProfile = CgGl.cgGLGetLatestProfile(CgGl.CG_GL_FRAGMENT);
 
-			Gl.glEnableClientState(Gl.GL_VERTEX_ARRAY);
+			GL.EnableClientState(ArrayCap.VertexArray);
 			ErrorHandler.CheckGlError();
-			Gl.glEnableClientState(Gl.GL_TEXTURE_COORD_ARRAY);
+			GL.EnableClientState(ArrayCap.TextureCoordArray);
 			ErrorHandler.CheckGlError();
 
 			Sdl.SDL_SetModState(0);	// i have had enough.
@@ -87,15 +91,15 @@ namespace OpenRA.Renderer.Cg
 			if (width < 0) width = 0;
 			if (height < 0) height = 0;
 
-			Gl.glScissor(left, windowSize.Height - ( top + height ), width, height);
+			GL.Scissor(left, windowSize.Height - ( top + height ), width, height);
 			ErrorHandler.CheckGlError();
-			Gl.glEnable(Gl.GL_SCISSOR_TEST);
+			GL.Enable(EnableCap.ScissorTest);
 			ErrorHandler.CheckGlError();
 		}
 
 		public void DisableScissor()
 		{
-			Gl.glDisable(Gl.GL_SCISSOR_TEST);
+			GL.Disable(EnableCap.ScissorTest);
 			ErrorHandler.CheckGlError();
 		}
 
@@ -110,7 +114,7 @@ namespace OpenRA.Renderer.Cg
 
 		public void SetLineWidth(float width)
 		{
-			Gl.glLineWidth(width);
+			GL.LineWidth(width);
 			ErrorHandler.CheckGlError();
 		}
 
