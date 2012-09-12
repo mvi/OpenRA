@@ -18,7 +18,6 @@ using OpenRA.Renderer.SdlCommon;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Compatibility;
-using Tao.OpenGl;
 
 namespace OpenRA.Renderer.Glsl
 {
@@ -27,33 +26,35 @@ namespace OpenRA.Renderer.Glsl
 		int program;
 		readonly Dictionary<string, int> samplers = new Dictionary<string, int>();
 
-		public Shader(GraphicsDevice dev, string type)
+		public Shader (GraphicsDevice dev, string type)
 		{
 			// Vertex shader
 			string vertexCode;
 			using (var file = new StreamReader(FileSystem.Open("glsl{0}{1}.vert".F(Path.DirectorySeparatorChar, type))))
-				vertexCode = file.ReadToEnd();
+				vertexCode = file.ReadToEnd ();
 
-			int v = Gl.glCreateShaderObjectARB(Gl.GL_VERTEX_SHADER_ARB);
-			ErrorHandler.CheckGlError();
-			Gl.glShaderSourceARB(v,1,new string[]{vertexCode},null);
-			ErrorHandler.CheckGlError();
-			GL.Arb.CompileShader(v);
-			ErrorHandler.CheckGlError();
+			int v = GL.CreateShader(ShaderType.VertexShader);
+			ErrorHandler.CheckGlError ();
+			unsafe {
+				GL.Arb.ShaderSource (v, 1, new string[]{vertexCode}, null);
+			}
+			ErrorHandler.CheckGlError ();
+			GL.Arb.CompileShader (v);
+			ErrorHandler.CheckGlError ();
 
 			int success;
-			GL.Arb.GetObjectParameter(v, ArbShaderObjects.ObjectCompileStatusArb, out success);
-			ErrorHandler.CheckGlError();
+			GL.Arb.GetObjectParameter (v, ArbShaderObjects.ObjectCompileStatusArb, out success);
+			ErrorHandler.CheckGlError ();
 			if (success == 0)
-				throw new InvalidProgramException("Compile error in {0}{1}.vert".F(Path.DirectorySeparatorChar, type));
+				throw new InvalidProgramException ("Compile error in {0}{1}.vert".F (Path.DirectorySeparatorChar, type));
 
 			// Fragment shader
 			string fragmentCode;
 			using (var file = new StreamReader(FileSystem.Open("glsl{0}{1}.frag".F(Path.DirectorySeparatorChar, type))))
-				fragmentCode = file.ReadToEnd();
-			int f = Gl.glCreateShaderObjectARB(Gl.GL_FRAGMENT_SHADER_ARB);
-			ErrorHandler.CheckGlError();
-			Gl.glShaderSourceARB(f,1,new string[]{fragmentCode},null);
+				fragmentCode = file.ReadToEnd ();
+			int f = GL.CreateShader(ShaderType.FragmentShader);
+			ErrorHandler.CheckGlError ();
+			unsafe { GL.Arb.ShaderSource (f, 1, new string[]{fragmentCode}, null); }
 			ErrorHandler.CheckGlError();
 			GL.Arb.CompileShader(f);
 			ErrorHandler.CheckGlError();
