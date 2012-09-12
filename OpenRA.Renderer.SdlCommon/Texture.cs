@@ -14,6 +14,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using OpenRA.FileFormats;
 using OpenRA.FileFormats.Graphics;
+using OpenTK;
+using OpenTK.Compatibility;
 using Tao.OpenGl;
 
 namespace OpenRA.Renderer.SdlCommon

@@ -29,7 +29,7 @@ game_TARGET			= OpenRA.Game.exe
 game_KIND			= winexe
 game_DEPS			= $(fileformats_TARGET) 
 game_LIBS			= $(COMMON_LIBS) System.Windows.Forms.dll $(game_DEPS) \
-						thirdparty/Tao/Tao.OpenAl.dll thirdparty/Tao/Tao.FreeType.dll
+						thirdparty/OpenTK/OpenTK.dll thirdparty/OpenTK/OpenTK.Compatibility.dll thirdparty/Tao/Tao.FreeType.dll
 game_FLAGS			= -win32icon:OpenRA.Game/OpenRA.ico
 PROGRAMS 			+= game
 game: $(game_TARGET)
@@ -42,7 +42,7 @@ rsdl_TARGET			= OpenRA.Renderer.SdlCommon.dll
 rsdl_KIND			= library
 rsdl_DEPS			= $(fileformats_TARGET) $(game_TARGET)
 rsdl_LIBS			= $(COMMON_LIBS) System.Windows.Forms.dll \
-					thirdparty/Tao/Tao.OpenGl.dll thirdparty/Tao/Tao.Sdl.dll \
+					thirdparty/OpenTK/OpenTK.dll thirdparty/OpenTK/OpenTK.Compatibility.dll thirdparty/Tao/Tao.Sdl.dll \
 					$(rsdl_DEPS)
 
 rcg_SRCS			:= $(shell find OpenRA.Renderer.Cg/ -iname '*.cs')
@@ -50,7 +50,7 @@ rcg_TARGET			= OpenRA.Renderer.Cg.dll
 rcg_KIND			= library
 rcg_DEPS			= $(fileformats_TARGET) $(game_TARGET) $(rsdl_TARGET)
 rcg_LIBS			= $(COMMON_LIBS) System.Windows.Forms.dll \
-					thirdparty/Tao/Tao.Cg.dll thirdparty/Tao/Tao.OpenGl.dll thirdparty/Tao/Tao.Sdl.dll \
+					thirdparty/Tao/Tao.Cg.dll thirdparty/OpenTK/OpenTK.dll thirdparty/OpenTK/OpenTK.Compatibility.dll thirdparty/Tao/Tao.Sdl.dll \
 					$(rcg_DEPS)
 
 rgl_SRCS			:= $(shell find OpenRA.Renderer.Gl/ -iname '*.cs')
@@ -58,7 +58,7 @@ rgl_TARGET			= OpenRA.Renderer.Gl.dll
 rgl_KIND			= library
 rgl_DEPS			= $(fileformats_TARGET) $(game_TARGET) $(rsdl_TARGET)
 rgl_LIBS			= $(COMMON_LIBS) System.Windows.Forms.dll \
-					thirdparty/Tao/Tao.Cg.dll thirdparty/Tao/Tao.OpenGl.dll thirdparty/Tao/Tao.Sdl.dll \
+					thirdparty/Tao/Tao.Cg.dll thirdparty/OpenTK/OpenTK.dll thirdparty/OpenTK/OpenTK.Compatibility.dll thirdparty/Tao/Tao.Sdl.dll \
 					$(rgl_DEPS)
 
 rnull_SRCS			:= $(shell find OpenRA.Renderer.Null/ -iname '*.cs')
@@ -244,6 +244,7 @@ install: all
 	@cp -r cg $(INSTALL_DIR)
 	@cp *.ttf $(INSTALL_DIR)
 	@cp thirdparty/Tao/* $(INSTALL_DIR)
+	@cp thirdparty/OpenTK/* $(INSTALL_DIR)
 	@$(INSTALL_PROGRAM) thirdparty/ICSharpCode.SharpZipLib.dll $(INSTALL_DIR)
 
 	@echo "#!/bin/sh" > openra
