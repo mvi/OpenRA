@@ -12,8 +12,7 @@ using System;
 using System.Runtime.InteropServices;
 using OpenRA.FileFormats.Graphics;
 using OpenTK;
-using OpenTK.Compatibility;
-using Tao.OpenGl;
+using OpenTK.Graphics.OpenGL;
 
 namespace OpenRA.Renderer.SdlCommon
 {
@@ -25,20 +24,20 @@ namespace OpenRA.Renderer.SdlCommon
 
 		public VertexBuffer(int size)
 		{
-			Gl.glGenBuffersARB(1, out buffer);
+			GL.Arb.GenBuffers(1, out buffer);
 			ErrorHandler.CheckGlError();
 			Bind();
-			Gl.glBufferDataARB(Gl.GL_ARRAY_BUFFER_ARB,
+			GL.Arb.BufferData(BufferTargetArb.ArrayBuffer,
 				new IntPtr(vertexSize * size),
 				new T[ size ],
-				Gl.GL_DYNAMIC_DRAW_ARB);
+				BufferUsageArb.DynamicDraw);
 			ErrorHandler.CheckGlError();
 		}
 
 		public void SetData(T[] data, int length)
 		{
 			Bind();
-			Gl.glBufferSubDataARB(Gl.GL_ARRAY_BUFFER_ARB,
+			GL.Arb.BufferSubData(BufferTargetArb.ArrayBuffer,
 				IntPtr.Zero,
 				new IntPtr(vertexSize * length),
 				data);
@@ -47,15 +46,15 @@ namespace OpenRA.Renderer.SdlCommon
 
 		public void Bind()
 		{
-			Gl.glBindBufferARB(Gl.GL_ARRAY_BUFFER_ARB, buffer);
+			GL.Arb.BindBuffer(BufferTargetArb.ArrayBuffer, buffer);
 			ErrorHandler.CheckGlError();
-			Gl.glVertexPointer(3, Gl.GL_FLOAT, vertexSize, IntPtr.Zero);
+			GL.VertexPointer(3, VertexPointerType.Float, vertexSize, IntPtr.Zero);
 			ErrorHandler.CheckGlError();
-			Gl.glTexCoordPointer(4, Gl.GL_FLOAT, vertexSize, new IntPtr(12));
+			GL.TexCoordPointer(4, TexCoordPointerType.Float, vertexSize, new IntPtr(12));
 			ErrorHandler.CheckGlError();
 		}
 
-		void FinalizeInner() { Gl.glDeleteBuffersARB( 1, ref buffer ); }
+		void FinalizeInner() { GL.Arb.DeleteBuffers( 1, ref buffer ); }
 		~VertexBuffer() { Game.RunAfterTick( FinalizeInner ); }
 	}
 }
