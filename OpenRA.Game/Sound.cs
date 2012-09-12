@@ -15,8 +15,7 @@ using OpenRA.FileFormats;
 using OpenRA.GameRules;
 using OpenRA.Traits;
 using OpenTK;
-using OpenTK.Compatibility;
-using Tao.OpenAl;
+using OpenTK.Audio.OpenAL;
 
 namespace OpenRA
 {
@@ -353,19 +352,19 @@ namespace OpenRA
 		public OpenAlSoundEngine()
 		{
 			//var str = Alc.alcGetString(IntPtr.Zero, Alc.ALC_DEFAULT_DEVICE_SPECIFIER);
-			var dev = Alc.alcOpenDevice(null);
+			var dev = Alc.OpenDevice(null);
 			if (dev == IntPtr.Zero)
 				throw new InvalidOperationException("Can't create OpenAL device");
-			var ctx = Alc.alcCreateContext(dev, IntPtr.Zero);
-			if (ctx == IntPtr.Zero)
+			var ctx = Alc.CreateContext(dev, (int[])null);
+			if (ctx == ContextHandle.Zero)
 				throw new InvalidOperationException("Can't create OpenAL context");
-			Alc.alcMakeContextCurrent(ctx);
+			Alc.MakeContextCurrent(ctx);
 
 			for (var i = 0; i < POOL_SIZE; i++)
 			{
 				var source = 0;
-				Al.alGenSources(1, out source);
-				if (0 != Al.alGetError())
+				AL.GenSources(1, out source);
+				if (0 != AL.GetError())
 				{
 					Log.Write("debug", "Failed generating OpenAL source {0}", i);
 					return;
@@ -390,8 +389,8 @@ namespace OpenRA
 			foreach (int key in sourcePool.Keys)
 			{
 				int state;
-				Al.alGetSourcei(key, Al.AL_SOURCE_STATE, out state);
-				if (state != Al.AL_PLAYING && state != Al.AL_PAUSED)
+				AL.GetSource(key, ALGetSourcei.SourceState, out state);
+				if (state != (int)ALSourceState.Playing && state != (int)ALSourceState.Paused)
 					freeSources.Add(key);
 			}
 
@@ -472,7 +471,7 @@ namespace OpenRA
 		public float Volume
 		{
 			get { return volume; }
-			set { Al.alListenerf(Al.AL_GAIN, volume = value); }
+			set { AL.Listener(ALListenerf.Gain, volume = value); }
 		}
 
 		public void PauseSound(ISound sound, bool paused)
@@ -481,11 +480,11 @@ namespace OpenRA
 
 			int key = ((OpenAlSound)sound).source;
 			int state;
-			Al.alGetSourcei(key, Al.AL_SOURCE_STATE, out state);
-			if (state == Al.AL_PLAYING && paused)
-				Al.alSourcePause(key);
-			else if (state == Al.AL_PAUSED && !paused)
-				Al.alSourcePlay(key);
+			AL.GetSource(key, ALGetSourcei.SourceState, out state);
+			if (state == (int)ALSourceState.Playing && paused)
+				AL.SourcePause(key);
+			else if (state ==  (int)ALSourceState.Paused && !paused)
+				AL.SourcePlay(key);
 		}
 
 		public void SetAllSoundsPaused(bool paused)
@@ -493,11 +492,11 @@ namespace OpenRA
 			foreach (int key in sourcePool.Keys)
 			{
 				int state;
-				Al.alGetSourcei(key, Al.AL_SOURCE_STATE, out state);
-				if (state == Al.AL_PLAYING && paused)
-					Al.alSourcePause(key);
-				else if (state == Al.AL_PAUSED && !paused)
-					Al.alSourcePlay(key);
+				AL.GetSource(key, ALGetSourcei.SourceState, out state);
+				if (state == (int)ALSourceState.Playing && paused)
+					AL.SourcePause(key);
+				else if (state ==  (int)ALSourceState.Paused && !paused)
+					AL.SourcePlay(key);
 
 			}
 		}
@@ -507,14 +506,14 @@ namespace OpenRA
 			var sounds = sourcePool.Select(s => s.Key).Where(b =>
 			{
 				int state;
-				Al.alGetSourcei(b, Al.AL_SOURCE_STATE, out state);
-				return ((state == Al.AL_PLAYING || state == Al.AL_PAUSED) &&
+				AL.GetSource(b, ALGetSourcei.SourceState, out state);
+				return ((state == (int)ALSourceState.Playing || state == (int)ALSourceState.Paused) &&
 					   ((music != null) ? b != ((OpenAlSound)music).source : true) &&
 					   ((video != null) ? b != ((OpenAlSound)video).source : true));
 			}).ToList();
 			foreach (var s in sounds)
 			{
-				Al.alSourcef(s, Al.AL_GAIN, volume);
+				AL.Source(s, ALSourcef.Gain, volume);
 			}
 		}
 
@@ -524,9 +523,9 @@ namespace OpenRA
 
 			int key = ((OpenAlSound)sound).source;
 			int state;
-			Al.alGetSourcei(key, Al.AL_SOURCE_STATE, out state);
-			if (state == Al.AL_PLAYING || state == Al.AL_PAUSED)
-				Al.alSourceStop(key);
+			AL.GetSource(key, ALGetSourcei.SourceState, out state);
+			if (state == (int)ALSourceState.Playing || state == (int)ALSourceState.Paused)
+				AL.SourceStop(key);
 		}
 
 		public void StopAllSounds()
@@ -534,9 +533,9 @@ namespace OpenRA
 			foreach (int key in sourcePool.Keys)
 			{
 				int state;
-				Al.alGetSourcei(key, Al.AL_SOURCE_STATE, out state);
-				if (state == Al.AL_PLAYING || state == Al.AL_PAUSED)
-					Al.alSourceStop(key);
+				AL.GetSource(key, ALGetSourcei.SourceState, out state);
+				if (state == (int)ALSourceState.Playing || state == (int)ALSourceState.Paused)
+					AL.SourceStop(key);
 			}
 		}
 
@@ -544,9 +543,9 @@ namespace OpenRA
 		{
 			var orientation = new[] { 0f, 0f, 1f, 0f, -1f, 0f };
 
-			Al.alListener3f(Al.AL_POSITION, position.X, position.Y, 50);
-			Al.alListenerfv(Al.AL_ORIENTATION, ref orientation[0]);
-			Al.alListenerf(Al.AL_METERS_PER_UNIT, .01f);
+			AL.Listener(ALListener3f.Position, position.X, position.Y, 50);
+			AL.Listener(ALListenerfv.Orientation, ref orientation);
+			AL.Listener(ALListenerf.EfxMetersPerUnit, .01f);
 		}
 	}
 
@@ -554,18 +553,18 @@ namespace OpenRA
 	{
 		public readonly int buffer;
 
-		static int MakeALFormat(int channels, int bits)
+		static ALFormat MakeALFormat(int channels, int bits)
 		{
 			if (channels == 1)
-				return bits == 16 ? Al.AL_FORMAT_MONO16 : Al.AL_FORMAT_MONO8;
+				return bits == 16 ? ALFormat.Mono16 : ALFormat.Mono8;
 			else
-				return bits == 16 ? Al.AL_FORMAT_STEREO16 : Al.AL_FORMAT_STEREO8;
+				return bits == 16 ? ALFormat.Stereo16 : ALFormat.Stereo8;
 		}
 
 		public OpenAlSoundSource(byte[] data, int channels, int sampleBits, int sampleRate)
 		{
-			Al.alGenBuffers(1, out buffer);
-			Al.alBufferData(buffer, MakeALFormat(channels, sampleBits), data, data.Length, sampleRate);
+			AL.GenBuffers(1, out buffer);
+			AL.BufferData(buffer, MakeALFormat(channels, sampleBits), data, data.Length, sampleRate);
 		}
 	}
 
@@ -578,16 +577,16 @@ namespace OpenRA
 		{
 			if (source == -1) return;
 			this.source = source;
-			Al.alSourcef(source, Al.AL_PITCH, 1f);
+			AL.Source(source, ALSourcef.Pitch, 1f);
 			Volume = volume;
-			Al.alSource3f(source, Al.AL_POSITION, pos.X, pos.Y, 0f);
-			Al.alSource3f(source, Al.AL_VELOCITY, 0f, 0f, 0f);
-			Al.alSourcei(source, Al.AL_BUFFER, buffer);
-			Al.alSourcei(source, Al.AL_LOOPING, looping ? Al.AL_TRUE : Al.AL_FALSE);
-			Al.alSourcei(source, Al.AL_SOURCE_RELATIVE, relative ? 1 : 0);
-			Al.alSourcef(source, Al.AL_REFERENCE_DISTANCE, 160);
-			Al.alSourcef(source, Al.AL_MAX_DISTANCE, 3200 / Game.viewport.Zoom);
-			Al.alSourcePlay(source);
+			AL.Source(source, ALSource3f.Position, pos.X, pos.Y, 0f);
+			AL.Source(source, ALSource3f.Velocity, 0f, 0f, 0f);
+			AL.Source(source, ALSourcei.Buffer, buffer);
+			AL.Source(source, ALSourceb.Looping, looping);
+			AL.Source(source, ALSourceb.SourceRelative, relative);
+			AL.Source(source, ALSourcef.ReferenceDistance, 160);
+			AL.Source(source, ALSourcef.MaxDistance, 3200 / Game.viewport.Zoom);
+			AL.SourcePlay(source);
 		}
 
 		public float Volume
@@ -596,7 +595,7 @@ namespace OpenRA
 			set
 			{
 				if (source != -1)
-					Al.alSourcef(source, Al.AL_GAIN, volume = value);
+					AL.Source(source, ALSourcef.Gain, volume = value);
 			}
 		}
 
@@ -604,8 +603,8 @@ namespace OpenRA
 		{
 			get
 			{
-				float pos;
-				Al.alGetSourcef(source, Al.AL_SAMPLE_OFFSET, out pos);
+				int pos;
+				AL.GetSource(source, ALGetSourcei.SampleOffset, out pos);
 				return pos / 22050f;
 			}
 		}
@@ -615,8 +614,8 @@ namespace OpenRA
 			get
 			{
 				int state;
-				Al.alGetSourcei(source, Al.AL_SOURCE_STATE, out state);
-				return state == Al.AL_PLAYING;
+				AL.GetSource(source, ALGetSourcei.SourceState, out state);
+				return state == (int)ALSourceState.Playing;
 			}
 		}
 	}
