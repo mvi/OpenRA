@@ -50,6 +50,11 @@ namespace OpenRA.Renderer.Glsl
 
 			surf = SdlGraphics.InitializeSdlGl(ref windowSize, window, extensions);
 
+			OpenTK.Graphics.GraphicsContext dummyContext = OpenTK.Graphics.GraphicsContext.CreateDummyContext(new OpenTK.ContextHandle(surf));
+			OpenTK.Platform.IWindowInfo windowInfo = OpenTK.Platform.Utilities.CreateDummyWindowInfo();
+			dummyContext.MakeCurrent(windowInfo);
+			OpenTK.Graphics.OpenGL.GL.LoadAll();
+
 			GL.EnableClientState(ArrayCap.VertexArray);
 			ErrorHandler.CheckGlError();
 			GL.EnableClientState(ArrayCap.TextureCoordArray);

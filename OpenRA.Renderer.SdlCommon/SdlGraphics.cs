@@ -64,17 +64,12 @@ namespace OpenRA.Renderer.SdlCommon
 			if (surf == IntPtr.Zero)
 				Console.WriteLine("Failed to set video mode.");
 
-			OpenTK.Graphics.GraphicsContext dummyContext = OpenTK.Graphics.GraphicsContext.CreateDummyContext(new OpenTK.ContextHandle(surf));
-			OpenTK.Platform.IWindowInfo windowInfo = OpenTK.Platform.Utilities.CreateDummyWindowInfo();
-			dummyContext.MakeCurrent(windowInfo);
-			OpenTK.Graphics.OpenGL.GL.LoadAll();
-
 			Sdl.SDL_WM_SetCaption( "OpenRA", "OpenRA" );
 			Sdl.SDL_ShowCursor( 0 );
 			Sdl.SDL_EnableUNICODE( 1 );
 			Sdl.SDL_EnableKeyRepeat( Sdl.SDL_DEFAULT_REPEAT_DELAY, Sdl.SDL_DEFAULT_REPEAT_INTERVAL );
 
-			ErrorHandler.CheckGlError();
+			/*ErrorHandler.CheckGlError();
 
 			var extensions = GL.GetString(StringName.Extensions);
 			if (extensions == null)
@@ -87,7 +82,7 @@ namespace OpenRA.Renderer.SdlCommon
 				ErrorHandler.WriteGraphicsLog("Unsupported GPU: Missing extensions: {0}"
 					.F(missingExtensions.JoinWith(",")));
 				throw new InvalidProgramException("Unsupported GPU. See graphics.log for details.");
-			}
+			}*/
 
 			return surf;
 		}

@@ -62,6 +62,11 @@ namespace OpenRA.Renderer.Cg
 
 			surf = SdlGraphics.InitializeSdlGl(ref windowSize, window, extensions);
 
+			OpenTK.Graphics.GraphicsContext dummyContext = OpenTK.Graphics.GraphicsContext.CreateDummyContext(new OpenTK.ContextHandle(surf));
+			OpenTK.Platform.IWindowInfo windowInfo = OpenTK.Platform.Utilities.CreateDummyWindowInfo();
+			dummyContext.MakeCurrent(windowInfo);
+			OpenTK.Graphics.OpenGL.GL.LoadAll();
+
 			cgContext = Tao.Cg.Cg.cgCreateContext();
 
 			Tao.Cg.Cg.cgSetErrorCallback(CgErrorCallback);
