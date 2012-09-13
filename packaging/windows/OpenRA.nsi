@@ -83,6 +83,7 @@ Section "Client" Client
 	File "${SRCDIR}\OpenRA.Renderer.Cg.dll"
 	File "${SRCDIR}\OpenRA.Renderer.Null.dll"
 	File "${SRCDIR}\ICSharpCode.SharpZipLib.dll"
+	File "${SRCDIR}\Mono.Nat.dll"
 	File "${SRCDIR}\COPYING"
 	File "${SRCDIR}\HACKING"
 	File "${SRCDIR}\INSTALL"
