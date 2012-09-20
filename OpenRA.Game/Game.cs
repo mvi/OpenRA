@@ -327,9 +327,11 @@ namespace OpenRA
 
 		internal static void Run()
 		{
+			var idealFrameTime = 1.0 / Settings.Graphics.MaxFramerate;
+			ushort i=0;
+			
 			while (!quit)
-			{
-				var idealFrameTime = 1.0 / Settings.Graphics.MaxFramerate;
+			{				
 				var sw = new Stopwatch();
 
 				Tick( orderManager, viewport );
@@ -339,6 +341,16 @@ namespace OpenRA
 					var waitTime = idealFrameTime - sw.ElapsedTime();
 					if (waitTime > 0)
 						System.Threading.Thread.Sleep( TimeSpan.FromSeconds(waitTime) );
+				}
+				
+				if (Settings.Graphics.DebugFramerate)
+				{
+					i++;
+					if (i == Settings.Graphics.MaxFramerate / 2)
+					{
+						Debug("Frame Rate: {0}", (float) 1.0/sw.ElapsedTime());
+						i = 0;
+					}
 				}
 			}
 

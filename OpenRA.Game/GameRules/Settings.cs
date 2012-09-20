@@ -71,6 +71,7 @@ namespace OpenRA.GameRules
 		public bool PixelDouble = false;
 		public bool CapFramerate = false;
 		public int MaxFramerate = 60;
+		public bool DebugFramerate = false;
 
 		public int BatchSize = 8192;
 		public int NumTempBuffers = 8;
