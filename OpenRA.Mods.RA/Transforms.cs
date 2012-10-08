@@ -19,10 +19,25 @@ namespace OpenRA.Mods.RA
 {
 	class TransformsInfo : ITraitInfo
 	{
+		/// <summary>
+		/// Defines in what actor to transform
+		/// </summary>
 		[ActorReference] public readonly string IntoActor = null;
+		/// <summary>
+		/// X, Y offset
+		/// </summary>
 		public readonly int2 Offset = int2.Zero;
+		/// <summary>
+		/// Facing before transforming animation
+		/// </summary>
 		public readonly int Facing = 96;
+		/// <summary>
+		/// *.aud file during successful transformation
+		/// </summary>
 		public readonly string[] TransformSounds = {};
+		/// <summary>
+		/// *.aud file when transform is impossible
+		/// </summary>
 		public readonly string[] NoTransformSounds = {};
 
 		public virtual object Create(ActorInitializer init) { return new Transforms(init.self, this); }
@@ -34,6 +49,9 @@ namespace OpenRA.Mods.RA
 		TransformsInfo Info;
 		BuildingInfo bi;
 
+		/// <summary>
+		/// If present, the unit is able to transform
+		/// </summary>
 		public Transforms(Actor self, TransformsInfo info)
 		{
 			this.self = self;
