@@ -18,17 +18,38 @@ namespace OpenRA.Mods.RA
 {
 	public class Barrel
 	{
-		public PVecInt TurretSpaceOffset;	// position in turret space
-		public PVecInt ScreenSpaceOffset;	// screen-space hack to make things line up good.
-		public int Facing;					// deviation from turret facing
+		/// <summary>
+		/// position in turret space
+		/// </summary>
+		public PVecInt TurretSpaceOffset;
+		/// <summary>
+		/// screen-space hack to make things line up good.
+		/// </summary>
+		public PVecInt ScreenSpaceOffset;
+		/// <summary>
+		/// deviation from turret facing
+		/// </summary>
+		public int Facing;
 	}
 
 	public class Turret
 	{
-		public float Recoil = 0.0f;			// remaining recoil
-		public float RecoilRecovery = 0.2f;	// recoil recovery rate
-		public PVecInt UnitSpacePosition;	// where, in the unit's local space.
-		public PVecInt ScreenSpacePosition;	// screen-space hack to make things line up good.
+		/// <summary>
+		/// remaining recoil
+		/// </summary>
+		public float Recoil = 0.0f;
+		/// <summary>
+		/// recoil recovery rate
+		/// </summary>
+		public float RecoilRecovery = 0.2f;
+		/// <summary>
+		/// where, in the unit's local space.
+		/// </summary>
+		public PVecInt UnitSpacePosition;
+		/// <summary>
+		/// screen-space hack to make things line up good.
+		/// </summary>
+		public PVecInt ScreenSpacePosition;
 
 		public Turret(int[] offset, float recoilRecovery)
 		{
@@ -43,12 +64,27 @@ namespace OpenRA.Mods.RA
 	public class Weapon
 	{
 		public WeaponInfo Info;
-		public int FireDelay = 0;			// time (in frames) until the weapon can fire again
-		public int Burst = 0;				// burst counter
+		/// <summary>
+		/// time (in frames) until the weapon can fire again
+		/// </summary>
+		public int FireDelay = 0;
+		/// <summary>
+		/// burst counter
+		/// </summary>
+		public int Burst = 0;
+		/// <summary>
+		/// how far to move the barrel upon firing
+		/// </summary>
 		public int Recoil = 0;
 
-		public Barrel[] Barrels;			// where projectiles are spawned, in local turret space.
-		public Turret Turret;				// where this weapon is mounted -- possibly shared
+		/// <summary>
+		/// where projectiles are spawned, in local turret space.
+		/// </summary>
+		public Barrel[] Barrels;
+		/// <summary>
+		/// where this weapon is mounted -- possibly shared
+		/// </summary>
+		public Turret Turret;
 
 		public Weapon(string weaponName, Turret turret, int[] localOffset, int recoil)
 		{
