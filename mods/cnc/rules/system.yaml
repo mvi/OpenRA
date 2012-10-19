@@ -3,8 +3,6 @@ Player:
 	TechTree:
 	SupportPowerManager:
 	ConquestVictoryConditions:
-		WinNotification:accom1.aud
-		LoseNotification:fail1.aud
 	PowerManager:
 	AllyRepair:
 	PlayerResources:
@@ -53,7 +51,7 @@ Player:
 			orca: 5%
 	PlayerColorPalette:
 		BasePalette: terrain
-		PaletteFormat: cnc
+		RemapIndex: 176, 178, 180, 182, 184, 186, 189, 191, 177, 179, 181, 183, 185, 187, 188, 190
 	BaseAttackNotifier:
 
 World:
@@ -70,14 +68,18 @@ World:
 		Bridges: bridge1, bridge2, bridge3, bridge4
 	PaletteFromCurrentTileset@terrain:
 		Name: terrain
+		ShadowIndex: 4
 	PaletteFromCurrentTileset@static:
 		Name: staticterrain
+		ShadowIndex: 4
 	PaletteFromFile@chrome:
 		Name: chrome
 		Filename: temperat.pal
+		ShadowIndex: 3
 	PaletteFromFile@effect:
 		Name: effect
 		Filename: temperat.pal
+		ShadowIndex: 4
 	PaletteFromRGBA@shadow:
 		Name: shadow
 		R: 0
@@ -117,6 +119,7 @@ World:
 		ProductionTabsWidget: PRODUCTION_TABS
 	BibLayer:
 	ResourceLayer:
+	ResourceClaimLayer:
 	ResourceType@green-tib:
 		ResourceType: 1
 		Palette: staticterrain
@@ -150,17 +153,6 @@ World:
 	CreateMPPlayers:
 	SpawnMPUnits:
 	MPStartLocations:
-	EvaAlerts:
-		RadarUp: comcntr1.aud
-		RadarDown: powrdn1.aud
-		BuildingCannotPlaceAudio: deploy1.aud
-		CashTickUp:
-		CashTickDown:
-		LowPower: lopower1.aud
-		SilosNeeded: silos1.aud
-		PrimaryBuildingSelected: pribldg1.aud
-		AbilityInsufficientPower: nopower1.aud
-		LevelUp: text2.aud
 	SpatialBins:
 		BinSize: 4
 	Shroud:

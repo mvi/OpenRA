@@ -213,8 +213,8 @@ IRON:
 		Image: infxicon
 		ChargeTime: 120
 		Description: Invulnerability
-		LongDesc: Makes a group of units invulnerable\nfor 10 seconds.
-		Duration: 10
+		LongDesc: Makes a group of units invulnerable\nfor 15 seconds.
+		Duration: 15
 		SelectTargetSound: slcttgt1.aud
 		BeginChargeSound: ironchg1.aud
 		EndChargeSound: ironrdy1.aud
@@ -296,6 +296,7 @@ TSLA:
 	-RenderBuilding:
 	RenderRangeCircle:
 	-AcceptsSupplies:
+	DrawLineToTarget:
 
 AGUN:
 	Inherits: ^Building
@@ -308,7 +309,7 @@ AGUN:
 		Owner: allies
 		Hotkey: r
 	Valued:
-		Cost: 600
+		Cost: 800
 	Tooltip:
 		Name: AA Gun
 		Description: Anti-Air base defense.\n  Strong vs Aircraft\n  Weak vs Infantry, Tanks
@@ -336,6 +337,7 @@ AGUN:
 	RenderRangeCircle:
 		RangeCircleType: aa
 	-AcceptsSupplies:
+	DrawLineToTarget:
 
 DOME:
 	RequiresPower:
@@ -348,7 +350,7 @@ DOME:
 		Owner: allies,soviet
 		Hotkey: r
 	Valued:
-		Cost: 1400
+		Cost: 1600
 	Tooltip:
 		Name: Radar Dome
 		Description: Provides an overview of the battlefield.\n  Requires power to operate.
@@ -392,6 +394,7 @@ PBOX:
 		PipCount: 1
 	-EmitInfantryOnSell:
 #	EmitCargoOnSell:
+	DrawLineToTarget:
 	TransformOnPassenger@e1:
 		PassengerTypes: e1
 		OnEnter: pbox.e1
@@ -415,12 +418,17 @@ PBOX:
 	TransformOnPassenger@e7:
 		PassengerTypes: e7
 		OnEnter: pbox.e7
-		OnExit:	pbox
+		OnExit: pbox
 		SkipMakeAnims: true
 	TransformOnPassenger@SHOK:
 		PassengerTypes: shok
 		OnEnter: pbox.shok
-		OnExit:	pbox
+		OnExit: pbox
+		SkipMakeAnims: true
+	TransformOnPassenger@Sniper:
+		PassengerTypes: sniper
+		OnEnter: pbox.sniper
+		OnExit: pbox
 		SkipMakeAnims: true
 
 PBOX.E1:
@@ -501,6 +509,18 @@ PBOX.SHOK:
 		PrimaryWeapon: PortaTesla
 		PrimaryLocalOffset: 0,-11,0,0,0
 
+PBOX.SNIPER:
+	Inherits: PBOX
+	Tooltip:
+		Name: Pillbox (Sniper)
+	RenderBuilding:
+		Image: PBOX
+	RenderRangeCircle:
+	AutoTarget:
+	AttackTurreted:
+		PrimaryWeapon: Sniper
+		PrimaryLocalOffset: 0,-11,0,0,0
+
 HBOX:
 	Inherits: ^Building
 	Tooltip:
@@ -531,6 +551,7 @@ HBOX:
 		PipCount: 1
 	-EmitInfantryOnSell:
 #	EmitCargoOnSell:
+	DrawLineToTarget:
 	TransformOnPassenger@e1:
 		PassengerTypes: e1
 		OnEnter: HBOX.e1
@@ -554,12 +575,17 @@ HBOX:
 	TransformOnPassenger@e7:
 		PassengerTypes: e7
 		OnEnter: HBOX.e7
-		OnExit:	HBOX
+		OnExit: HBOX
 		SkipMakeAnims: true
 	TransformOnPassenger@SHOK:
 		PassengerTypes: shok
 		OnEnter: HBOX.shok
-		OnExit:	HBOX
+		OnExit: HBOX
+		SkipMakeAnims: true
+	TransformOnPassenger@Sniper:
+		PassengerTypes: sniper
+		OnEnter: HBOX.sniper
+		OnExit: HBOX
 		SkipMakeAnims: true
 
 HBOX.E1:
@@ -638,7 +664,19 @@ HBOX.SHOK:
 	AutoTarget:
 	AttackTurreted:
 		PrimaryWeapon: PortaTesla
-		PrimaryLocalOffset: 0,-11,0,0,0		
+		PrimaryLocalOffset: 0,-11,0,0,0
+
+HBOX.SNIPER:
+	Inherits: HBOX
+	Tooltip:
+		Name: Camo Pillbox (Sniper)
+	RenderBuilding:
+		Image: HBOX
+	RenderRangeCircle:
+	AutoTarget:
+	AttackTurreted:
+		PrimaryWeapon: Sniper
+		PrimaryLocalOffset: 0,-11,0,0,0
 
 GUN:
 	Inherits: ^Building
@@ -673,6 +711,7 @@ GUN:
 	-RenderBuilding:
 	RenderRangeCircle:
 	-AcceptsSupplies:
+	DrawLineToTarget:
 
 FTUR:
 	Inherits: ^Building
@@ -706,6 +745,7 @@ FTUR:
 	IronCurtainable:
 	RenderRangeCircle:
 	-AcceptsSupplies:
+	DrawLineToTarget:
 
 SAM:
 	Inherits: ^Building
@@ -746,6 +786,7 @@ SAM:
 	RequiresPower:
 	CanPowerDown:
 	-AcceptsSupplies:
+	DrawLineToTarget:
 
 ATEK:
 	Inherits: ^Building
@@ -804,7 +845,7 @@ WEAP:
 	Health:
 		HP: 1500
 	Armor:
-		Type: Light
+		Type: Wood
 	RevealsShroud:
 		Range: 4
 	Bib:
@@ -882,6 +923,7 @@ PROC:
 		PipCount: 17
 		Capacity: 2000
 	IronCurtainable:
+	DrawLineToTarget:
 	CustomSellValue:
 		Value: 600
 	FreeActor:
@@ -933,7 +975,7 @@ HPAD:
 		Owner: allies
 		Hotkey: f
 	Valued:
-		Cost: 300
+		Cost: 500
 	Tooltip:
 		Name: Helipad
 		Description: Produces and reloads helicopters
@@ -970,7 +1012,7 @@ AFLD:
 		Owner: soviet
 		Hotkey: f
 	Valued:
-		Cost: 300
+		Cost: 500
 	Tooltip:
 		Name: Airstrip
 		Description: Provides radar and off-map support\n  Special Ability: Paratroopers\n  Special Ability: Spy Plane
@@ -981,7 +1023,7 @@ AFLD:
 	Health:
 		HP: 1000
 	Armor:
-		Type: Heavy
+		Type: Wood
 	RevealsShroud:
 		Range: 7
 	Exit@1:
@@ -1013,7 +1055,7 @@ AFLD:
 	SupportPowerChargeBar:
 	ProductionBuilding:
 		BuildingType: AirportType
-	
+
 POWR:
 	Inherits: ^Building
 	Buildable:
@@ -1175,6 +1217,23 @@ TENT:
 	ProductionBuilding:
 		BuildingType: BarracksType
 
+KENN:
+	Inherits: ^Building
+	Tooltip:
+		Name: Kennel
+	Building:
+		Power: -10
+	-GivesBuildableArea:
+	Health:
+		HP: 300
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4
+	IronCurtainable:
+	-EmitInfantryOnSell:
+	-AcceptsSupplies:
+
 FIX:
 	Inherits: ^Building
 	Buildable:
@@ -1184,7 +1243,7 @@ FIX:
 		Owner: allies,soviet
 		Hotkey: y
 	Valued:
-		Cost: 1000
+		Cost: 1200
 	Tooltip:
 		Name: Service Depot
 		Description: Repairs vehicles, reloads minelayers, and \nallows the construction of additional bases.

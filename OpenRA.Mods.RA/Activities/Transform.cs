@@ -17,7 +17,7 @@ namespace OpenRA.Mods.RA.Activities
 	class Transform : Activity
 	{
 		public readonly string ToActor = null;
-		public int2 Offset = new int2(0,0);
+		public CVec Offset = new CVec(0, 0);
 		public int Facing = 96;
 		public string[] Sounds = {};
 		public int ForceHealthPercentage = 0;
@@ -34,6 +34,9 @@ namespace OpenRA.Mods.RA.Activities
 
 			self.World.AddFrameEndTask(w =>
 			{
+				foreach (var nt in self.TraitsImplementing<INotifyTransform>())
+					nt.OnTransform(self);
+
 				var selected = w.Selection.Contains(self);
 
 				self.Destroy();
@@ -52,11 +55,11 @@ namespace OpenRA.Mods.RA.Activities
 				var health = self.TraitOrDefault<Health>();
 				if (health != null)
 				{
-					// TODO: Fix bogus health init
-					if (ForceHealthPercentage > 0)
-						init.Add( new HealthInit( ForceHealthPercentage * 1f / 100 ));
-					else
-						init.Add( new HealthInit( (float)health.HP / health.MaxHP ));
+					var newHP = (ForceHealthPercentage > 0)
+						? ForceHealthPercentage / 100f
+						: (float)health.HP / health.MaxHP;
+
+					init.Add( new HealthInit(newHP) );
 				}
 
 				var cargo = self.TraitOrDefault<Cargo>();

@@ -1,4 +1,4 @@
-﻿#region Copyright & License Information
+#region Copyright & License Information
 /*
  * Copyright 2007-2011 The OpenRA Developers (see AUTHORS)
  * This file is part of OpenRA, which is free software. It is made
@@ -23,12 +23,13 @@ namespace OpenRA.Mods.RA
 
 	public class RallyPoint : IIssueOrder, IResolveOrder, ISync
 	{
-		[Sync] public int2 rallyPoint;
+		[Sync] public CPos rallyPoint;
+		public int nearEnough = 1;
 
 		public RallyPoint(Actor self)
 		{
 			var info = self.Info.Traits.Get<RallyPointInfo>();
-			rallyPoint = self.Location + new int2(info.RallyPoint[0], info.RallyPoint[1]);
+			rallyPoint = self.Location + new CVec(info.RallyPoint[0], info.RallyPoint[1]);
 			self.World.AddFrameEndTask(w => w.Add(new Effects.RallyPoint(self)));
 		}
 
@@ -40,7 +41,7 @@ namespace OpenRA.Mods.RA
 		public Order IssueOrder( Actor self, IOrderTargeter order, Target target, bool queued )
 		{
 			if( order.OrderID == "SetRallyPoint" )
-				return new Order(order.OrderID, self, false) { TargetLocation = Traits.Util.CellContaining(target.CenterLocation) };
+				return new Order(order.OrderID, self, false) { TargetLocation = target.CenterLocation.ToCPos() };
 
 			return null;
 		}
@@ -61,7 +62,7 @@ namespace OpenRA.Mods.RA
 				return false;
 			}
 
-			public bool CanTargetLocation(Actor self, int2 location, List<Actor> actorsAtLocation, bool forceAttack, bool forceQueued, ref string cursor)
+			public bool CanTargetLocation(Actor self, CPos location, List<Actor> actorsAtLocation, bool forceAttack, bool forceQueued, ref string cursor)
 			{
 				if (self.World.Map.IsInMap(location))
 				{

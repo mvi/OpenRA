@@ -61,8 +61,6 @@ namespace OpenRA.Mods.Cnc.Widgets
 	class ProductionTabsWidget : Widget
 	{
 		public readonly string PaletteWidget = null;
-		public readonly string ClickSound = null;
-		public readonly string DisabledClickSound = null;
 		public readonly float ScrollVelocity = 4f;
 		public readonly int TabWidth = 30;
 		public readonly int ArrowWidth = 20;
@@ -140,8 +138,8 @@ namespace OpenRA.Mods.Cnc.Widgets
 			var rightHover = Ui.MouseOverWidget == this && rightButtonRect.Contains(Viewport.LastMousePos);
 
 			WidgetUtils.DrawPanel("panel-black", rb);
-			ButtonWidget.DrawBackground("button", leftButtonRect, leftDisabled, leftPressed, leftHover);
-			ButtonWidget.DrawBackground("button", rightButtonRect, rightDisabled, rightPressed, rightHover);
+			ButtonWidget.DrawBackground("button", leftButtonRect, leftDisabled, leftPressed, leftHover, false);
+			ButtonWidget.DrawBackground("button", rightButtonRect, rightDisabled, rightPressed, rightHover, false);
 
 			WidgetUtils.DrawRGBA(ChromeProvider.GetImage("scrollbar", leftPressed || leftDisabled ? "left_pressed" : "left_arrow"),
 				new float2(leftButtonRect.Left + 2, leftButtonRect.Top + 2));
@@ -159,7 +157,7 @@ namespace OpenRA.Mods.Cnc.Widgets
 				var rect = new Rectangle(origin.X + ContentWidth, origin.Y, TabWidth, rb.Height);
 				var hover = !leftHover && !rightHover && Ui.MouseOverWidget == this && rect.Contains(Viewport.LastMousePos);
 				var baseName = tab.Queue == CurrentQueue ? "button-toggled" : "button";
-				ButtonWidget.DrawBackground(baseName, rect, false, false, hover);
+				ButtonWidget.DrawBackground(baseName, rect, false, false, hover, false);
 				ContentWidth += TabWidth - 1;
 
 				int2 textSize = font.Measure(tab.Name);
@@ -248,9 +246,9 @@ namespace OpenRA.Mods.Cnc.Widgets
 			if (leftPressed || rightPressed)
 			{
 				if ((leftPressed && !leftDisabled) || (rightPressed && !rightDisabled))
-					Sound.Play(ClickSound);
+					Sound.PlayNotification(null, "Sounds", "ClickSound", null);
 				else
-					Sound.Play(DisabledClickSound);
+					Sound.PlayNotification(null, "Sounds", "ClickDisabledSound", null);
 			}
 
 			// Check production tabs
@@ -258,7 +256,7 @@ namespace OpenRA.Mods.Cnc.Widgets
 			if (offsetloc.X > 0 && offsetloc.X < ContentWidth)
 			{
 				CurrentQueue = Groups[queueGroup].Tabs[offsetloc.X/(TabWidth - 1)].Queue;
-				Sound.Play(ClickSound);
+				Sound.PlayNotification(null, "Sounds", "ClickSound", null);
 				return true;
 			}
 
@@ -270,7 +268,7 @@ namespace OpenRA.Mods.Cnc.Widgets
 			if (e.Event != KeyInputEvent.Down) return false;
 			if (e.KeyName == "tab")
 			{
-				Sound.Play(ClickSound);
+				Sound.PlayNotification(null, "Sounds", "ClickSound", null);
 				SelectNextTab(e.Modifiers.HasModifier(Modifiers.Shift));
 				return true;
 			}

@@ -1,6 +1,6 @@
 #region Copyright & License Information
 /*
- * Copyright 2007-2011 The OpenRA Developers (see AUTHORS)
+ * Copyright 2007-2012 The OpenRA Developers (see AUTHORS)
  * This file is part of OpenRA, which is free software. It is made
  * available to you under the terms of the GNU General Public License
  * as published by the Free Software Foundation. For more information,
@@ -15,10 +15,14 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Net.NetworkInformation;
+using UPnP;
 using System.Threading;
 using OpenRA.FileFormats;
 using OpenRA.GameRules;
 using OpenRA.Network;
+
+using XTimer = System.Timers.Timer;
 
 namespace OpenRA.Server
 {
@@ -45,9 +49,13 @@ namespace OpenRA.Server
 		public ServerSettings Settings;
 		public ModData ModData;
 		public Map Map;
+		XTimer gameTimeout;
 
 		volatile bool shutdown = false;
-		public void Shutdown() { shutdown = true; }
+		public void Shutdown()
+		{
+			shutdown = true;
+		}
 
 		public Server(IPEndPoint endpoint, string[] mods, ServerSettings settings, ModData modData)
 		{
@@ -64,6 +72,44 @@ namespace OpenRA.Server
 
 			randomSeed = (int)DateTime.Now.ToBinary();
 
+			if (Settings.AllowUPnP)
+			{
+				try
+				{
+					if (UPnP.NAT.Discover())
+						{
+							Log.Write("server", "UPnP-enabled router discovered.");
+							Log.Write("server", "Your IP is: {0}", UPnP.NAT.GetExternalIP() );
+						}
+						else
+						{
+							Log.Write("server", "No UPnP-enabled router detected.");
+							Settings.AllowUPnP = false;
+						}
+				}
+				catch (Exception e)
+				{
+					OpenRA.Log.Write("server", "Can't discover UPnP-enabled routers: {0}", e);
+					Settings.AllowUPnP = false;
+				}
+			}
+
+			if (Settings.AllowUPnP)
+			{
+				try
+				{
+					if (UPnP.NAT.ForwardPort(Port, ProtocolType.Tcp, "OpenRA"))
+						Log.Write("server", "Port {0} (TCP) has been forwarded.", Port);
+					else
+						Settings.AllowUPnP = false;
+				}
+				catch (Exception e)
+				{
+					OpenRA.Log.Write("server", "Can not forward ports via UPnP: {0}", e);
+					Settings.AllowUPnP = false;
+				}
+			}
+
 			foreach (var trait in modData.Manifest.ServerTraits)
 				ServerTraits.Add( modData.ObjectCreator.CreateObject<ServerTrait>(trait) );
 
@@ -72,6 +118,8 @@ namespace OpenRA.Server
 			lobbyInfo.GlobalSettings.Map = settings.Map;
 			lobbyInfo.GlobalSettings.ServerName = settings.Name;
 			lobbyInfo.GlobalSettings.Ban = settings.Ban;
+			lobbyInfo.GlobalSettings.Dedicated = settings.Dedicated;
+			lobbyInfo.GlobalSettings.DedicatedMOTD = settings.DedicatedMOTD;
 
 			foreach (var t in ServerTraits.WithInterface<INotifyServerStart>())
 				t.ServerStarted(this);
@@ -94,7 +142,11 @@ namespace OpenRA.Server
 
 					Socket.Select( checkRead, null, null, timeout );
 					if (shutdown)
+					{
+						if (Settings.AllowUPnP)
+							RemovePortforward();
 						break;
+					}
 
 					foreach( Socket s in checkRead )
 						if( s == listener.Server ) AcceptConnection();
@@ -109,7 +161,11 @@ namespace OpenRA.Server
 						t.Tick(this);
 
 					if (shutdown)
+					{
+						if (Settings.AllowUPnP)
+							RemovePortforward();
 						break;
+					}
 				}
 
 				GameStarted = false;
@@ -121,6 +177,20 @@ namespace OpenRA.Server
 				try { listener.Stop(); }
 				catch { }
 			} ) { IsBackground = true }.Start();
+
+		}
+
+		void RemovePortforward()
+		{
+			try
+			{
+				if (UPnP.NAT.DeleteForwardingRule(Port, ProtocolType.Tcp))
+					Log.Write("server", "Port {0} (TCP) forwarding rules has been removed.", Port);
+			}
+  			catch (Exception e)
+			{
+				OpenRA.Log.Write("server", "Can not remove UPnP portforwarding rules: {0}", e);
+			}
 		}
 
 		/* lobby rework todo:
@@ -195,13 +265,24 @@ namespace OpenRA.Server
 							mods.Count() == Game.CurrentMods.Count() &&  //same number
 							mods.Select( m => Pair.New(m.Split('@')[0], m.Split('@')[1])).All(kv => Game.CurrentMods.ContainsKey(kv.First) &&
 					 		(kv.Second == "{DEV_VERSION}" || Game.CurrentMods[kv.First].Version == "{DEV_VERSION}" || kv.Second == Game.CurrentMods[kv.First].Version));
-
+				
 				if (!valid)
 				{
 					Log.Write("server", "Rejected connection from {0}; mods do not match.",
 						newConn.socket.RemoteEndPoint);
 
 					SendOrderTo(newConn, "ServerError", "Your mods don't match the server");
+					DropClient(newConn);
+					return;
+				}
+				
+				// Drop DEV_VERSION if it's a Dedicated
+				if ( lobbyInfo.GlobalSettings.Dedicated &&  mods.Any(m => m.Contains("{DEV_VERSION}")) )
+				{
+					Log.Write("server", "Rejected connection from {0}; DEV_VERSION is not allowed here.",
+						newConn.socket.RemoteEndPoint);
+
+					SendOrderTo(newConn, "ServerError", "DEV_VERSION is not allowed here");
 					DropClient(newConn);
 					return;
 				}
@@ -237,6 +318,8 @@ namespace OpenRA.Server
 				if(lobbyInfo.Clients.Count==1)
 					client.IsAdmin=true;
 
+				OpenRA.Network.Session.Client clientAdmin = lobbyInfo.Clients.Where(c1 => c1.IsAdmin).Single();
+				
 				Log.Write("server", "Client {0}: Accepted connection from {1}",
 					newConn.PlayerIndex, newConn.socket.RemoteEndPoint);
 
@@ -245,6 +328,16 @@ namespace OpenRA.Server
 
 				SyncLobbyInfo();
 				SendChat(newConn, "has joined the game.");
+				
+				if ( lobbyInfo.GlobalSettings.Dedicated )
+				{
+					if (lobbyInfo.GlobalSettings.DedicatedMOTD != null)
+						SendChatTo(newConn, lobbyInfo.GlobalSettings.DedicatedMOTD);
+					if (client.IsAdmin)
+						SendChatTo(newConn, "    You are admin now!");
+					else
+						SendChatTo(newConn, "    Current admin is {0}".F(clientAdmin.Name));
+				}
 
 				if (mods.Any(m => m.Contains("{DEV_VERSION}")))
 					SendChat(newConn, "is running a development version, "+
@@ -348,6 +441,9 @@ namespace OpenRA.Server
 
 		void InterpretServerOrder(Connection conn, ServerOrder so)
 		{
+			var fromClient = GetClient(conn);
+			var fromIndex = fromClient != null ? fromClient.Index : 0;
+			
 			switch (so.Name)
 			{
 				case "Command":
@@ -363,17 +459,23 @@ namespace OpenRA.Server
 					}
 
 					break;
+				
 				case "HandshakeResponse":
 					ValidateClient(conn, so.Data);
 					break;
+				
 				case "Chat":
 				case "TeamChat":
-					var fromClient = GetClient(conn);
-					var fromIndex = fromClient != null ? fromClient.Index : 0;
-
 					foreach (var c in conns.Except(conn).ToArray())
 						DispatchOrdersToClient(c, fromIndex, 0, so.Serialize());
-				break;
+					break;
+				
+				case "PauseRequest":
+					foreach (var c in conns.ToArray())
+					{  var x = Order.PauseGame();
+						DispatchOrdersToClient(c, fromIndex, 0, x.Serialize());
+					}
+					break;
 			}
 		}
 
@@ -390,15 +492,29 @@ namespace OpenRA.Server
 			{
 				conns.Remove(toDrop);
 				SendChat(toDrop, "Connection Dropped");
-
+				
+				OpenRA.Network.Session.Client dropClient = lobbyInfo.Clients.Where(c1 => c1.Index == toDrop.PlayerIndex).Single();
+				
 				if (GameStarted)
 					SendDisconnected(toDrop); /* Report disconnection */
 
 				lobbyInfo.Clients.RemoveAll(c => c.Index == toDrop.PlayerIndex);
 
+				// reassign admin if necessary
+				if ( lobbyInfo.GlobalSettings.Dedicated && dropClient.IsAdmin && !GameStarted)
+				{
+					if (lobbyInfo.Clients.Count() > 0)
+					{
+						// client was not alone on the server but he was admin: set admin to the last connected client
+						OpenRA.Network.Session.Client lastClient = lobbyInfo.Clients.Last();
+						lastClient.IsAdmin = true;
+						SendChat(toDrop, "Admin left! {0} is a new admin now!".F(lastClient.Name));
+					}
+				}
+				
 				DispatchOrders( toDrop, toDrop.MostRecentFrame, new byte[] { 0xbf } );
 
-				if (conns.Count != 0)
+				if (conns.Count != 0 || lobbyInfo.GlobalSettings.Dedicated)
 					SyncLobbyInfo();
 			}
 
@@ -423,6 +539,7 @@ namespace OpenRA.Server
 		{
 			GameStarted = true;
 			listener.Stop();
+
 			Console.WriteLine("Game started");
 
 			foreach( var c in conns )
@@ -438,6 +555,18 @@ namespace OpenRA.Server
 
 			foreach (var t in ServerTraits.WithInterface<IStartGame>())
 				t.GameStarted(this);
+			
+			// Check TimeOut
+			if ( Settings.TimeOut > 10000 )
+			{
+				gameTimeout = new XTimer(Settings.TimeOut);
+				gameTimeout.Elapsed += (_,e) =>
+                                {
+                                    Console.WriteLine("Timeout at {0}!!!", e.SignalTime);
+                                    Environment.Exit(0);
+                                };
+				gameTimeout.Enabled = true;
+			}
 		}
 	}
 }

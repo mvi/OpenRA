@@ -4,14 +4,14 @@ Player:
 		Type: Building
 		BuildSpeed: .4
 		LowPowerSlowdown: 3
-		QueuedAudio: abldgin1.aud
-		ReadyAudio: conscmp1.aud
+		QueuedAudio: Building
+		ReadyAudio: ConstructionComplete
 	ClassicProductionQueue@Defense:
 		Type: Defense
 		BuildSpeed: .4
 		LowPowerSlowdown: 3
-		QueuedAudio: abldgin1.aud
-		ReadyAudio: conscmp1.aud
+		QueuedAudio: Building
+		ReadyAudio: ConstructionComplete
 	ClassicProductionQueue@Vehicle:
 		Type: Vehicle
 		BuildSpeed: .4
@@ -31,8 +31,6 @@ Player:
 	PlaceBuilding:
 	SupportPowerManager:
 	ConquestVictoryConditions:
-		WinNotification:misnwon1.aud
-		LoseNotification:misnlst1.aud
 	PowerManager:
 	AllyRepair:
 	PlayerResources:
@@ -98,6 +96,34 @@ Player:
 			2tnk: 25%
 			3tnk: 50%
 		SquadSize: 10
+	HackyAI@OptiAI:
+		Name:Eisenhower AI
+		BuildingFractions:
+			proc: 25.1%
+			powr: 35%
+			tent: 0.1%
+			barr: 0.1%
+			weap: 0.1%
+			fix: 0.1%
+			dome: 0.1%
+			atek: 0.1%
+			stek: 0.1%
+		UnitsToBuild:
+			e1: 50%
+			e2: 1%
+			e3: 10%
+			medi: 0.01%
+			e7: 0.01%
+			apc: 10%
+			jeep: 10%
+			ftrk: 25%
+			1tnk: 25%
+			2tnk: 50%
+			3tnk: 75%
+			4tnk: 100%
+			arty: 30%
+			v2rl: 30%
+		SquadSize: 10
 	HackyAI@ZhukovAI:
 		Name:Zhukov AI
 		BuildingFractions:
@@ -157,6 +183,7 @@ Player:
 		SquadSize: 7
 	PlayerColorPalette:
 		BasePalette: terrain
+		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
 	DebugResourceCash:
 	DebugResourceOre:
 	DebugResourceOreCapacity:
@@ -175,7 +202,7 @@ World:
 	BuildingInfluence:
 	ChooseBuildTabOnSelect:
 	BridgeLayer:
-		Bridges: bridge1, bridge2, br1, br2, br3
+		Bridges: bridge1, bridge2, br1, br2, br3, sbridge1, sbridge2, sbridge3, sbridge4
 	CrateDrop:
 		Minimum: 1
 		Maximum: 3
@@ -183,12 +210,15 @@ World:
 		WaterChance: .2
 	PaletteFromCurrentTileset:
 		Name: terrain
+		ShadowIndex: 4
 	PaletteFromFile@chrome:
 		Name: chrome
 		Filename: temperat.pal
+		ShadowIndex: 3
 	PaletteFromFile@effect:
 		Name: effect
 		Filename: temperat.pal
+		ShadowIndex: 4
 	PaletteFromRGBA@shadow:
 		Name: shadow
 		R: 0
@@ -232,6 +262,7 @@ World:
 		Race: soviet
 	BibLayer:
 	ResourceLayer:
+	ResourceClaimLayer:
 	ResourceType@ore:
 		ResourceType: 1
 		Palette: terrain
@@ -263,7 +294,6 @@ World:
 	CreateMPPlayers:
 	MPStartLocations:
 	SpawnMPUnits:
-	EvaAlerts:
 	SpatialBins:
 		BinSize: 4
 	Shroud:
@@ -283,6 +313,7 @@ MINP:
 	InvisibleToEnemy:
 	Tooltip:
 		Name: Anti-Personnel Mine
+		Icon: jmin
 	ProximityCaptor:
 		Types:Mine
 
@@ -299,6 +330,7 @@ MINV:
 	InvisibleToEnemy:
 	Tooltip:
 		Name: Anti-Tank Mine
+		Icon: jmin
 	ProximityCaptor:
 		Types:Mine
 
@@ -320,12 +352,13 @@ CRATE:
 	ExplodeCrateAction@boom:
 		Weapon: CrateExplosion
 		SelectionShares: 5
-	ExplodeCrateAction@nuke:
-		Weapon: CrateNuke
-		SelectionShares: 5
 	HideMapCrateAction:
 		SelectionShares: 5
 		Effect: hide-map
+	HealUnitsCrateAction:
+		Notification: heal2.aud
+		SelectionShares: 2
+		Effect: heal
 	RevealMapCrateAction:
 		SelectionShares: 1
 		Effect: reveal-map

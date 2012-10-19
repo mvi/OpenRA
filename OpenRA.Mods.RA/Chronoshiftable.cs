@@ -13,15 +13,18 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.RA
 {
-	class ChronoshiftableInfo : TraitInfo<Chronoshiftable> { }
+	class ChronoshiftableInfo : TraitInfo<Chronoshiftable>
+	{
+		public readonly bool ExplodeInstead = false;
+	}
 
 	public class Chronoshiftable : ITick, ISync
 	{
 		// Return-to-sender logic
-		[Sync]
-		int2 chronoshiftOrigin;
-		[Sync]
-		int chronoshiftReturnTicks = 0;
+		[Sync] CPos chronoshiftOrigin;
+		[Sync] int chronoshiftReturnTicks = 0;
+		Actor chronosphere;
+		bool killCargo;
 
 		public void Tick(Actor self)
 		{
@@ -36,12 +39,12 @@ namespace OpenRA.Mods.RA
 			{
 				self.CancelActivity();
 				// Todo: need a new Teleport method that will move to the closest available cell
-				self.QueueActivity(new Teleport(chronoshiftOrigin));
+				self.QueueActivity(new Teleport(chronosphere, chronoshiftOrigin, killCargo));
 			}
 		}
 
 		// Can't be used in synced code, except with ignoreVis.
-		public virtual bool CanChronoshiftTo(Actor self, int2 targetLocation, bool ignoreVis)
+		public virtual bool CanChronoshiftTo(Actor self, CPos targetLocation, bool ignoreVis)
 		{
 			// Todo: Allow enemy units to be chronoshifted into bad terrain to kill them
 			return self.HasTrait<ITeleportable>() &&
@@ -49,27 +52,28 @@ namespace OpenRA.Mods.RA
 				(ignoreVis || self.World.LocalShroud.IsExplored(targetLocation));
 		}
 
-		public virtual bool Teleport(Actor self, int2 targetLocation, int duration, bool killCargo, Actor chronosphere)
+		public virtual bool Teleport(Actor self, CPos targetLocation, int duration, bool killCargo, Actor chronosphere)
 		{
+			var info = self.Info.Traits.Get<ChronoshiftableInfo>();
+			if (info.ExplodeInstead)	// some things appear chronoshiftable, but instead they just die.
+			{
+				self.World.AddFrameEndTask(w =>
+				{
+					// damage is inflicted by the chronosphere
+					if (!self.Destroyed) self.InflictDamage(chronosphere, int.MaxValue, null); 
+				});
+				return true;
+			}
+
 			/// Set up return-to-sender info
 			chronoshiftOrigin = self.Location;
 			chronoshiftReturnTicks = duration;
-
-			// Kill cargo
-			if (killCargo && self.HasTrait<Cargo>())
-			{
-				var cargo = self.Trait<Cargo>();
-				while (!cargo.IsEmpty(self))
-				{
-					chronosphere.Owner.Kills++;
-					var a = cargo.Unload(self);
-					a.Owner.Deaths++;
-				}
-			}
+			this.chronosphere = chronosphere;
+			this.killCargo = killCargo;
 
 			// Set up the teleport
 			self.CancelActivity();
-			self.QueueActivity(new Teleport(targetLocation));
+			self.QueueActivity(new Teleport(chronosphere, targetLocation, killCargo));
 
 			return true;
 		}

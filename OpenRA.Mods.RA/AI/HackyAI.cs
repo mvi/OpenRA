@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenRA.FileFormats;
 using OpenRA.Mods.RA.Buildings;
+using OpenRA.Mods.RA.Move;
 using OpenRA.Traits;
 using XRandom = OpenRA.Thirdparty.Random;
 
@@ -34,7 +35,7 @@ namespace OpenRA.Mods.RA.AI
 		public readonly int SquadSize = 8;
 		public readonly int AssignRolesInterval = 20;
 		public readonly string RallypointTestBuilding = "fact";		// temporary hack to maintain previous rallypoint behavior.
-		public readonly string[] UnitQueues = { "Vehicle", "Infantry", "Plane" };
+		public readonly string[] UnitQueues = {"Vehicle", "Infantry", "Plane"};
 		public readonly bool ShouldRepairBuildings = true;
 
 		string IBotInfo.Name { get { return this.Name; } }
@@ -72,7 +73,7 @@ namespace OpenRA.Mods.RA.AI
 		readonly HackyAIInfo Info;
 
 		Cache<Player,Enemy> aggro = new Cache<Player, Enemy>( _ => new Enemy() );
-		int2 baseCenter;
+		CPos baseCenter;
 		XRandom random = new XRandom(); //we do not use the synced random number generator.
 		BaseBuilder[] builders;
 
@@ -116,7 +117,7 @@ namespace OpenRA.Mods.RA.AI
 		ActorInfo ChooseRandomUnitToBuild(ProductionQueue queue)
 		{
 			var buildableThings = queue.BuildableItems();
-			if (buildableThings.Count() == 0) return null;
+			if (!buildableThings.Any()) return null;
 			return buildableThings.ElementAtOrDefault(random.Next(buildableThings.Count()));
 		}
 
@@ -154,23 +155,22 @@ namespace OpenRA.Mods.RA.AI
 			return null;
 		}
 
-		bool NoBuildingsUnder(IEnumerable<int2> cells)
+		bool NoBuildingsUnder(IEnumerable<CPos> cells)
 		{
 			var bi = world.WorldActor.Trait<BuildingInfluence>();
 			return cells.All(c => bi.GetBuildingAt(c) == null);
 		}
 
-		public int2? ChooseBuildLocation(string actorType)
+		public CPos? ChooseBuildLocation(string actorType)
 		{
 			var bi = Rules.Info[actorType].Traits.Get<BuildingInfo>();
 
-			for (var k = 0; k < MaxBaseDistance; k++)
-				foreach (var t in world.FindTilesInCircle(baseCenter, k))
-					if (world.CanPlaceBuilding(actorType, bi, t, null))
-						if (bi.IsCloseEnoughToBase(world, p, actorType, t))
-							if (NoBuildingsUnder(Util.ExpandFootprint(
-								FootprintUtils.Tiles(actorType, bi, t), false)))
-								return t;
+			foreach (var t in world.FindTilesInCircle(baseCenter, MaxBaseDistance))
+				if (world.CanPlaceBuilding(actorType, bi, t, null))
+					if (bi.IsCloseEnoughToBase(world, p, actorType, t))
+						if (NoBuildingsUnder(Util.ExpandFootprint(
+							FootprintUtils.Tiles(actorType, bi, t), false)))
+							return t;
 
 			return null;		// i don't know where to put it.
 		}
@@ -182,7 +182,7 @@ namespace OpenRA.Mods.RA.AI
 
 			ticks++;
 
-			if (ticks == 10)
+			if (ticks == 1)
 				DeployMcv(self);
 
 			if (ticks % feedbackTime == 0)
@@ -200,12 +200,12 @@ namespace OpenRA.Mods.RA.AI
 		//A bunch of hardcoded lists to keep track of which units are doing what.
 		List<Actor> unitsHangingAroundTheBase = new List<Actor>();
 		List<Actor> attackForce = new List<Actor>();
-		int2? attackTarget;
+		CPos? attackTarget;
 
 		//Units that the ai already knows about. Any unit not on this list needs to be given a role.
 		List<Actor> activeUnits = new List<Actor>();
 
-		int2? ChooseEnemyTarget()
+		CPos? ChooseEnemyTarget()
 		{
 			var liveEnemies = world.Players
 				.Where(q => p != q && p.Stances[q] == Stance.Enemy)
@@ -219,14 +219,14 @@ namespace OpenRA.Mods.RA.AI
 			if (leastLikedEnemies == null)
 				return null;
 
-			var enemy = leastLikedEnemies != null ? leastLikedEnemies.Random(random) : null;
+			var enemy = leastLikedEnemies.Random(random);
 
 			/* pick something worth attacking owned by that player */
 			var targets = world.Actors
-				.Where(a => a.Owner == enemy && a.HasTrait<IOccupySpace>());
-			Actor target=null;
+				.Where(a => a.Owner == enemy && a.HasTrait<IOccupySpace>() && !a.HasTrait<Husk>());
+			Actor target = null;
 
-			if (targets.Count()>0)
+			if (targets.Any())
 				target = targets.Random(random);
 
 			if (target == null)
@@ -260,27 +260,46 @@ namespace OpenRA.Mods.RA.AI
 			else
 				assignRolesTicks = Info.AssignRolesInterval;
 
+			// Find idle harvesters and give them orders:
+			foreach (var a in activeUnits)
+			{
+				var harv = a.TraitOrDefault<Harvester>();
+				if (harv == null) continue;
+				if (!a.IsIdle)
+				{
+					Activity act = a.GetCurrentActivity();
+					// A Wait activity is technically idle:
+					if (!(act is Activities.Wait) &&
+						(act.NextActivity == null || !(act.NextActivity is Activities.FindResources)))
+						continue;
+				}
+				if (!harv.IsEmpty) continue;
+
+				// Tell the idle harvester to quit slacking:
+				world.IssueOrder(new Order("Harvest", a, false));
+			}
+
 			var newUnits = self.World.ActorsWithTrait<IMove>()
-				.Where(a => a.Actor.Owner == p && a.Actor.Info != Rules.Info["mcv"]
+				.Where(a => a.Actor.Owner == p && !a.Actor.HasTrait<BaseBuilding>()
 					&& !activeUnits.Contains(a.Actor))
 					.Select(a => a.Actor).ToArray();
 
 			foreach (var a in newUnits)
 			{
 				BotDebug("AI: Found a newly built unit");
-				if (a.Info == Rules.Info["harv"])
+				if (a.HasTrait<Harvester>())
 					world.IssueOrder( new Order( "Harvest", a, false ) );
 				else
 					unitsHangingAroundTheBase.Add(a);
 
 				activeUnits.Add(a);
 			}
-			
+
 			/* Create an attack force when we have enough units around our base. */
 			// (don't bother leaving any behind for defense.)
 			
 			int randomizedSquadSize = Info.SquadSize - 4 + random.Next(200);
-						
+
 			if (unitsHangingAroundTheBase.Count >= randomizedSquadSize)
 			{
 				BotDebug("Launch an attack.");
@@ -306,7 +325,7 @@ namespace OpenRA.Mods.RA.AI
 				foreach (var a1 in attackForce)
 				{
 					var enemyUnits = world.FindUnitsInCircle(a1.CenterLocation, Game.CellSize * 10)
-						.Where(unit => p.Stances[unit.Owner] == Stance.Enemy).ToList();
+						.Where(unit => p.Stances[unit.Owner] == Stance.Enemy && !unit.HasTrait<Husk>()).ToList();
 
 					if (enemyUnits.Count > 0)
 					{
@@ -346,7 +365,7 @@ namespace OpenRA.Mods.RA.AI
 			}
 		}
 
-		bool IsRallyPointValid(int2 x)
+		bool IsRallyPointValid(CPos x)
 		{
 			// this is actually WRONG as soon as HackyAI is building units with a variety of
 			// movement capabilities. (has always been wrong)
@@ -363,16 +382,15 @@ namespace OpenRA.Mods.RA.AI
 				BotDebug("Bot {0} needs to find rallypoints for {1} buildings.",
 					p.PlayerName, buildings.Length);
 
-
 			foreach (var a in buildings)
 			{
-				int2 newRallyPoint = ChooseRallyLocationNear(a.Actor.Location);
+				CPos newRallyPoint = ChooseRallyLocationNear(a.Actor.Location);
 				world.IssueOrder(new Order("SetRallyPoint", a.Actor, false) { TargetLocation = newRallyPoint });
 			}
 		}
 
 		//won't work for shipyards...
-		int2 ChooseRallyLocationNear(int2 startPos)
+		CPos ChooseRallyLocationNear(CPos startPos)
 		{
 			var possibleRallyPoints = world.FindTilesInCircle(startPos, 8).Where(IsRallyPointValid).ToArray();
 			if (possibleRallyPoints.Length == 0)
@@ -384,18 +402,18 @@ namespace OpenRA.Mods.RA.AI
 			return possibleRallyPoints.Random(random);
 		}
 
-		int2? ChooseDestinationNear(Actor a, int2 desiredMoveTarget)
+		CPos? ChooseDestinationNear(Actor a, CPos desiredMoveTarget)
 		{
 			var move = a.TraitOrDefault<IMove>();
 			if (move == null) return null;
 
-			int2 xy;
+			CPos xy;
 			int loopCount = 0; //avoid infinite loops.
 			int range = 2;
 			do
 			{
 				//loop until we find a valid move location
-				xy = new int2(desiredMoveTarget.X + random.Next(-range, range), desiredMoveTarget.Y + random.Next(-range, range));
+				xy = new CPos(desiredMoveTarget.X + random.Next(-range, range), desiredMoveTarget.Y + random.Next(-range, range));
 				loopCount++;
 				range = Math.Max(range, loopCount / 2);
 				if (loopCount > 10) return null;
@@ -406,7 +424,7 @@ namespace OpenRA.Mods.RA.AI
 
 		//try very hard to find a valid move destination near the target.
 		//(Don't accept a move onto the subject's current position. maybe this is already not allowed? )
-		bool TryToMove(Actor a, int2 desiredMoveTarget, bool attackMove)
+		bool TryToMove(Actor a, CPos desiredMoveTarget, bool attackMove)
 		{
 			var xy = ChooseDestinationNear(a, desiredMoveTarget);
 			if (xy == null)
@@ -419,15 +437,19 @@ namespace OpenRA.Mods.RA.AI
 		{
 			/* find our mcv and deploy it */
 			var mcv = self.World.Actors
-				.FirstOrDefault(a => a.Owner == p && a.Info == Rules.Info["mcv"]);
+				.FirstOrDefault(a => a.Owner == p && a.HasTrait<BaseBuilding>());
 
 			if (mcv != null)
 			{
 				baseCenter = mcv.Location;
-				world.IssueOrder(new Order("DeployTransform", mcv, false));
+				//Don't transform the mcv if it is a fact
+				if (mcv.HasTrait<Mobile>())
+				{
+					world.IssueOrder(new Order("DeployTransform", mcv, false));
+				}
 			}
 			else
-				BotDebug("AI: Can't find the MCV.");
+				BotDebug("AI: Can't find BaseBuildUnit.");
 		}
 
 		internal IEnumerable<ProductionQueue> FindQueues(string category)
