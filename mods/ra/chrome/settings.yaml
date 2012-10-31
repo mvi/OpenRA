@@ -238,32 +238,20 @@ Background@SETTINGS_MENU:
 			Height:PARENT_BOTTOM - 100
 			Visible: false
 			Children:
-				Label@KEYS_MOUSESTYLEHEADLINE:
-					Id:KEYS_MOUSESTYLEHEADLINE
-					X:0
-					Y:0
-					Text: Mouse Behavior:
-				Checkbox@USE_CLASSIC_MOUSE_STYLE_CHECKBOX:
-					Id:USE_CLASSIC_MOUSE_STYLE_CHECKBOX
-					X:0
-					Y:20
-					Width:200
-					Height:20
-					Text: Use Classic Mouse Style
 				Label@KEYS_MODIFIERHEADLINE:
 					Id:KEYS_MODIFIERHEADLINE
 					X:0
-					Y:70
+					Y:0
 					Text: Hotkey Modifiers for Production Buildings:
 				Label@KEYS_MODIFIERTOBUILD_NAME:
 					Id:KEYS_MODIFIERTOBUILD_NAME
 					X:0
-					Y:100
+					Y:30
 					Text: Build:
 				DropDownButton@MODIFIERTOBUILD_DROPDOWN:
 					Id:MODIFIERTOBUILD_DROPDOWN
 					X:310
-					Y:90
+					Y:20
 					Width:139
 					Height:25
 					Font:Regular
@@ -271,12 +259,12 @@ Background@SETTINGS_MENU:
 				Label@KEYS_MODIFIERTOCYCLE_NAME:
 					Id:KEYS_MODIFIERTOCYCLE_NAME
 					X:0
-					Y:130
+					Y:60
 					Text: Cycle:
 				DropDownButton@MODIFIERTOCYCLE_DROPDOWN:
 					Id:MODIFIERTOCYCLE_DROPDOWN
 					X:310
-					Y:120
+					Y:50
 					Width:139
 					Height:25
 					Font:Regular
@@ -284,12 +272,12 @@ Background@SETTINGS_MENU:
 				Label@KEYS_MODIFIERTOSELECTTAB_NAME:
 					Id:KEYS_MODIFIERTOSELECTTAB_NAME
 					X:0
-					Y:160
+					Y:90
 					Text: Select corresponding Tab on Build Palette only:
 				DropDownButton@MODIFIERTOSELECTTAB_DROPDOWN:
 					Id:MODIFIERTOSELECTTAB_DROPDOWN
 					X:310
-					Y:150
+					Y:80
 					Width:139
 					Height:25
 					Font:Regular
@@ -297,12 +285,12 @@ Background@SETTINGS_MENU:
 				Label@KEYS_SPECIALHOTKEYSHEADLINE:
 					Id:KEYS_SPECIALHOTKEYSHEADLINE
 					X:0
-					Y:200
+					Y:130
 					Text: Special Hotkeys:
 				ScrollPanel@SPECIALHOTKEY_LIST:
 					Id:SPECIALHOTKEY_LIST
 					X:0
-					Y:220
+					Y:150
 					Width:449
 					Height:75
 					Children:
@@ -328,12 +316,12 @@ Background@SETTINGS_MENU:
 				Label@KEYS_UNITCOMMANDSHEADLINE:
 					Id:KEYS_UNITCOMMANDSHEADLINE
 					X:0
-					Y:320
+					Y:250
 					Text: Hotkeys for Unit Commands:
 				ScrollPanel@UNITCOMMANDHOTKEY_LIST:
 					Id:UNITCOMMANDHOTKEY_LIST
 					X:0
-					Y:340
+					Y:270
 					Width:449
 					Height:75
 					Children:
@@ -358,7 +346,7 @@ Background@SETTINGS_MENU:
 									MaxLength:16
 				Label@HOTKEY_INFO:
 					Id:HOTKEY_INFO
-					Y:422
+					Y:352
 					X:0
 					Height:25
 					Font:Tiny

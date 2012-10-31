@@ -52,20 +52,12 @@ namespace OpenRA.Widgets
 		public override bool HandleMouseInput(MouseInput mi)
 		{
 			var xy = Game.viewport.ViewToWorldPx(mi);
-
-			var UseClassicMouseStyle = Game.Settings.Keys.UseClassicMouseStyle;
-
-			bool UnitsUnderCursor = (world.FindUnitsAtMouse(mi.Location).FirstOrDefault() != null) ? true : false;
-			bool Box = (SelectionBox != null) ? true : false;
-			bool MultiClick = (mi.MultiTapCount >= 2) ? true : false;
-
 			if (mi.Button == MouseButton.Left && mi.Event == MouseInputEvent.Down)
 			{
 				if (!TakeFocus(mi))
 					return false;
 
 				dragStart = dragEnd = xy;
-
 				ApplyOrders(world, xy, mi);
 			}
 
@@ -76,14 +68,7 @@ namespace OpenRA.Widgets
 			{
 				if (world.OrderGenerator is UnitOrderGenerator)
 				{
-					if (!UseClassicMouseStyle || (UseClassicMouseStyle && (UnitsUnderCursor || Box)))
-					{
-						var newSelection = SelectActorsInBox(world, dragStart, xy, _ => true);
-						world.Selection.Combine(world, newSelection,
-										mi.Modifiers.HasModifier(Modifiers.Shift), dragStart == xy);
-					}
-
-					if (MultiClick)
+					if (mi.MultiTapCount == 2)
 					{
 						var unit = SelectActorsInBox(world, xy, xy, _ => true).FirstOrDefault();
 
@@ -95,10 +80,10 @@ namespace OpenRA.Widgets
 
 						world.Selection.Combine(world, newSelection, true, false);
 					}
-
-					if (UseClassicMouseStyle && !UnitsUnderCursor && !Box)
+					else
 					{
-						ApplyOrders(world, xy, mi);
+						var newSelection = SelectActorsInBox(world, dragStart, xy, _ => true);
+						world.Selection.Combine(world, newSelection, mi.Modifiers.HasModifier(Modifiers.Shift), dragStart == xy);
 					}
 				}
 
@@ -110,13 +95,8 @@ namespace OpenRA.Widgets
 				dragStart = dragEnd = xy;
 
 			if (mi.Button == MouseButton.Right && mi.Event == MouseInputEvent.Down)
-			{
-				if (UseClassicMouseStyle)
-					world.Selection.Clear();
-
-				if (!Box)	/* don't issue orders while selecting */
+				if (SelectionBox == null)	/* don't issue orders while selecting */
 					ApplyOrders(world, xy, mi);
-			}
 
 			return true;
 		}
@@ -150,7 +130,7 @@ namespace OpenRA.Widgets
 				var mi = new MouseInput
 				{
 					Location = pos,
-					Button = Game.Settings.Keys.UseClassicMouseStyle ? MouseButton.Left : MouseButton.Right,
+					Button = MouseButton.Right,
 					Modifiers = Game.GetModifierKeys()
 				};
 

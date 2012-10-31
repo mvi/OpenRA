@@ -122,8 +122,6 @@ namespace OpenRA.GameRules
 
 	public class KeySettings
 	{
-		public bool UseClassicMouseStyle = false;
-
 		public Modifiers ModifierToBuild = Modifiers.None;
 		public Modifiers ModifierToCycle = Modifiers.Alt;
 		public Modifiers ModifierToSelectTab = Modifiers.Ctrl;

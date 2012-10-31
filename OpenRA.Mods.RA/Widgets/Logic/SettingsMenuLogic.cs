@@ -123,10 +123,6 @@ namespace OpenRA.Mods.RA.Widgets.Logic
 
 			var keyConfig = Game.Settings.Keys;
 
-			var useClassicMouseStyleCheckbox = keys.Get<CheckboxWidget>("USE_CLASSIC_MOUSE_STYLE_CHECKBOX");
-			useClassicMouseStyleCheckbox.IsChecked = () => keyConfig.UseClassicMouseStyle;
-			useClassicMouseStyleCheckbox.OnClick = () => keyConfig.UseClassicMouseStyle ^= true;
-
 			var modifierToBuildDropdown = keys.Get<DropDownButtonWidget>("MODIFIERTOBUILD_DROPDOWN");
 			modifierToBuildDropdown.OnMouseDown = _
 				=> ShowHotkeyModifierDropdown(modifierToBuildDropdown, keyConfig.ModifierToBuild, m => keyConfig.ModifierToBuild = m);
