@@ -5,7 +5,7 @@ Name: %{name}
 Version: %{version}
 Release: 1
 Summary: Open Source rebuild of the Red Alert game engine using Mono/OpenGL.
-License: GPL3
+License: GPL-3.0
 URL: http://open-ra.org
 Group: Amusements/Games
 Packager: Matthew Bowra-Dean <matthew@ijw.co.nz>
