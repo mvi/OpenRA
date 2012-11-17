@@ -29,11 +29,11 @@ namespace OpenRA.Mods.RA.AI
 
 		BuildState state = BuildState.WaitForFeedback;
 		string category;
-		BetaAI ai;
+		HackyAI ai;
 		int lastThinkTick;
 		Func<ProductionQueue, ActorInfo> chooseItem;
 
-		public BaseBuilder (BetaAI ai, string category, Func<ProductionQueue, ActorInfo> chooseItem)
+		public BaseBuilder (HackyAI ai, string category, Func<ProductionQueue, ActorInfo> chooseItem)
 		{
 			this.ai = ai;
 			this.category = category;
@@ -83,7 +83,7 @@ namespace OpenRA.Mods.RA.AI
 					CPos? location = ai.ChooseBuildLocation (currentBuilding.Item, type);
 
 					if (location == null) { /* C'mon... */
-						BetaAI.BotDebug ("AI: Nowhere to place or no adequate number {0}".F (currentBuilding.Item));
+						HackyAI.BotDebug ("AI: Nowhere to place or no adequate number {0}".F (currentBuilding.Item));
 						ai.world.IssueOrder (Order.CancelProduction (queue.self, currentBuilding.Item, 1));
 					} else
 						ai.world.IssueOrder (new Order ("PlaceBuilding", ai.p.PlayerActor, false)
@@ -99,7 +99,7 @@ namespace OpenRA.Mods.RA.AI
 				break;
 
 			case BuildState.WaitForFeedback:
-				if (ai.ticks - lastThinkTick > BetaAI.feedbackTime)
+				if (ai.ticks - lastThinkTick > HackyAI.feedbackTime)
 					state = BuildState.ChooseItem;
 				break;
 			}

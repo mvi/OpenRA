@@ -37,7 +37,7 @@ Player:
 		InitialCash: 5000
 	ActorGroupProxy:
 	DeveloperMode:
-	BetaAI@NormalAI:
+	HackyAI@NormalAI:
 		Name:Normal AI
 		Tweaks:
 			rand_b: 20%

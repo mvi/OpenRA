@@ -1,6 +1,6 @@
 #region Copyright & License Information
 /*
- * Copyright 2007-2011 The OpenRA Developers (see AUTHORS)
+ * Copyright 2007-2012 The OpenRA Developers (see AUTHORS)
  * This file is part of OpenRA, which is free software. It is made
  * available to you under the terms of the GNU General Public License
  * as published by the Free Software Foundation. For more information,
@@ -19,17 +19,9 @@ using XRandom = OpenRA.Thirdparty.Random;
 using System.Collections;
 using OpenRA.Mods.RA.Air;
 
-/*
-
- * BetaAI
- * Contributors: JamesDunne, Earthpig, Mart0258, Mailaender, Chrisforbes, Valkirie
- * 
-
- */
-
 namespace OpenRA.Mods.RA.AI
 {
-    class BetaAIInfo : IBotInfo, ITraitInfo
+	class HackyAIInfo : IBotInfo, ITraitInfo
     {
         public readonly string Name = "Unnamed Bot";
         public readonly int AssignRolesInterval = 20;
@@ -101,7 +93,7 @@ namespace OpenRA.Mods.RA.AI
         static object LoadBuildings(MiniYaml y) { return LoadActorList(y, "BuildingFractions"); }
         static object LoadTicketsLimits(MiniYaml y) { return LoadOtherList(y, "TicketsLimits"); }
 
-        public object Create(ActorInitializer init) { return new BetaAI(this); }
+        public object Create(ActorInitializer init) { return new HackyAI(this); }
     }
 
     class Enemy { public int Aggro; }
@@ -119,7 +111,7 @@ namespace OpenRA.Mods.RA.AI
         public List<Actor> units = new List<Actor>();
         public string type;
         public World world;
-        public BetaAIInfo info;
+        public HackyAIInfo info;
 
         float range;
         List<Actor> enemys = new List<Actor>();
@@ -130,7 +122,7 @@ namespace OpenRA.Mods.RA.AI
         List<Actor> enemynearby_artillery = new List<Actor>();
         Actor target;
 
-        public Squad(World w1, string s1, BetaAIInfo i1)
+        public Squad(World w1, string s1, HackyAIInfo i1)
         {
             type = s1;
             world = w1;
@@ -497,7 +489,7 @@ namespace OpenRA.Mods.RA.AI
         }
     };
 
-    class BetaAI : ITick, IBot, INotifyDamage
+    class HackyAI : ITick, IBot, INotifyDamage
     {
         bool enabled;
         public int ticks;
@@ -507,7 +499,7 @@ namespace OpenRA.Mods.RA.AI
         SupportPowerManager playerSupport;
         PlayerResources playerResource;
         readonly BuildingInfo rallypointTestBuilding;
-        readonly BetaAIInfo Info;
+        readonly HackyAIInfo Info;
 
         Cache<Player, Enemy> aggro = new Cache<Player, Enemy>(_ => new Enemy());
 
@@ -524,7 +516,7 @@ namespace OpenRA.Mods.RA.AI
         public World world { get { return p.PlayerActor.World; } }
         IBotInfo IBot.Info { get { return this.Info; } }
 
-        public BetaAI(BetaAIInfo Info)
+        public HackyAI(HackyAIInfo Info)
         {
             this.Info = Info;
             this.rallypointTestBuilding = Rules.Info["silo"].Traits.Get<BuildingInfo>(); /* so wrong */
@@ -553,7 +545,7 @@ namespace OpenRA.Mods.RA.AI
 
             general = Info.UnitQueues[random.Next(0, Info.UnitQueues.Length - 2)];
 
-            BotChat(p.PlayerActor, false, "I am proudly using BetaAI.");
+            BotChat(p.PlayerActor, false, "I am the experimental BetaAI. Please report problems.");
         }
 
         int GetPowerProvidedBy(ActorInfo building)
@@ -1182,7 +1174,7 @@ namespace OpenRA.Mods.RA.AI
 
         bool IsRallyPointValid(CPos x)
         {
-            // this is actually WRONG as soon as BetaAI is building units with a variety of
+            // this is actually WRONG as soon as HackyAI is building units with a variety of
             // movement capabilities. (has always been wrong)
             return world.IsCellBuildable(x, rallypointTestBuilding);
         }
