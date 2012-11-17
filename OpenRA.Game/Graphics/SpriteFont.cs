@@ -101,6 +101,7 @@ namespace OpenRA.Graphics
 		{
 			uint index = face.GetCharIndex(c.First);
 			face.LoadGlyph(index, LoadFlags.Default, LoadTarget.Normal);
+			face.Glyph.RenderGlyph(RenderMode.Normal);
 
 			var s = builder.Allocate(
 				new Size((int)face.Glyph.Metrics.Width >> 6,
@@ -134,7 +135,6 @@ namespace OpenRA.Graphics
 					p += face.Glyph.Bitmap.Pitch;
 				}
 			}
-
 			return g;
 		}
 
