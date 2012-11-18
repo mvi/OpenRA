@@ -1,7 +1,7 @@
 CSC         = gmcs
 CSFLAGS     = -nologo -warn:4 -debug:+ -debug:full -optimize- -codepage:utf8 -unsafe
 DEFINE      = DEBUG;TRACE
-COMMON_LIBS	= System.dll System.Core.dll System.Drawing.dll System.Xml.dll thirdparty/ICSharpCode.SharpZipLib.dll
+COMMON_LIBS	= System.dll System.Core.dll System.Drawing.dll System.Xml.dll thirdparty/ICSharpCode.SharpZipLib.dll thirdparty/Mono.Nat.dll
 PHONY		= core tools package all mods clean distclean
 
 .SUFFIXES:
@@ -245,6 +245,7 @@ install: all
 	@cp *.ttf $(INSTALL_DIR)
 	@cp thirdparty/Tao/* $(INSTALL_DIR)
 	@$(INSTALL_PROGRAM) thirdparty/ICSharpCode.SharpZipLib.dll $(INSTALL_DIR)
+	@$(INSTALL_PROGRAM) thirdparty/Mono.Nat.dll $(INSTALL_DIR)
 
 	@echo "#!/bin/sh" > openra
 	@echo "cd "$(datadir)"/openra" >> openra
