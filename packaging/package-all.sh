@@ -39,6 +39,9 @@ cp thirdparty/Tao/* packaging/built
 # SharpZipLib for zip file support
 cp thirdparty/ICSharpCode.SharpZipLib.dll packaging/built
 
+# SharpFont for FreeType support
+cp thirdparty/SharpFont* packaging/built
+
 # Copy game icon for windows package
 cp OpenRA.Game/OpenRA.ico packaging/built
 
