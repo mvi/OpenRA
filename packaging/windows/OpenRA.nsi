@@ -261,6 +261,7 @@ Function ${UN}Clean
 	Delete $INSTDIR\OpenRA.Renderer.Null.dll
 	Delete $INSTDIR\OpenRA.Renderer.SdlCommon.dll
 	Delete $INSTDIR\ICSharpCode.SharpZipLib.dll
+	Delete $INSTDIR\Mono.Nat.dll
 	Delete $INSTDIR\Tao.*.dll
 	Delete $INSTDIR\COPYING
 	Delete $INSTDIR\HACKING
