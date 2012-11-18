@@ -25,18 +25,11 @@ namespace OpenRA.Graphics
 		{
 			this.size = size;
 
-			try
-			{
-				face = library.NewFace(name, 0);
-				face.SetPixelSizes((uint)size, (uint)size);
+			face = library.NewFace(name, 0);
+			face.SetPixelSizes((uint)size, (uint)size);
 
-				glyphs = new Cache<Pair<char, Color>, GlyphInfo>(CreateGlyph, 
-				         Pair<char,Color>.EqualityComparer);
-			}
-			catch (FreeTypeException e)
-			{
-				throw new InvalidOperationException(e.Error.ToString());
-			}
+			glyphs = new Cache<Pair<char, Color>, GlyphInfo>(CreateGlyph, 
+			         Pair<char,Color>.EqualityComparer);
 
 			// setup a 1-channel SheetBuilder for our private use
 			if (builder == null) builder = new SheetBuilder(TextureChannel.Alpha);
