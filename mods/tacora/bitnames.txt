@@ -1,0 +1,33 @@
+=== SHP ===
+
+bggy = nod buggy?
+- bggyicon
+
+bike = nod recon bike?
+- bikeicon
+
+bio = ? (biochemical plant?)
+- bioicon
+- biomake
+
+medi = medic
+
+mlrs = GDI MLRS from Tiberian Dawn
+- mlrsicon
+
+npwr = ?
+- npwricon
+- npwrmake
+
+sf = special forces
+- sficon
+
+shok = shock trooper
+- shokicon
+
+ssml = ? (SSM launcher from Tiberian Dawn?)
+- ssmlicon
+
+=== AUD ===
+
+shotgunfire.aud = shotgun trooper's weapon

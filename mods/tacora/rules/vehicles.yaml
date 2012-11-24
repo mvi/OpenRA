@@ -1,0 +1,1037 @@
+V2RL:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 575
+		Prerequisites: dome
+		Owner: soviet
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: V2 Rocket
+		Description: Long-range rocket artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks, Aircraft
+	Health:
+		HP: 150
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 4
+	RevealsShroud:
+		Range: 5
+	AttackFrontal:
+		PrimaryWeapon: SCUD
+	RenderUnitReload:
+	Explodes:
+		Weapon: SCUD
+		EmptyWeapon:
+		
+SSML:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 576
+		Prerequisites: dome
+		Owner: africa
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: SSM Launcher
+		Description: Long-range rocket artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks, Aircraft
+	Health:
+		HP: 100
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 4
+	RevealsShroud:
+		Range: 5
+	AttackFrontal:
+		PrimaryWeapon: SSMLROCKET
+	RenderUnitReload:
+	Explodes:
+		Weapon: SCUD
+		EmptyWeapon:
+		
+SMERCH:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 577
+		Prerequisites: stek
+		Owner: soviet
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Smerch
+		Description: Long-range bombardment. It lays down\na field of rockets. \n  Strong vs Infantry, Buildings\n  Weak vs Tanks, Aircraft
+	Health:
+		HP: 75
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 3
+		ROT: 2
+	RevealsShroud:
+		Range: 5
+	Turreted:
+		ROT: 3
+	AttackTurreted:
+		PrimaryWeapon: smerchstorm
+		AlignIdleTurrets: true
+	RenderUnitTurretedAim:
+	Explodes:
+		Weapon: SCUD
+		
+MLRS:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 578
+		Prerequisites: atek
+		Owner: allies
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Mobile Rocket Launcher System
+		Description: Long-range bombardment. It lays down\na field of rockets. \n  Strong vs Infantry, Buildings\n  Weak vs Tanks, Aircraft
+	Health:
+		HP: 75
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 3
+		ROT: 2
+	RevealsShroud:
+		Range: 5
+	Turreted:
+		ROT: 3
+	AttackTurreted:
+		PrimaryWeapon: mlrsstorm
+		AlignIdleTurrets: true
+	RenderUnitTurretedAim:
+	Explodes:
+		Weapon: SCUD
+		
+1TNK:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 540
+		Owner: allies
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Light Tank
+		Description: Light Tank, good for scouting.\n  Strong vs Light Vehicles\n  Weak vs Tanks, Aircraft
+	Health:
+		HP: 220
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 9
+	RevealsShroud:
+		Range: 5
+	Turreted:
+		ROT: 5
+	AttackTurreted:
+		PrimaryWeapon: 25mm
+		PrimaryRecoil: 2
+		PrimaryRecoilRecovery: 0.5
+		SecondaryWeapon: TankLMG
+		SecondaryRecoil: 1
+	RenderUnitTurreted:
+	AutoTarget:
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	LeavesHusk:
+		HuskActor: 1TNK.Husk
+		
+S1TNK:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 545
+		Owner: soviet
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Soviet Light Tank
+		Description: Light Tank, good for scouting.\n  Strong vs Light Vehicles\n  Weak vs Tanks, Aircraft
+	Health:
+		HP: 255
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 8
+	RevealsShroud:
+		Range: 5
+	Turreted:
+		ROT: 5
+	AttackTurreted:
+		PrimaryWeapon: 75mm
+		PrimaryRecoil: 2
+		PrimaryRecoilRecovery: 1
+		SecondaryWeapon: TankHMG
+		SecondaryRecoil: 1
+	RenderUnitTurreted:
+	AutoTarget:
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	LeavesHusk:
+		HuskActor: 1TNK.Husk
+		
+SCOUTTANK:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 555
+		Owner: soviet
+		Prerequisites: fix
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Medium Tank
+		Description: Lighter, Soviet medium tank.\n  Strong vs Light Vehicles\n  Weak vs Tanks, Aircraft
+	Health:
+		HP: 450
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 7
+		Crushes: wall, atmine, crate, infantry
+	RevealsShroud:
+		Range: 6
+	Turreted:
+		ROT: 5
+	AttackTurreted:
+		PrimaryWeapon: 90mm
+		PrimaryRecoil: 2
+		PrimaryRecoilRecovery: 1
+		SecondaryWeapon: TankLMG
+		SecondaryRecoil: 1
+	RenderUnitTurreted:
+	AutoTarget:
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	LeavesHusk:
+		HuskActor: 2TNK.Husk
+		
+2TNK:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 550
+		Prerequisites: fix
+		Owner: allies
+	Valued:
+		Cost: 850
+	Tooltip:
+		Name: Medium Tank
+		Description: Previous Main Battle Tank.\n  Strong vs Tanks, Light Vehicles\n  Weak vs Infantry, Aircraft
+	Health:
+		HP: 500
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 6
+		Crushes: wall, atmine, crate, infantry
+	RevealsShroud:
+		Range: 6
+	Turreted:
+		ROT: 5
+	AttackTurreted:
+		PrimaryWeapon: 90mm
+		PrimaryRecoil: 3
+		PrimaryRecoilRecovery: 0.9
+		SecondaryWeapon: TankHMG
+		SecondaryRecoil: 1
+	RenderUnitTurreted:
+	AutoTarget:
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	LeavesHusk:
+		HuskActor: 2TNK.Husk
+	Selectable:
+		Bounds: 30,30
+		
+TANKDESTROYER: 
+	Inherits: ^Tank 
+	Buildable: 
+		Queue: Vehicle 
+		BuildPaletteOrder: 590
+		Prerequisites: techcentre 
+		Owner: allies
+	Valued: 
+		Cost: 1000 
+	Tooltip: 
+		Name: Tank Destroyer 
+		Description: German Elite Tank.\n  Strong vs Tanks, Light Vehicles\n  Useless vs Infantry, Aircraft 
+	Health: 
+		HP: 325 
+	Armor: 
+		Type: Heavy 
+	Mobile: 
+		Speed: 6 
+		Crushes: wall, atmine, crate, infantry 
+	RevealsShroud: 
+		Range: 7
+	AttackFrontal: 
+		PrimaryWeapon: 105mmAT 
+		SecondaryWeapon: 105mmAA
+	AutoTarget: 
+	RenderUnit:
+	Explodes: 
+		Weapon: UnitExplodeSmall 
+		EmptyWeapon: UnitExplodeSmall
+		
+MBTANK:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 580
+		Prerequisites: dome, fix
+		Owner: allies
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Main Battle Tank
+		Description: Allies' Main Battle Tank.\n  Strong vs Vehicles and Infantry\n  Weak vs. Aircraft
+	Health:
+		HP: 550
+	Armor:
+		Type: Heavy
+	Mobile:
+		ROT: 6
+		Speed: 6
+		Crushes: wall, atmine, crate, infantry
+	RevealsShroud:
+		Range: 6
+	Turreted:
+		ROT: 5
+	AttackTurreted:
+		PrimaryWeapon: 90mmHE
+		PrimaryRecoil: 3
+		PrimaryRecoilRecovery: 0.9
+		SecondaryWeapon: TankGL
+		SecondaryRecoil: 1
+	RenderUnitTurreted:
+	AutoTarget:
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	LeavesHusk:
+		HuskActor: 2TNK.Husk
+	Selectable:
+		Bounds: 30,30
+	SelfHealing:
+		Step: 1
+		Ticks: 4
+		HealIfBelow: 50%
+		DamageCooldown: 200
+		
+3TNK:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 585
+		Prerequisites: fix, dome
+		Owner: soviet
+	Valued:
+		Cost: 1150
+	Tooltip:
+		Name: Heavy Tank
+		Description: Soviet Main Battle Tank, with dual cannons\n  Strong vs Tanks, Light Vehicles\n  Weak vs Infantry, Aircraft
+	Health:
+		HP: 550
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 5
+		Crushes: wall, atmine, crate, infantry
+	RevealsShroud:
+		Range: 6
+	Turreted:
+		ROT: 5
+	AttackTurreted:
+		PrimaryWeapon: 105mm
+		PrimaryRecoil: 3
+		PrimaryRecoilRecovery: 0.9
+		PrimaryLocalOffset: 2,0,0,0,0, -2,0,0,0,0
+		SecondaryWeapon: TankFlamer
+		SecondaryRecoil: 1
+	RenderUnitTurreted:
+	AutoTarget:
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	LeavesHusk:
+		HuskActor: 3TNK.Husk
+	Selectable:
+		Bounds: 30,30
+
+4TNK:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 595
+		Prerequisites: techcentre
+		Owner: soviet
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Mammoth Tank
+		Description: Big and slow tank, with anti-air.\n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
+	Health:
+		HP: 1000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 3
+		Crushes: wall, atmine, crate, infantry
+	RevealsShroud:
+		Range: 7
+	Turreted:
+		ROT: 4
+	AttackTurreted:
+		PrimaryWeapon: 120mmAT
+		SecondaryWeapon: MammothTusk
+		PrimaryLocalOffset: -4,-5,0,0,0, 4,-5,0,0,0
+		SecondaryLocalOffset: -7,2,0,0,25, 7,2,0,0,-25
+		PrimaryRecoil: 4
+		PrimaryRecoilRecovery: 0.7
+		SecondaryRecoil: 1
+	RenderUnitTurreted:
+	AutoTarget:
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	LeavesHusk:
+		HuskActor: 4TNK.Husk
+	SelfHealing:
+		Step: 1
+		Ticks: 1
+		HealIfBelow: 50%
+		DamageCooldown: 200
+	Selectable:
+		Bounds: 44,38,0,-4
+
+ARTY:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 570
+		Prerequisites: dome
+		Owner: allies
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Artillery
+		Description: Long-range artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks, Aircraft
+	Health:
+		HP: 75
+	Armor:
+		Type: Light
+	Mobile:
+		ROT: 2
+		Speed: 4
+	RevealsShroud:
+		Range: 5
+	AttackFrontal:
+		PrimaryWeapon: 155mm
+	RenderUnit:
+	Explodes:
+		Weapon: UnitExplode
+		Chance: 75
+
+HARV:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 510
+		Prerequisites: proc
+		Owner: allies,soviet,africa
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Ore Truck
+		Description: Collects Ore and Gems for processing.\n  Unarmed
+	Selectable:
+		Priority: 7
+		Bounds: 42,42
+	Harvester:
+		Capacity: 20
+		Resources: Ore,Gems
+		UnloadTicksPerBale: 1
+	Health:
+		HP: 600
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 6
+		Crushes: wall, atmine, crate, infantry
+	RevealsShroud:
+		Range: 4
+	RenderHarvester:
+	-AttackMove:
+	GpsDot:
+		String:Harvester
+	LeavesHusk:
+		HuskActor: HARV.EmptyHusk
+	HarvesterHuskModifier:
+		FullHuskActor: HARV.FullHusk
+		FullnessThreshold: 50
+
+MCV:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 513
+		Prerequisites: techcentre
+		Owner: allies,soviet,africa
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Mobile Construction Vehicle
+		Description: Deploys into another Construction Yard.\n  Unarmed
+	Selectable:
+		Priority: 3
+		Bounds: 42,42
+	Health:
+		HP: 600
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 6
+		Crushes: wall, atmine, crate, infantry
+	RevealsShroud:
+		Range: 4
+	Transforms:
+		IntoActor: fact
+		Offset:-1,-1
+		Facing: 96
+		TransformSounds: placbldg.aud, build5.aud
+		NoTransformSounds: nodeply1.aud
+	RenderUnit:
+	MustBeDestroyed:
+	BaseBuilding:
+	-AttackMove:
+	LeavesHusk:
+		HuskActor: MCV.Husk
+
+JEEP:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 520
+		Owner: allies
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Ranger
+		Description: Fast scout & anti-infantry vehicle.\n  Strong vs Infantry\n  Weak vs Tanks, Aircraft
+	Health:
+		HP: 150
+	Armor:
+		Type: Light
+	Mobile:
+		ROT: 10
+		Speed: 12
+	RevealsShroud:
+		Range: 8
+	Turreted:
+		ROT: 10
+	AttackTurreted:
+		PrimaryWeapon: M60mg
+		PrimaryOffset: 0,0,0,-2
+		SecondaryWeapon: M60mgAA
+		SecondaryOffset: 0,0,0,-2 
+	WithMuzzleFlash:
+	RenderUnitTurreted:
+	AutoTarget:
+	Cargo:
+		Types: Infantry
+		MaxWeight: 3
+		PipCount: 3
+		UnloadFacing: 220
+		
+BGGY:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 522
+		Owner: africa
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Buggy
+		Description: Fast scout & anti-infantry vehicle.\n  Strong vs Infantry\n  Weak vs Tanks, Aircraft
+	Health:
+		HP: 120
+	Armor:
+		Type: Light
+	Mobile:
+		ROT: 12
+		Speed: 14
+	RevealsShroud:
+		Range: 8
+	Turreted:
+		ROT: 12
+	AttackTurreted:
+		PrimaryWeapon: M60mg
+		PrimaryOffset: 0,0,0,-2
+	WithMuzzleFlash:
+	RenderUnitTurreted:
+	AutoTarget:
+	Cargo:
+		Types: Infantry
+		MaxWeight: 2
+		PipCount: 2
+		UnloadFacing: 220
+		
+APC:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 525
+		Owner: soviet
+	Valued:
+		Cost: 850
+	Tooltip:
+		Name: Armored Personnel Carrier
+		Description: Tough infantry transport.\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks, Aircraft
+	Health:
+		HP: 300
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 10
+	RevealsShroud:
+		Range: 5
+	AttackFrontal:
+		PrimaryWeapon: M60mg
+		PrimaryOffset: 0,0,0,-4
+		SecondaryWeapon: M60mgAA
+		SecondaryOffset: 0,0,0,-4 
+	RenderUnit:
+	WithMuzzleFlash:
+	AutoTarget:
+	Cargo:
+		Types: Infantry
+		MaxWeight: 5
+		PipCount: 5
+		UnloadFacing: 220
+
+MNLY.AP:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 565
+		Prerequisites: fix
+		Owner: soviet
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Minelayer (Anti-Personnel)
+		Icon: MNLYICON
+		Description: Lays mines to destroy unwary enemy units.\n  Unarmed
+	Health:
+		HP: 100
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 9
+	RevealsShroud:
+		Range: 5
+	RenderUnit:
+		Image: MNLY
+	Minelayer:
+		Mine: MINP
+	MineImmune:
+	LimitedAmmo:
+		Ammo: 5
+	AttackMove:
+		JustMove: true
+
+MNLY.AT:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 560
+		Prerequisites: fix
+		Owner: allies
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Minelayer (Anti-Tank)
+		Icon: MNLYICON
+		Description: Lays mines to destroy unwary enemy units.\n  Unarmed
+	Health:
+		HP: 100
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 9
+	RevealsShroud:
+		Range: 5
+	RenderUnit:
+		Image: MNLY
+	Minelayer:
+		Mine: MINV
+	MineImmune:
+	LimitedAmmo:
+		Ammo: 3
+	AttackMove:
+		JustMove: true
+
+TRUK:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 516
+		Prerequisites: weap
+		Owner: allies, soviet, africa
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Supply Truck
+		Description: Transports cash to other players.\n  Unarmed
+	Health:
+		HP: 110
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 9
+	RevealsShroud:
+		Range: 3
+	RenderUnit:
+	SupplyTruck:
+		Payload: 500
+	AttackMove:
+		JustMove: yes
+
+1TNK.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Light Tank)
+	RenderUnit:
+		Image: 1tnk
+	ThrowsParticle@turret:
+		Anim: turret
+		Spread: 3,3
+		Speed: 6
+		AnimKey: turret
+
+2TNK.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Medium Tank)
+	RenderUnit:
+		Image: 2tnk
+	ThrowsParticle@turret:
+		Anim: turret
+		Spread: 3,3
+		Speed: 6
+		AnimKey: turret
+
+3TNK.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Heavy Tank)
+	RenderUnit:
+		Image: 3tnk
+	ThrowsParticle@turret:
+		Anim: turret
+		Spread: 3,3
+		Speed: 6
+		AnimKey: turret
+
+4TNK.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Mammoth Tank)
+	RenderUnit:
+		Image: 4tnk
+	ThrowsParticle@turret:
+		Anim: turret
+		Spread: 3,3
+		Speed: 6
+		AnimKey: turret
+
+HARV.FullHusk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Harvester)
+	RenderUnit:
+		Image: hhusk
+
+HARV.EmptyHusk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (Harvester)
+	RenderUnit:
+		Image: hhusk2
+
+MCV.Husk:
+	Inherits: ^Husk
+	Tooltip:
+		Name: Husk (MCV)
+	RenderUnit:
+		Image: mcvhusk
+
+TTNK:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		Prerequisites: stek
+		Owner: soviet
+		BuildPaletteOrder: 600
+	Valued:
+		Cost: 1250
+	Tooltip:
+		Name: Tesla Tank
+		Description: Tank with mounted tesla coil.\n Strong vs Infantry.\n Weak vs Tanks
+	Health:
+		HP: 300
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 8
+		Crushes: wall, atmine, crate, infantry
+	RevealsShroud:
+		Range: 7
+	AttackFrontal:
+		PrimaryWeapon: TTankZap
+		PrimaryOffset: 0,0,0,-5
+	RenderUnitSpinner:
+	Selectable:
+		Bounds: 28,28,0,0
+	AutoTarget:
+
+FTRK:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 535
+		Owner: soviet
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Flak Truck
+		Description: Flak Truck, good for scouting.\n  Strong vs Light Vehicles\nand Aircraft, Weak vs Tanks 
+	Health:
+		HP: 120
+	Armor: 
+		Type: Light
+	Mobile:
+		ROT: 10
+		Speed: 9
+	RevealsShroud:
+		Range: 4
+	Turreted:
+		ROT: 5
+	AttackTurreted:
+		PrimaryWeapon: FLAK-23
+		PrimaryOffset: 0,5,0,-4
+		PrimaryRecoil: 2
+	RenderUnitTurreted:
+	AutoTarget:
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	Selectable:
+		Bounds: 28,28,0,0
+		
+MAAG:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 530
+		Owner: allies
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: MAAG
+		Description: Mobile Anti Aircraft Gun.\n  Strong vs Aircraft\n  Weak vs all else
+	Health:
+		HP: 120
+	Armor: 
+		Type: Light
+	Mobile:
+		ROT: 10
+		Speed: 9
+	RevealsShroud:
+		Range: 4
+	Turreted:
+		ROT: 5
+	AttackTurreted:
+		PrimaryWeapon: MAAGGUN
+		PrimaryOffset: 0,5,0,-4
+		PrimaryRecoil: 2
+		SecondaryWeapon: TankLMG
+		SecondaryRecoil: 1
+	RenderUnitTurreted:
+	AutoTarget:
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	Selectable:
+		Bounds: 28,28,0,0
+		
+MAMMOTH2:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 615
+		Prerequisites: fix,stek
+		Owner: soviet
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Mammoth Tank MkII
+		Description: Big and slow tank, pillages infantry.\n  Strong vs Tanks, Infantry\n  Weak vs Aircraft
+	Health:
+		HP: 1500
+	Armor:
+		Type: Heavy
+	Mobile:
+		ROT: 2
+		Speed: 3
+		Crushes: wall, atmine, crate, infantry
+	RevealsShroud:
+		Range: 7
+	Turreted:
+		ROT: 2
+	AttackTurreted:
+		PrimaryWeapon: 120mm
+		SecondaryWeapon: MammothRockets
+		PrimaryLocalOffset: -4,-5,0,0,0, 4,-5,0,0,0
+		SecondaryLocalOffset: -7,2,0,0,25, 7,2,0,0,-25
+		PrimaryRecoil: 4
+		PrimaryRecoilRecovery: 0.7
+		SecondaryRecoil: 1
+	RenderUnitTurreted:
+	AutoTarget:
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	LeavesHusk:
+		HuskActor: 4TNK.Husk
+	SelfHealing:
+		Step: 1
+		Ticks: 1
+		HealIfBelow: 75%
+		DamageCooldown: 200
+	Selectable:
+		Bounds: 44,38,0,-4
+		
+LANDCRUISER:
+	Inherits: ^Tank
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 610
+		Prerequisites: atek
+		Owner: allies
+	Valued:
+		Cost: 2600
+	Tooltip:
+		Name: Landcruiser
+		Description: Big and slow tank, pillages infantry.\n  Strong vs Lt Vehicles, Infantry\n  Weak vs Aircraft
+	Health:
+		HP: 1750
+	Armor:
+		Type: Heavy
+	Mobile:
+		ROT: 2
+		Speed: 4
+		Crushes: wall, atmine, crate, infantry
+	RevealsShroud:
+		Range: 7
+	Turreted:
+		ROT: 2
+	AttackTurreted:
+		PrimaryWeapon: 90mmHEBurst
+		SecondaryWeapon: TankHMGx4
+		PrimaryLocalOffset: -4,-5,0,0,0, 4,-5,0,0,0
+		PrimaryRecoil: 4
+		PrimaryRecoilRecovery: 0.7
+		SecondaryRecoil: 1
+	RenderUnitTurreted:
+	AutoTarget:
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	LeavesHusk:
+		HuskActor: 4TNK.Husk
+	SelfHealing:
+		Step: 1
+		Ticks: 1
+		HealIfBelow: 75%
+		DamageCooldown: 200
+	Selectable:
+		Bounds: 44,38,0,-4
+
+DTRK:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 140
+		Prerequisites: stek
+		Owner: soviet
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Demolition Truck
+		Description: Demolition Truck, actively armed with explosives.\n  Strong vs Everything\n  Weak vs Everything
+	Health:
+		HP: 110
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 8
+	RevealsShroud:
+		Range: 3
+	RenderUnit:
+	AttackMove:
+		JustMove: yes
+	Explodes:
+		Weapon: MiniNuke
+		EmptyWeapon: MiniNuke
+	DemoTruck:
+	-IronCurtainable:
+	Chronoshiftable:
+		ExplodeInstead: yes
+
+CTNK:
+	Inherits: ^Vehicle
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 140
+		Prerequisites: atek
+		Owner: allies
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Chrono Tank
+		Description: Chrono Tank, teleports to areas within range.\n  Strong vs Vehicles, Buildings\n  Weak vs Tanks
+	Selectable:
+		Bounds: 28,28
+	Health:
+		HP: 200
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 8
+	RevealsShroud:
+		Range: 3
+	RenderUnit:
+	AutoTarget:
+	AttackFrontal:
+		PrimaryWeapon: ChronoTusk
+		SecondaryWeapon: ChronoTusk
+		PrimaryLocalOffset: -4,0,0,0,0, -4,0,0,0,0
+		SecondaryLocalOffset: 4,0,0,0,25, 4,0,0,0,-25
+	ChronoshiftDeploy:
