@@ -79,3 +79,9 @@ Background@MAPCHOOSER_PANEL:
 			Text:Cancel
 			Font:Bold
 			Key:escape
+		Label@LOADING_MAPS:
+			Id:LOADING_MAPS
+			X:400
+			Y:300
+			Text:Loading Maps
+			Font:Bold
