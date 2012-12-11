@@ -126,20 +126,29 @@ namespace OpenRA.GameRules
 		public Modifiers ModifierToCycle = Modifiers.Alt;
 		public Modifiers ModifierToSelectTab = Modifiers.Ctrl;
 
-		public string DefenseTabKey = "x";
-		public string FocusBaseKey = "g";
-		public string FocusLastEventKey = "space";
-		public string SellKey = "v";
-		public string PowerDownKey = "b";
-		public string RepairKey = "n";
-		public string PlaceNormalBuildingKey = "f1";
-		public string PlaceDefenseBuildingKey = "f2";
+		public string PauseKey = "f3";
 
-		public string AttackMoveKey = "q";
-		public string StopKey = "w";
-		public string ScatterKey = "e";
-		public string StanceCycleKey = "r";
-		public string DeployKey = "t";
+		public string FocusBaseKey = "backspace";
+		public string FocusLastEventKey = "space";
+		public string SellKey = "";
+		public string PowerDownKey = "";
+		public string RepairKey = "";
+
+		public string AttackMoveKey = "a";
+		public string StopKey = "s";
+		public string ScatterKey = "x";
+		public string StanceCycleKey = "z";
+		public string DeployKey = "f";
+
+		public string BuildingsTabKey = "";
+		public string DefenseTabKey = "";
+		public string VehicleTabKey = "";
+		public string InfantryTabKey = "";
+		public string ShipTabKey = "";
+		public string PlaneTabKey = "";
+
+		public string PlaceNormalBuildingKey = "";
+		public string PlaceDefenseBuildingKey = "";
 	}
 
 	public class Settings

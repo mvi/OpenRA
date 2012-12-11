@@ -231,7 +231,6 @@ Background@SETTINGS_MENU:
 					Font:Regular
 					Text:Enable Pixel Doubling
 		Container@KEYS_PANE:
-			Id:KEYS_PANE
 			X:37
 			Y:100
 			Width:PARENT_RIGHT - 37
@@ -239,17 +238,15 @@ Background@SETTINGS_MENU:
 			Visible: false
 			Children:
 				Label@KEYS_MODIFIERHEADLINE:
-					Id:KEYS_MODIFIERHEADLINE
 					X:0
 					Y:0
-					Text: Hotkey Modifiers for Production Buildings:
+					Text: Production Queue Hotkeys and Modifiers:
+					Font:Bold
 				Label@KEYS_MODIFIERTOBUILD_NAME:
-					Id:KEYS_MODIFIERTOBUILD_NAME
 					X:0
 					Y:30
 					Text: Build:
 				DropDownButton@MODIFIERTOBUILD_DROPDOWN:
-					Id:MODIFIERTOBUILD_DROPDOWN
 					X:310
 					Y:20
 					Width:139
@@ -257,12 +254,10 @@ Background@SETTINGS_MENU:
 					Font:Regular
 					Text:
 				Label@KEYS_MODIFIERTOCYCLE_NAME:
-					Id:KEYS_MODIFIERTOCYCLE_NAME
 					X:0
 					Y:60
 					Text: Cycle:
 				DropDownButton@MODIFIERTOCYCLE_DROPDOWN:
-					Id:MODIFIERTOCYCLE_DROPDOWN
 					X:310
 					Y:50
 					Width:139
@@ -270,32 +265,23 @@ Background@SETTINGS_MENU:
 					Font:Regular
 					Text:
 				Label@KEYS_MODIFIERTOSELECTTAB_NAME:
-					Id:KEYS_MODIFIERTOSELECTTAB_NAME
 					X:0
 					Y:90
 					Text: Select corresponding Tab on Build Palette only:
 				DropDownButton@MODIFIERTOSELECTTAB_DROPDOWN:
-					Id:MODIFIERTOSELECTTAB_DROPDOWN
 					X:310
 					Y:80
 					Width:139
 					Height:25
 					Font:Regular
 					Text:
-				Label@KEYS_SPECIALHOTKEYSHEADLINE:
-					Id:KEYS_SPECIALHOTKEYSHEADLINE
+				ScrollPanel@PRODUCTIONQUEUEHOTKEY_LIST:
 					X:0
-					Y:130
-					Text: Special Hotkeys:
-				ScrollPanel@SPECIALHOTKEY_LIST:
-					Id:SPECIALHOTKEY_LIST
-					X:0
-					Y:150
+					Y:120
 					Width:449
 					Height:75
 					Children:
-						ScrollItem@SPECIALHOTKEY_TEMPLATE:
-							Id:SPECIALHOTKEY_TEMPLATE
+						ScrollItem@PRODUCTIONQUEUEHOTKEY_TEMPLATE:
 							Width:PARENT_RIGHT-27
 							Height:25
 							X:2
@@ -304,29 +290,52 @@ Background@SETTINGS_MENU:
 							Children:
 								Label@FUNCTION:
 									X:10
-									Id:FUNCTION
 									Width:200
 									Height:25
 								TextField@HOTKEY:
-									Id:HOTKEY
+									X:250
+									Width:139
+									Height:25
+									MaxLength:16
+				Label@KEYS_SPECIALHOTKEYSHEADLINE:
+					X:0
+					Y:220
+					Text: Special Hotkeys:
+					Font:Bold
+				ScrollPanel@SPECIALHOTKEY_LIST:
+					X:0
+					Y:240
+					Width:449
+					Height:75
+					Children:
+						ScrollItem@SPECIALHOTKEY_TEMPLATE:
+							Width:PARENT_RIGHT-27
+							Height:25
+							X:2
+							Y:0
+							Visible:false
+							Children:
+								Label@FUNCTION:
+									X:10
+									Width:200
+									Height:25
+								TextField@HOTKEY:
 									X:250
 									Width:139
 									Height:25
 									MaxLength:16
 				Label@KEYS_UNITCOMMANDSHEADLINE:
-					Id:KEYS_UNITCOMMANDSHEADLINE
 					X:0
-					Y:250
+					Y:340
 					Text: Hotkeys for Unit Commands:
+					Font:Bold
 				ScrollPanel@UNITCOMMANDHOTKEY_LIST:
-					Id:UNITCOMMANDHOTKEY_LIST
 					X:0
-					Y:270
+					Y:360
 					Width:449
 					Height:75
 					Children:
 						ScrollItem@UNITCOMMANDHOTKEY_TEMPLATE:
-							Id:UNITCOMMANDHOTKEY_TEMPLATE
 							Width:PARENT_RIGHT-27
 							Height:25
 							X:2
@@ -344,13 +353,6 @@ Background@SETTINGS_MENU:
 									Width:139
 									Height:25
 									MaxLength:16
-				Label@HOTKEY_INFO:
-					Id:HOTKEY_INFO
-					Y:352
-					X:0
-					Height:25
-					Font:Tiny
-					Text: To change the Hotkey Mapping edit the YAML-Files in /mods/ra/rules/.
 		Container@DEBUG_PANE:
 			X:37
 			Y:100

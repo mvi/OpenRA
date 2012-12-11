@@ -53,22 +53,19 @@ namespace OpenRA.Mods.RA.Widgets
 					if (e.MultiTapCount == 2)
 						World.Selection.Clear();
 
-					if (KeyName == Rules.Info["mcv"].Traits.Get<BuildableInfo>().Hotkey)
+					if (KeyName == KeyConfig.BuildingsTabKey)
 						return CycleProductionBuildings("BaseType", true);
 
-					if ((KeyName == Rules.Info["barr"].Traits.Get<BuildableInfo>().Hotkey)
-						|| (KeyName == Rules.Info["tent"].Traits.Get<BuildableInfo>().Hotkey))
+					if (KeyName == KeyConfig.InfantryTabKey)
 						return CycleProductionBuildings("BarracksType", true);
 
-					if (KeyName == Rules.Info["weap"].Traits.Get<BuildableInfo>().Hotkey)
+					if (KeyName == KeyConfig.VehicleTabKey)
 						return CycleProductionBuildings("WarFactoryType", true);
 
-					if ((KeyName == Rules.Info["spen"].Traits.Get<BuildableInfo>().Hotkey)
-						|| (KeyName == Rules.Info["syrd"].Traits.Get<BuildableInfo>().Hotkey))
+					if (KeyName == KeyConfig.ShipTabKey)
 						return CycleProductionBuildings("DockType", true);
 
-					if ((KeyName == Rules.Info["hpad"].Traits.Get<BuildableInfo>().Hotkey)
-						|| (KeyName == Rules.Info["afld"].Traits.Get<BuildableInfo>().Hotkey))
+					if (KeyName == KeyConfig.PlaneTabKey)
 						return CycleProductionBuildings("AirportType", true);
 
 					if (KeyName == KeyConfig.DefenseTabKey)
@@ -83,22 +80,19 @@ namespace OpenRA.Mods.RA.Widgets
 
 				if ((e.Modifiers == KeyConfig.ModifierToSelectTab) && (e.MultiTapCount == 1))
 				{
-					if (KeyName == Rules.Info["mcv"].Traits.Get<BuildableInfo>().Hotkey)
+					if (KeyName == KeyConfig.BuildingsTabKey)
 						return CycleProductionBuildings("BaseType", false);
 
-					if ((KeyName == Rules.Info["barr"].Traits.Get<BuildableInfo>().Hotkey)
-						|| (KeyName == Rules.Info["tent"].Traits.Get<BuildableInfo>().Hotkey))
+					if (KeyName == KeyConfig.InfantryTabKey)
 						return CycleProductionBuildings("BarracksType", false);
 
-					if (KeyName == Rules.Info["weap"].Traits.Get<BuildableInfo>().Hotkey)
+					if (KeyName == KeyConfig.VehicleTabKey)
 						return CycleProductionBuildings("WarFactoryType", false);
 
-					if ((KeyName == Rules.Info["spen"].Traits.Get<BuildableInfo>().Hotkey)
-						|| (KeyName == Rules.Info["syrd"].Traits.Get<BuildableInfo>().Hotkey))
+					if (KeyName == KeyConfig.ShipTabKey)
 						return CycleProductionBuildings("DockType", false);
 
-					if ((KeyName == Rules.Info["hpad"].Traits.Get<BuildableInfo>().Hotkey)
-						|| (KeyName == Rules.Info["afld"].Traits.Get<BuildableInfo>().Hotkey))
+					if (KeyName == KeyConfig.PlaneTabKey)
 						return CycleProductionBuildings("AirportType", false);
 
 					if (KeyName == KeyConfig.DefenseTabKey)
